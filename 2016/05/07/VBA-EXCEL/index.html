@@ -1,0 +1,862 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+	<script type="text/javascript">
+	    var host = "vast-stars.com";
+	    if ((host == window.location.host) && (window.location.protocol != "https:"))
+	        window.location.protocol = "https";
+	</script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="VBA," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="初始设定12345Dim oExcel, oWb, oSheetSet oExcel = CreateObject(&quot;Excel.Application&quot;)Set oWb = GetObject(, &quot;Excel.Application&quot;)  	使用已打开的文件&apos;oWb= oExcel.Workbooks.Open(&quot;E:\其他\新装电话表.xls&quot;) 		使用本地文件Set oSheet = o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VBA-EXCEL">
+<meta property="og:url" content="http://www.vast-stars.com/2016/05/07/VBA-EXCEL/index.html">
+<meta property="og:site_name" content="Vast-stars' Blog">
+<meta property="og:description" content="初始设定12345Dim oExcel, oWb, oSheetSet oExcel = CreateObject(&quot;Excel.Application&quot;)Set oWb = GetObject(, &quot;Excel.Application&quot;)  	使用已打开的文件&apos;oWb= oExcel.Workbooks.Open(&quot;E:\其他\新装电话表.xls&quot;) 		使用本地文件Set oSheet = o">
+<meta property="og:updated_time" content="2017-03-20T13:08:23.422Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VBA-EXCEL">
+<meta name="twitter:description" content="初始设定12345Dim oExcel, oWb, oSheetSet oExcel = CreateObject(&quot;Excel.Application&quot;)Set oWb = GetObject(, &quot;Excel.Application&quot;)  	使用已打开的文件&apos;oWb= oExcel.Workbooks.Open(&quot;E:\其他\新装电话表.xls&quot;) 		使用本地文件Set oSheet = o">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.vast-stars.com/2016/05/07/VBA-EXCEL/"/>
+
+
+
+
+
+  <title> VBA-EXCEL | Vast-stars' Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vast-stars' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">机器学习/算法/</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2016/05/07/VBA-EXCEL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vast-Stars">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vast-stars' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                VBA-EXCEL
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-07T18:11:13+08:00">
+                2016-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/05/07/VBA-EXCEL/" class="leancloud_visitors" data-flag-title="VBA-EXCEL">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="初始设定"><a href="#初始设定" class="headerlink" title="初始设定"></a>初始设定</h1><figure class="highlight vb"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Dim</span> oExcel, oWb, oSheet</div><div class="line"><span class="keyword">Set</span> oExcel = CreateObject(<span class="string">"Excel.Application"</span>)</div><div class="line"><span class="keyword">Set</span> oWb = GetObject(, <span class="string">"Excel.Application"</span>)  	使用已打开的文件</div><div class="line"><span class="comment">'oWb= oExcel.Workbooks.Open("E:\其他\新装电话表.xls") 		使用本地文件</span></div><div class="line"><span class="keyword">Set</span> oSheet = oWb.Sheets(<span class="string">"Sheet1"</span>)</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>如果只是单个Sheet的小程序 上面的定义都可以略去。</p>
+<p>关于GetObject和CreateObject的区别，可以参考<a href="http://blog.csdn.net/powerwolf/article/details/7295160" target="_blank" rel="external">这里</a>或者附件一(精简版)</p>
+<h1 id="关于Range和Cell"><a href="#关于Range和Cell" class="headerlink" title="关于Range和Cell"></a>关于Range和Cell</h1><p>Cell是指一个单元格</p>
+<p>Range是指一个区域的单元格</p>
+<p>Range(“A1”)和Cells(1,1)是指同一个单元格。Range可以配合固定字符串使用，比如Range(“c4:e10”)</p>
+<p>Range是一种对象     Cells是一个属性。 都可以用.Value 来获取、设置内容</p>
+<p>可用 expression.Cells(row, column) 返回单元格区域中的一部分，其中 expression 是返回 range 对象的表达式，row 和 column 为相对于该区域左上角的偏移量。下例设置单元格 C5 的值。</p>
+<p>myChart.Application.Range(“C5:C10”).Cells(1, 1).Value = 35</p>
+<p>Range(“A:A”)  A列</p>
+<p>Range(“1:1”)  第1行</p>
+<p>Range(“A:C”)  A列到C列</p>
+<p>Range(“1:5”)  第1行到第5行</p>
+<p>Range(“1:1,3:3,8:8:)第1、3、8行</p>
+<p>Range(“A:A,C:C,F:F”)A、C、F列</p>
+<p>更多可以看这里：<a href="http://wenku.baidu.com/link?url=vH7ypHIaw9tVa0lgIPLMLCPzvTft7daTNS2VbjiTI_WWmpM5AG4e3HqVJ3f4eSikxAqB5JATs22zXlGz6SMDy9eOr9oMiRS2ZsOWcsnqGEO" target="_blank" rel="external">传送门1</a>  <a href="http://www.dzwebs.net/2971.html" target="_blank" rel="external">传送门2</a> <a href="http://www.dzwebs.net/2972.html" target="_blank" rel="external">传送门3</a></p>
+<h1 id="关于VBA调用Exccel函数"><a href="#关于VBA调用Exccel函数" class="headerlink" title="关于VBA调用Exccel函数"></a>关于VBA调用Exccel函数</h1><p>Application.WorksheetFunction.函数名 </p>
+<p>例如 Application.WorksheetFunction.CountIf()</p>
+<p>考虑到比较长，建议配合VB中With……End With 来简写</p>
+<p>另外 某些函数返回错误值 #N/A时，VBA会提示错误信息，则必须要On Error Resume Next  配合Err.Number 使用  让程序分情况处理</p>
+<p>附件二列出了VBA中可用的Excel函数</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>工作表总数：Worksheets.Count</p>
+<p>遍历某个区域内所有单元格： For Each rg In Worksheets(i).Range(“E4”, “I18”)…………Next</p>
+<p>是否为合并单元格：Range.MergeCells() 真为合并</p>
+<p>单元格内容格式设置：range.Characters(start:=?,Length:=?).Font.+ Name/Size/……</p>
+<p>For循环没有Coutinue 只能用If等功能来跳过</p>
+<h2 id="附件一："><a href="#附件一：" class="headerlink" title="附件一："></a>附件一：</h2><p>1、CreateObject( ‘excel.类’)</p>
+<p>2、CreateObject( ‘excel.类’, ‘文件名.xls’ )</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">对Application类,无论有无进程已启动，均启动新进程；</th>
+<th>无论是否提供文件名，均无文件打开。</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>对Sheet类, 无进程时启动新进程；</strong></td>
+<td><strong>无论是否提供文件名，均另外打开新文件。</strong></td>
+</tr>
+</tbody>
+</table>
+<p>3、GetObject( ‘文件名.xls’, ‘excel.类’ )</p>
+<p>4、GetObject( ‘’,’excel.类’)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">对Application类，无论有无进程已启动，均启动新进程；</th>
+<th>无论是否提供文件名，均无文件打开。</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>对Sheet类，无进程时启动新进程；</strong></td>
+<td><strong>无论是否提供文件名，均另外打开新文件。</strong></td>
+</tr>
+</tbody>
+</table>
+<p>5、GetObject( ,’exel.类’ )</p>
+<table>
+<thead>
+<tr>
+<th>对Application类, 无进程已启动时，OLE错误；有进程已启动，不启动新进程，不产生新表。实际上只是取得当前进程的一个引用。</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>对Sheet类，均提示OLE错误。</strong></td>
+</tr>
+</tbody>
+</table>
+<p> 由上可知</p>
+<ul>
+<li>1、2、3、4其实是一样的。 5只适用于exce.Application，不适用于excel.Sheet</li>
+<li>Excel.Sheet是WorkBook对象，而不是Sheet或WorkSheet对象。</li>
+<li>在Application.Visible = .t. 的情况下，Release不能退出Excel。但如果Application.Visible = .f.，可以用Release直接退出Excel，终止进程。</li>
+<li>以上测试基于VFP9 + Excel2003，欢迎指正。）</li>
+</ul>
+<h2 id="附件二："><a href="#附件二：" class="headerlink" title="附件二："></a>附件二：</h2><p>下表列出了所有可用 WorkSheetFunction 对象调用的工作表函数。有关特定函数的详细信息，请参阅 Microsoft Office Online 上的函数参考主题。<br>AccrInt<br>AccrIntM<br>Acos<br>Acosh<br>AmorDegrc<br>AmorLinc<br>And<br>Application<br>Asc<br>Asin<br>Asinh<br>Atan2<br>Atanh<br>AveDev<br>Average<br>AverageIf<br>AverageIfs<br>BahtText<br>BesselI<br>BesselJ<br>BesselK<br>BesselY<br>BetaDist<br>BetaInv<br>Bin2Dec<br>Bin2Hex<br>Bin2Oct<br>BinomDist<br>Ceiling<br>ChiDist<br>ChiInv<br>ChiTest<br>Choose<br>Clean<br>Combin<br>Complex<br>Confidence<br>Convert<br>Correl<br>Cosh<br>Count<br>CountA<br>CountBlank<br>CountIf<br>CountIfs<br>CoupDayBs<br>CoupDays<br>CoupDaysNc<br>CoupNcd<br>CoupNum<br>CoupPcd<br>Covar<br>Creator<br>CritBinom<br>CumIPmt<br>CumPrinc<br>DAverage<br>Days360<br>Db<br>Dbcs<br>DCount<br>DCountA<br>Ddb<br>Dec2Bin<br>Dec2Hex<br>Dec2Oct<br>Degrees<br>Delta<br>DevSq<br>DGet<br>Disc<br>DMax<br>DMin<br>Dollar<br>DollarDe<br>DollarFr<br>DProduct<br>DStDev<br>DStDevP<br>DSum<br>Duration<br>DVar<br>DVarP<br>EDate<br>Effect<br>EoMonth<br>Erf<br>ErfC<br>Even<br>ExponDist<br>Fact<br>FactDouble<br>FDist<br>Find<br>FindB<br>FInv<br>Fisher<br>FisherInv<br>Fixed<br>Floor<br>Forecast<br>Frequency<br>FTest<br>Fv<br>FVSchedule<br>GammaDist<br>GammaInv<br>GammaLn<br>Gcd<br>GeoMean<br>GeStep<br>Growth<br>HarMean<br>Hex2Bin<br>Hex2Dec<br>Hex2Oct<br>HLookup<br>HypGeomDist<br>IfError<br>ImAbs<br>Imaginary<br>ImArgument<br>ImConjugate<br>ImCos<br>ImDiv<br>ImExp<br>ImLn<br>ImLog10<br>ImLog2<br>ImPower<br>ImProduct<br>ImReal<br>ImSin<br>ImSqrt<br>ImSub<br>ImSum<br>Index<br>Intercept<br>IntRate<br>Ipmt<br>Irr<br>IsErr<br>IsError<br>IsEven<br>IsLogical<br>IsNA<br>IsNonText<br>IsNumber<br>IsOdd<br>Ispmt<br>IsText<br>Kurt<br>Large<br>Lcm<br>LinEst<br>Ln<br>Log<br>Log10<br>LogEst<br>LogInv<br>LogNormDist<br>Lookup<br>match<br>Max<br>MDeterm<br>MDuration<br>Median<br>Min<br>MInverse<br>MIrr<br>MMult<br>Mode<br>MRound<br>MultiNomial<br>NegBinomDist<br>NetworkDays<br>Nominal<br>NormDist<br>NormInv<br>NormSDist<br>NormSInv<br>NPer<br>Npv<br>Oct2Bin<br>Oct2Dec<br>Oct2Hex<br>Odd<br>OddFPrice<br>OddFYield<br>OddLPrice<br>OddLYield<br>Or<br>Parent<br>Pearson<br>Percentile<br>PercentRank<br>Permut<br>Phonetic<br>Pi<br>Pmt<br>Poisson<br>Power<br>Ppmt<br>Price<br>PriceDisc<br>PriceMat<br>Prob<br>Product<br>Proper<br>Pv<br>Quartile<br>Quotient<br>Radians<br>RandBetween<br>Rank<br>Rate<br>Received<br>Replace<br>ReplaceB<br>Rept<br>Roman<br>Round<br>RoundDown<br>RoundUp<br>RSq<br>RTD<br>Search<br>SearchB<br>SeriesSum<br>Sinh<br>Skew<br>Sln<br>Slope<br>Small<br>SqrtPi<br>Standardize<br>StDev<br>StDevP<br>StEyx<br>Substitute<br>Subtotal<br>Sum<br>SumIf<br>SumIfs<br>SumProduct<br>SumSq<br>SumX2MY2<br>SumX2PY2<br>SumXMY2<br>Syd<br>Tanh<br>TBillEq<br>TBillPrice<br>TBillYield<br>TDist<br>Text<br>TInv<br>Transpose<br>Trend<br>Trim<br>TrimMean<br>TTest<br>USDollar<br>Var<br>VarP<br>Vdb<br>VLookup<br>Weekday<br>WeekNum<br>Weibull<br>WorkDay<br>Xirr<br>Xnpv<br>YearFrac<br>YieldDisc<br>YieldMat<br>ZTest</p>
+<h2 id="附件三"><a href="#附件三" class="headerlink" title="附件三"></a>附件三</h2><p>一个小程序</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> CommandButton1_Click()  </div><div class="line"><span class="keyword">With</span> Application.WorksheetFunction  </div><div class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span>  </div><div class="line">    <span class="keyword">Dim</span> oExcel, oWb, oSheet  </div><div class="line">      </div><div class="line">    Range(<span class="string">"K:K"</span>).Value = <span class="string">""</span>  </div><div class="line">    Range(<span class="string">"L:L"</span>).Value = <span class="string">""</span>  </div><div class="line">    Range(<span class="string">"K1"</span>).Value2 = <span class="string">"姓名"</span>  </div><div class="line">    Range(<span class="string">"L1"</span>).Value = <span class="string">"休息天数"</span>  </div><div class="line">      </div><div class="line">    <span class="keyword">Dim</span> i, j, Num As Integer  </div><div class="line">    Num = <span class="number">0</span>  </div><div class="line">    <span class="keyword">While</span> Cells(i + <span class="number">1</span>, <span class="number">1</span>).Value &lt;&gt; <span class="string">""</span>  </div><div class="line">        i = i + <span class="number">1</span>  </div><div class="line">        j = <span class="number">0</span>  </div><div class="line">        j = .Match(Cells(i, <span class="number">1</span>).Value, Range(Cells(<span class="number">1</span>, <span class="number">11</span>), Cells(Num + <span class="number">1</span>, <span class="number">11</span>)), <span class="number">0</span>)  </div><div class="line">        <span class="keyword">If</span> j = <span class="number">0</span> <span class="keyword">Then</span>  </div><div class="line">            Num = Num + <span class="number">1</span>  </div><div class="line">            j = Num + <span class="number">1</span>  </div><div class="line">            Cells(j, <span class="number">11</span>).Value = Cells(i, <span class="number">1</span>).Value  </div><div class="line">  </div><div class="line">        <span class="keyword">End</span> <span class="keyword">If</span>  </div><div class="line">          </div><div class="line">        Cells(j, <span class="number">12</span>).Value = Cells(j, <span class="number">12</span>).Value + .CountIf(Range(Cells(i, <span class="number">2</span>), Cells(i, <span class="number">8</span>)), <span class="string">"休"</span>)  </div><div class="line">    <span class="keyword">Wend</span>  </div><div class="line">    <span class="built_in">MsgBox</span> <span class="string">"共统计 "</span> &amp; Str(i) &amp; <span class="string">" 项，共 "</span> &amp; Str(Num) &amp; <span class="string">" 人"</span>  </div><div class="line"><span class="keyword">End</span> <span class="keyword">With</span>  </div><div class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/VBA/" rel="tag"># VBA</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/22/VB.NET中，如何得知多个radiobutton中哪个被选中(checked)/" rel="prev" title="VB.NET中，取出被选中(checked)的按钮(radiobutton)">
+                VB.NET中，取出被选中(checked)的按钮(radiobutton) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Vast-Stars" />
+          <p class="site-author-name" itemprop="name">Vast-Stars</p>
+           
+              <p class="site-description motion-element" itemprop="description">或许是不知梦的缘故，游离之人追逐幻影</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#初始设定"><span class="nav-number">1.</span> <span class="nav-text">初始设定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于Range和Cell"><span class="nav-number">2.</span> <span class="nav-text">关于Range和Cell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于VBA调用Exccel函数"><span class="nav-number">3.</span> <span class="nav-text">关于VBA调用Exccel函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#附件一："><span class="nav-number">4.1.</span> <span class="nav-text">附件一：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附件二："><span class="nav-number">4.2.</span> <span class="nav-text">附件二：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附件三"><span class="nav-number">4.3.</span> <span class="nav-text">附件三</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vast-Stars</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("yy4R2ce0nQiB5osrIqegmjha-gzGzoHsz", "Ai70LQutX0l8oRmalLz8EyiF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

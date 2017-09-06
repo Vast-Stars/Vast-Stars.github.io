@@ -1,0 +1,886 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+	<script type="text/javascript">
+	    var host = "vast-stars.com";
+	    if ((host == window.location.host) && (window.location.protocol != "https:"))
+	        window.location.protocol = "https";
+	</script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="辛辛苦苦搭好的博客，纪念一下搭建过程吧。希望他人搭建的时候更加轻松
+（假定读者能基本使用Linux）
+总共分3部分：
+第一部分，最早搭建在Azure上，Git+Nginx+Hexo 。
+第二部分，将站点迁移到Github Page上的过程。
+第三部分，Reference（Hexo基本操作）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS 6 搭建 Nginx+Hexo全过程">
+<meta property="og:url" content="http://www.vast-stars.com/2016/11/04/新博客！/index.html">
+<meta property="og:site_name" content="Vast-stars' Blog">
+<meta property="og:description" content="辛辛苦苦搭好的博客，纪念一下搭建过程吧。希望他人搭建的时候更加轻松
+（假定读者能基本使用Linux）
+总共分3部分：
+第一部分，最早搭建在Azure上，Git+Nginx+Hexo 。
+第二部分，将站点迁移到Github Page上的过程。
+第三部分，Reference（Hexo基本操作）">
+<meta property="og:updated_time" content="2017-03-20T13:08:39.471Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS 6 搭建 Nginx+Hexo全过程">
+<meta name="twitter:description" content="辛辛苦苦搭好的博客，纪念一下搭建过程吧。希望他人搭建的时候更加轻松
+（假定读者能基本使用Linux）
+总共分3部分：
+第一部分，最早搭建在Azure上，Git+Nginx+Hexo 。
+第二部分，将站点迁移到Github Page上的过程。
+第三部分，Reference（Hexo基本操作）">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.vast-stars.com/2016/11/04/新博客！/"/>
+
+
+
+
+
+  <title> CentOS 6 搭建 Nginx+Hexo全过程 | Vast-stars' Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vast-stars' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">机器学习/算法/</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2016/11/04/新博客！/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vast-Stars">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vast-stars' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CentOS 6 搭建 Nginx+Hexo全过程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-04T21:28:23+08:00">
+                2016-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/11/04/新博客！/" class="leancloud_visitors" data-flag-title="CentOS 6 搭建 Nginx+Hexo全过程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>辛辛苦苦搭好的博客，纪念一下搭建过程吧。希望他人搭建的时候更加轻松</p>
+<p>（假定读者能基本使用Linux）</p>
+<p>总共分3部分：</p>
+<p>第一部分，最早搭建在Azure上，Git+Nginx+Hexo 。</p>
+<p>第二部分，将站点迁移到Github Page上的过程。</p>
+<p>第三部分，Reference（Hexo基本操作）</p>
+<a id="more"></a>
+<hr>
+<h1 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h1><p>主要参考的是 <a href="http://tiktoking.github.io/2016/01/26/hexo/#VPS_u7684_u64CD_u4F5C" target="_blank" rel="external">在VPS上搭建hexo博客，利用Git更新</a>，事实又一次证明了教程是多么重要：一个教程或是方法遗漏了那么一点点关键步骤，就好比一个软件工程少了那么几行代码。。。</p>
+<h2 id="VPS操作-CentOS-6-5"><a href="#VPS操作-CentOS-6-5" class="headerlink" title="VPS操作(CentOS 6.5)"></a>VPS操作(CentOS 6.5)</h2><h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx:"></a>Nginx:</h3><p>安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum update &amp;&amp; apt-get upgrade -y #更新内核</div><div class="line">yum install nginx -y</div></pre></td></tr></table></figure>
+<p>配置：(<strong>不推荐</strong>新手按照参考去改动/conf.d/hexo.conf)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vim /etc/nginx/nginx.conf</div><div class="line">##change</div><div class="line">service nginx restart</div></pre></td></tr></table></figure>
+<p>要改的主要在 <code>server{}</code>中。 其中， listen是监听端口，即访问网站使用的端口，默认80。 root 是网站文件的根目录。server_name 填ip或者域名即可。</p>
+<p>设置防火墙</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">iptables -I INPUT -p tcp --dport 80 -j ACCEPT</div><div class="line">service iptables save</div><div class="line">service iptables restart</div></pre></td></tr></table></figure>
+<p>之后记得再去VPS的管理页面开启防火墙策略组，开放80端口。正常的话外网就能访问你的博客了。如果不行，<strong>先建议换个端口</strong>比如1011(配置文件、iptables、策略组都要改)，以免像我一样浪费时间在检查自己配置上。Azure的VPS确实过滤了80端口，没法用。</p>
+<h3 id="Git"><a href="#Git" class="headerlink" title="Git:"></a>Git:</h3><p>安装Git</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install git-core</div></pre></td></tr></table></figure>
+<p>新建git用户添加sudo权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">adduser git</div><div class="line">chmod 740 /etc/sudoers</div><div class="line">vim /etc/sudoers</div></pre></td></tr></table></figure>
+<p>在vi编辑中找到如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## Allow root to run any commands anywhere</div><div class="line">root    ALL=(ALL)     ALL</div></pre></td></tr></table></figure>
+<p>在下面添加一行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git   ALL=(ALL)     ALL</div></pre></td></tr></table></figure>
+<p>保存并退出后执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod 440 /etc/sudoers</div></pre></td></tr></table></figure>
+<h3 id="创建网站目录并赋予git对网站目录的所有权："><a href="#创建网站目录并赋予git对网站目录的所有权：" class="headerlink" title="创建网站目录并赋予git对网站目录的所有权："></a>创建网站目录并赋予git对网站目录的所有权：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /var/www</div><div class="line">mkdir hexo</div><div class="line">chown git:git -R /var/www/hexo</div></pre></td></tr></table></figure>
+<h3 id="配置git-hooks："><a href="#配置git-hooks：" class="headerlink" title="配置git hooks："></a>配置git hooks：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">su git</div><div class="line">cd /home/git/hexo.git/hooks</div><div class="line">vim post-receive</div></pre></td></tr></table></figure>
+<p>输入如下内容后保存退出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">GIT_REPO=/home/git/hexo.git #git仓库</div><div class="line">TMP_GIT_CLONE=/tmp/hexo</div><div class="line">PUBLIC_WWW=/var/www/hexo #网站目录</div><div class="line">rm -rf $&#123;TMP_GIT_CLONE&#125;</div><div class="line">git clone $GIT_REPO $TMP_GIT_CLONE</div><div class="line">rm -rf $&#123;PUBLIC_WWW&#125;/*</div><div class="line">cp -rf $&#123;TMP_GIT_CLONE&#125;/* $&#123;PUBLIC_WWW&#125;</div></pre></td></tr></table></figure>
+<p>(注意上面#和之后的注释不要写入到文件中，否则出错！)</p>
+<p>然后赋予脚本的执行权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod +x post-receive</div></pre></td></tr></table></figure>
+<h3 id="Git-仓库："><a href="#Git-仓库：" class="headerlink" title="Git 仓库："></a>Git 仓库：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">su git  #（如果已经是git用户就无需此命令）</div><div class="line">cd ~ </div><div class="line">mkdir hexo.git &amp;&amp; cd hexo.git</div><div class="line">git init --bare</div><div class="line"></div><div class="line">cd ~</div><div class="line">mkdir .ssh &amp;&amp; cd .ssh</div><div class="line">touch authorized_keys</div><div class="line">vi authorized_keys</div></pre></td></tr></table></figure>
+<p>接下来有2种办法。</p>
+<ul>
+<li>已经有keys的可以直接复制进去。我就是把github的key复制到这里来。好处是一个key两边都能用，操作起来方便</li>
+<li>如果没有的话按下面<strong><em>本机操作</em></strong>部分全部执行。</li>
+</ul>
+<hr>
+<h2 id="本机操作-Windows"><a href="#本机操作-Windows" class="headerlink" title="本机操作(Windows)"></a>本机操作(Windows)</h2><h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>在<a href="https://nodejs.org/en/download/" target="_blank" rel="external">Node.js</a>官网下载最新版，一路默认安装。</p>
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>下载<a href="https://git-scm.com/download/win" target="_blank" rel="external">Git for windows</a>一路默认安装。<br>Git这里我们需要注意一下，需要配置一下<a href="http://www.brafox.com/post/2015/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/git-%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE.html" target="_blank" rel="external">环境变量</a>。<br>然后我们需要生成SSH密钥，按下面的步骤进行。</p>
+<p>1.打开<code>C:\Users\&lt;用户名&gt;\.ssh</code>文件夹，如果没有就新建<br>2.在空白处单击右键，选择<code>Git Bash Here</code>打开终端<br>3.设置git用户名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.email &quot;email@example.com&quot;  </div><div class="line">git config --global user.name &quot;username&quot;</div></pre></td></tr></table></figure>
+<p>4.生成ssh密钥</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;email@example.com&quot;  </div><div class="line">##一会要用到公钥id_rsa.pub</div></pre></td></tr></table></figure>
+<p>如果成功的话，会多出几个文件。用TXT打开其中的id_rsa.pub，复制里面的内容到VPS的 authorized_keys中。</p>
+<h3 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h3><p>打开<code>Git Bash</code>, 输入<code>ssh git@VPS的ip</code> 能够远程登录的话，就说明设置正确，可以进行下一步。否则最好找出并解决错误。</p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><h3 id="创建网站目录"><a href="#创建网站目录" class="headerlink" title="创建网站目录"></a>创建网站目录</h3><p>在你电脑的任意位置创建一个文件夹（例如<code>E:\hexo</code>，下文以此代替），作为网站目录。</p>
+<h3 id="安装Hexo-1"><a href="#安装Hexo-1" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>打开<code>cmd</code>，通过<code>cd</code>命令进入<code>hexo</code>文件夹，<del>输入<code>node</code>后执行如下命令 ~</del></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo-cli</div><div class="line">hexo init</div><div class="line">npm install</div><div class="line">hexo d -fg</div><div class="line">hexo s</div></pre></td></tr></table></figure>
+<p>打开<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000</a> 即可看到你的站点（当然还没有发布到服务器上）。</p>
+<h3 id="配置hexo配置文件"><a href="#配置hexo配置文件" class="headerlink" title="配置hexo配置文件"></a>配置hexo配置文件</h3><p>位于<code>hexo</code>文件夹下，<code>_config.yml</code>,修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># Site</div><div class="line">title: XXX  (这里就是网站的名字)</div><div class="line"></div><div class="line">deploy:</div><div class="line">      type: git</div><div class="line">      message: update</div><div class="line">      repo: git@192.234.35.236:hexo.git (这里换成VPS的ip即可)</div><div class="line">      branch: master</div></pre></td></tr></table></figure>
+<p><strong>特别注意，每个<code>“:”</code>后面都要有空格！</strong></p>
+<p>接着在<code>hexo</code>文件夹内，按住<code>shift</code>右击，选择<code>在此处打开命令窗口</code>（当然你也可以用<code>cd</code>命令），运行<code>hexo g hexo d</code>，如果一切正常，静态文件已经被成功的push到了blog的仓库里，如果出现<code>appears not to be a git repo</code>的错误，删除<code>hexo</code>目录下的<code>.deploy</code>后再次<code>hexo g hexo d</code>就可以了。</p>
+<p>以上，博客已经完全建好了。如果顺利的话，1个小时应该是足够了。</p>
+<h2 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a><em>遇到的坑</em></h2><ol>
+<li>Nginx设置按照原教程，在<code>conf.d/hexo.conf</code> 中设置，导致后面的问题出现时更加难以排查</li>
+<li>VPS服务商过滤了80端口。导致我一直认为是自己配置不对，反复修改<code>nginx.conf 和conf.d/hexo.conf</code></li>
+<li>修改<code>_config.yml</code>时，忘记加空格。</li>
+</ol>
+<hr>
+<hr>
+<h1 id="第二部分"><a href="#第二部分" class="headerlink" title="第二部分"></a>第二部分</h1><p>把第一部分搭好的博客迁移到Github Page上(不要问我为什么不一开始就在Github Page上搭。。谁能预见未来的需求呢……)</p>
+<p>假定读者已经有了Github账号。如果没有就去注册一个。</p>
+<h2 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h2><p>以我为例，Github用户名是 <a href="https://github.com/Vast-Stars" target="_blank" rel="external">Vast-Stars</a>，则创建的仓库名为：<strong>Vast-Stars.github.io</strong></p>
+<h2 id="设置SSH秘钥"><a href="#设置SSH秘钥" class="headerlink" title="设置SSH秘钥"></a>设置SSH秘钥</h2><p>点击右上角头像，进入`setting→ SSH and GPG keys</p>
+<ol>
+<li>打开本地C:\Documents and Settings\Administrator.ssh\id_rsa.pub文件。准确的复制这个文件的内容，才能保证设置的成功。</li>
+<li>add another public keys</li>
+<li>把刚刚用TXT打开的的密钥复制到里面（key文本框中）， 点击 add key 就ok了</li>
+</ol>
+<p>同样可以在 <code>git bash</code> 中<code>ssh git@github.com</code>来验证SSH是否成功。</p>
+<p>(由于我第一部分中使用的key就是从github这生成的，所以自然保证了两边ssh都正常。)</p>
+<h2 id="修改-config-yml文件"><a href="#修改-config-yml文件" class="headerlink" title="修改_config.yml文件"></a>修改_config.yml文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">repo: git@192.234.35.236:hexo.git </div><div class="line">#改成</div><div class="line">repo: git@github.com:Vast-Stars/Vast-Stars.github.io.git</div></pre></td></tr></table></figure>
+<p>当然如果已经绑定了域名也可以不用修改</p>
+<hr>
+<hr>
+<h1 id="第三部分"><a href="#第三部分" class="headerlink" title="第三部分"></a>第三部分</h1><p><del>本来是想自己写点的，不过既然别人就写了，我就附上链接吧。</del></p>
+<p>有些重要的东西还是自己写下吧。。不定时更新</p>
+<p><code>_config.yml</code>中，设置<code>language: zh-CN</code></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><p> <a href="http://tiktoking.github.io/2016/01/26/hexo/#VPS_u7684_u64CD_u4F5C" target="_blank" rel="external">在VPS上搭建hexo博客，利用Git更新</a></p>
+<p><a href="http://www.jianshu.com/p/05289a4bc8b2" target="_blank" rel="external">如何搭建一个独立博客——简明Github Pages与Hexo教程</a></p>
+<p><a href="https://xuanwo.org/2015/03/26/hexo-intor/" target="_blank" rel="external">史上最详细的Hexo博客搭建图文教程</a></p>
+<p><a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">Next主题的安装</a> 很简洁很漂亮的主题！</p>
+<p><a href="http://oakland.github.io/2016/04/30/hexo-%E5%A6%82%E4%BD%95%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A2%98%E3%80%81%E5%88%A0%E9%99%A4%E6%96%87%E7%AB%A0/" target="_blank" rel="external">[hexo]如何更换主题、删除文章</a></p>
+<p><a href="https://xuanwo.org/2014/08/14/hexo-usual-problem/#%E6%9C%AC%E5%9C%B0%E6%B5%8F%E8%A7%88%E6%B2%A1%E9%97%AE%E9%A2%98%EF%BC%8CDeploy%E6%8A%A5%E9%94%99" target="_blank" rel="external">Hexo常见问题解决方案</a> 很全很好</p>
+<p><a href="https://g2ex.github.io/2015/10/14/Hexo-with-SSL-Hosted-on-Github-Page/" target="_blank" rel="external">为Github的Hexo博客启用SSL/TLS</a></p>
+<p><a href="http://www.jianshu.com/p/834d7cc0668d" target="_blank" rel="external">我的博客是如何搭建的（github pages + HEXO + 域名绑定）</a></p>
+<p><a href="https://drkbl.com/hexo-init/" target="_blank" rel="external">Hexo 初始化笔记</a></p>
+<p><a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="external">配置</a>  官方文档 强力推荐！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/16/关于蓝牙模块-HC-06/" rel="next" title=" 关于蓝牙模块(HC-06)">
+                <i class="fa fa-chevron-left"></i>  关于蓝牙模块(HC-06)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/18/Cent-7-2-搭建OpenVPN/" rel="prev" title="CentOS7.2 搭建OpenVPN 及 用户认证">
+                CentOS7.2 搭建OpenVPN 及 用户认证 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Vast-Stars" />
+          <p class="site-author-name" itemprop="name">Vast-Stars</p>
+           
+              <p class="site-description motion-element" itemprop="description">或许是不知梦的缘故，游离之人追逐幻影</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一部分"><span class="nav-number">1.</span> <span class="nav-text">第一部分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VPS操作-CentOS-6-5"><span class="nav-number">1.1.</span> <span class="nav-text">VPS操作(CentOS 6.5)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx"><span class="nav-number">1.1.1.</span> <span class="nav-text">Nginx:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git"><span class="nav-number">1.1.2.</span> <span class="nav-text">Git:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建网站目录并赋予git对网站目录的所有权："><span class="nav-number">1.1.3.</span> <span class="nav-text">创建网站目录并赋予git对网站目录的所有权：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置git-hooks："><span class="nav-number">1.1.4.</span> <span class="nav-text">配置git hooks：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-仓库："><span class="nav-number">1.1.5.</span> <span class="nav-text">Git 仓库：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本机操作-Windows"><span class="nav-number">1.2.</span> <span class="nav-text">本机操作(Windows)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Node-js"><span class="nav-number">1.2.1.</span> <span class="nav-text">安装Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Git"><span class="nav-number">1.2.2.</span> <span class="nav-text">安装Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试连接"><span class="nav-number">1.2.3.</span> <span class="nav-text">测试连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo"><span class="nav-number">1.2.4.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建网站目录"><span class="nav-number">1.2.5.</span> <span class="nav-text">创建网站目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo-1"><span class="nav-number">1.2.6.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置hexo配置文件"><span class="nav-number">1.2.7.</span> <span class="nav-text">配置hexo配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的坑"><span class="nav-number">1.3.</span> <span class="nav-text">遇到的坑</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二部分"><span class="nav-number">2.</span> <span class="nav-text">第二部分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建仓库"><span class="nav-number">2.1.</span> <span class="nav-text">创建仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置SSH秘钥"><span class="nav-number">2.2.</span> <span class="nav-text">设置SSH秘钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改-config-yml文件"><span class="nav-number">2.3.</span> <span class="nav-text">修改_config.yml文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三部分"><span class="nav-number">3.</span> <span class="nav-text">第三部分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.1.</span> <span class="nav-text">Reference:</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vast-Stars</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("yy4R2ce0nQiB5osrIqegmjha-gzGzoHsz", "Ai70LQutX0l8oRmalLz8EyiF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

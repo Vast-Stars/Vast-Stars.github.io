@@ -1,0 +1,856 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+	<script type="text/javascript">
+	    var host = "vast-stars.com";
+	    if ((host == window.location.host) && (window.location.protocol != "https:"))
+	        window.location.protocol = "https";
+	</script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="环境：Win10 x64 Python3.5/Pythom2.7 
+由于网上各种方案鱼龙混杂，正好顺带测试下。
+（成功的方法在最下面，着急的可以直接看）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于python生成gif图">
+<meta property="og:url" content="http://www.vast-stars.com/2016/12/29/关于python生成gif图/index.html">
+<meta property="og:site_name" content="Vast-stars' Blog">
+<meta property="og:description" content="环境：Win10 x64 Python3.5/Pythom2.7 
+由于网上各种方案鱼龙混杂，正好顺带测试下。
+（成功的方法在最下面，着急的可以直接看）">
+<meta property="og:image" content="http://www.vast-stars.com/2016/12/29/关于python生成gif图/Blog\QQ截图20161225181504.png">
+<meta property="og:updated_time" content="2017-03-20T12:33:11.061Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于python生成gif图">
+<meta name="twitter:description" content="环境：Win10 x64 Python3.5/Pythom2.7 
+由于网上各种方案鱼龙混杂，正好顺带测试下。
+（成功的方法在最下面，着急的可以直接看）">
+<meta name="twitter:image" content="http://www.vast-stars.com/2016/12/29/关于python生成gif图/Blog\QQ截图20161225181504.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.vast-stars.com/2016/12/29/关于python生成gif图/"/>
+
+
+
+
+
+  <title> 关于python生成gif图 | Vast-stars' Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vast-stars' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">机器学习/算法/</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2016/12/29/关于python生成gif图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vast-Stars">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vast-stars' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关于python生成gif图
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-29T22:46:13+08:00">
+                2016-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/12/29/关于python生成gif图/" class="leancloud_visitors" data-flag-title="关于python生成gif图">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>环境：Win10 x64 Python3.5/Pythom2.7 </p>
+<p>由于网上各种方案鱼龙混杂，正好顺带测试下。</p>
+<p>（成功的方法在最下面，着急的可以直接看）</p>
+<a id="more"></a>
+<hr>
+<h2 id="使用imageio库（py3"><a href="#使用imageio库（py3" class="headerlink" title="使用imageio库（py3)"></a>使用imageio库（py3)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> numpy</div><div class="line"><span class="keyword">import</span> imageio,os</div><div class="line">images = []</div><div class="line">filenames=sorted((fn <span class="keyword">for</span> fn <span class="keyword">in</span> os.listdir(<span class="string">'.'</span>) <span class="keyword">if</span> fn.endswith(<span class="string">'.png'</span>)))</div><div class="line"></div><div class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> filenames:</div><div class="line">    images.append(imageio.imread(filename))</div><div class="line">imageio.mimsave(<span class="string">'movie.gif'</span>, images)</div><div class="line">exit()</div></pre></td></tr></table></figure>
+<p>效果还是有的，然而有严重的编码错误。。生成的gif图一大片全是白色，剩下的好像也乱码了</p>
+<hr>
+<h2 id="使用images2gif-py"><a href="#使用images2gif-py" class="headerlink" title="使用images2gif.py"></a>使用<a href="https://pypi.python.org/pypi/images2gif" target="_blank" rel="external">images2gif.py</a></h2><p>如果在py3下使用，会报错</p>
+<p><img src="/2016/12/29/关于python生成gif图/Blog\QQ截图20161225181504.png" alt="QQ截图20161225181504"></p>
+<p>原因是这个库还不支持py3(然而为什么不支持我还能Pip intall下来???)</p>
+<p>改用2.7。下面这个是逆转一个GIF图的代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageSequence</div><div class="line"><span class="keyword">import</span> sys, os</div><div class="line"><span class="comment">#filename = sys.argv[1]</span></div><div class="line">filename=<span class="string">'1.gif'</span></div><div class="line">im = Image.open(filename)</div><div class="line">original_duration = im.info[<span class="string">'duration'</span>]</div><div class="line">frames = [frame.copy() <span class="keyword">for</span> frame <span class="keyword">in</span> ImageSequence.Iterator(im)]    </div><div class="line">frames.reverse()</div><div class="line"></div><div class="line"><span class="keyword">from</span> images2gif <span class="keyword">import</span> writeGif</div><div class="line">writeGif(<span class="string">"reverse_"</span> + os.path.basename(filename), frames, duration=original_duration/<span class="number">1000.0</span>, dither=<span class="number">0</span>)</div></pre></td></tr></table></figure>
+<p>运行果然报错（我好像拥有了蜜汁第六感）</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt;  File <span class="string">"TEST.py"</span>, line <span class="number">11</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">&gt;    writeGif(<span class="string">"reverse_"</span> + os.path.basename(filename), frames, duration=original_duration/<span class="number">1000.0</span>, dither=<span class="number">0</span>)</div><div class="line">&gt;  File <span class="string">"D:\Python27\lib\site-packages\images2gif\images2gif.py"</span>, line <span class="number">593</span>, <span class="keyword">in</span> writeGif</div><div class="line">&gt;    gifWriter.writeGifToFile(fp, images, duration, loops, xy, dispose)</div><div class="line">&gt;  File <span class="string">"D:\Python27\lib\site-packages\images2gif\images2gif.py"</span>, line <span class="number">449</span>, <span class="keyword">in</span> writeGifToFile</div><div class="line">&gt;    fp.write(globalPalette)</div><div class="line">&gt;TypeError: argument <span class="number">1</span> must be string <span class="keyword">or</span> buffer, <span class="keyword">not</span> <span class="keyword">None</span></div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>谷歌查一下。。果然有坑。。</p>
+<blockquote>
+<p>In images2gif.py change line 200:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;<span class="keyword">for</span> im <span class="keyword">in</span> images:</div><div class="line">&gt;    palettes.append( getheader(im)[<span class="number">1</span>] )</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>to</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;<span class="keyword">for</span> im <span class="keyword">in</span> images:</div><div class="line">&gt;    palettes.append(im.palette.getdata()[<span class="number">1</span>])</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>当然这里200行不准确，我的是在第425-426行。。。</p>
+<p>改完之后很神奇的Exit 0了。。。打开新生成的gif一看还是有乱码。。。</p>
+<p>值得一提的是，image2gif的作者说这个库效率低下而且调色板有问题，强力推荐用新开发的imageio的库，也就是①的方法。。果然相同作者写出来的库跑出来的错误都是类似的……</p>
+<p>值得一提的是，只要使用了image2gif这个库（通常是使用其中的.wirteGif函数）的代码，我的测试样例都会乱码。只不过具体情况有点差别。</p>
+<hr>
+<h2 id="使用ImageMagick"><a href="#使用ImageMagick" class="headerlink" title="使用ImageMagick"></a>使用ImageMagick</h2><blockquote>
+<p>Well, now I’m using ImageMagick. I save my frames as PNG files and then invoke ImageMagick’s convert.exe from Python to create an animated GIF. The nice thing about this approach is I can specify a frame duration for each frame individually. Unfortunately this depends on ImageMagick being installed on the machine. They have a Python wrapper but it looks pretty crappy and unsupported. Still open to other suggestions.</p>
+</blockquote>
+<p>嗯..调用exe文件。。我没试，有兴趣的可以试试  </p>
+<p><a href="https://www.imagemagick.org/script/index.php" target="_blank" rel="external">ImageMagick</a></p>
+<p><a href="http://www.ctolib.com/gifbook.html" target="_blank" rel="external">gifbook-GifBook: 从视频和字幕文件生成 gif 动画!</a></p>
+<hr>
+<h2 id="使用gifmaker-py-Py2-7"><a href="#使用gifmaker-py-Py2-7" class="headerlink" title="使用gifmaker.py(Py2.7)"></a>使用gifmaker.py(Py2.7)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span>  Image,ImageSequence</div><div class="line"><span class="keyword">import</span> gifmaker,os</div><div class="line"></div><div class="line">sequence = []</div><div class="line"></div><div class="line">filenames=sorted((fn <span class="keyword">for</span> fn <span class="keyword">in</span> os.listdir(<span class="string">'.'</span>) <span class="keyword">if</span> fn.endswith(<span class="string">'.PNG'</span>)))</div><div class="line">im =[ Image.open(filename) <span class="keyword">for</span> filename <span class="keyword">in</span> filenames]</div><div class="line"><span class="comment"># im is your original image</span></div><div class="line"><span class="comment">#frames = [frame.copy() for frame in ImageSequence.Iterator([imm for immm in im])]</span></div><div class="line"></div><div class="line"><span class="comment"># write GIF animation</span></div><div class="line">fp = open(<span class="string">"out.gif"</span>, <span class="string">"wb"</span>)</div><div class="line">gifmaker.makedelta(fp, im)</div><div class="line">fp.close()</div></pre></td></tr></table></figure>
+<p>结果依然是报错了。。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Connected to pydev debugger (build <span class="number">162.1967</span><span class="number">.10</span>)</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"D:\PyCharm Community Edition 2016.2.3\helpers\pydev\pydevd.py"</span>, line <span class="number">1580</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    globals = debugger.run(setup[<span class="string">'file'</span>], <span class="keyword">None</span>, <span class="keyword">None</span>, is_module)</div><div class="line">  File <span class="string">"D:\PyCharm Community Edition 2016.2.3\helpers\pydev\pydevd.py"</span>, line <span class="number">964</span>, <span class="keyword">in</span> run</div><div class="line">    pydev_imports.execfile(file, globals, locals)  <span class="comment"># execute the script</span></div><div class="line">  File <span class="string">"C:/Users/Administrator/Desktop/TEST/ga.py"</span>, line <span class="number">14</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    gifmaker.makedelta(fp, im)</div><div class="line">  File <span class="string">"C:/Users/Administrator/Desktop/TEST\gifmaker.py"</span>, line <span class="number">78</span>, <span class="keyword">in</span> makedelta</div><div class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> getheader(im) + getdata(im):</div><div class="line">  File <span class="string">"D:\Python27\lib\site-packages\PIL\GifImagePlugin.py"</span>, line <span class="number">754</span>, <span class="keyword">in</span> getdata</div><div class="line">    ImageFile._save(im, fp, [(<span class="string">"gif"</span>, (<span class="number">0</span>, <span class="number">0</span>)+im.size, <span class="number">0</span>, RAWMODE[im.mode])])</div><div class="line">KeyError: <span class="string">'RGBA'</span></div></pre></td></tr></table></figure>
+<p>好像是色调空间的问题。。。没空折腾了。PASS</p>
+<hr>
+<h2 id="PIL库（Py2、3都支持）"><a href="#PIL库（Py2、3都支持）" class="headerlink" title="PIL库（Py2、3都支持）"></a>PIL库（Py2、3都支持）</h2><p>无意中翻了下PIL官方文档，是支持Gif的。而且保存成gif格式也允许mulityImage. </p>
+<p>果断试了下，<strong>成功了！</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageSequence</div><div class="line"><span class="keyword">import</span> sys, os</div><div class="line"><span class="comment">#filename = sys.argv[1]</span></div><div class="line"></div><div class="line">filenames=sorted((fn <span class="keyword">for</span> fn <span class="keyword">in</span> os.listdir(<span class="string">'.'</span>) <span class="keyword">if</span> fn.endswith(<span class="string">'.PNG'</span>)))</div><div class="line">im=Image.open(<span class="string">'001.png'</span>)</div><div class="line">print(filenames)</div><div class="line">im.save(<span class="string">'123.gif'</span>, save_all=<span class="keyword">True</span>, append_images=[Image.open(filename) <span class="keyword">for</span> filename <span class="keyword">in</span> filenames],loop=<span class="number">5</span>,duration=<span class="number">500</span>)</div></pre></td></tr></table></figure>
+<p>得到的123.gif分析了下：</p>
+<ol>
+<li>位深由origin的32位变成了8位，所以图像看起来有点.色差……回头看看能不能指定参数</li>
+</ol>
+<ol>
+<li>总共6个文件，生成的gif也依次包括了6帧。但是如果<code>im=Image.open(&#39;001.png&#39;)</code> 这打开的不是第一个（头）帧的话，就会变成7帧。应该是PIL内部自动做了判断。</li>
+<li>原始6个png文件大小（K）分别为：863、804、789、810、834、833，共计4933K。合成出来的gif大小为2.37MB。还不错。具体的格式编码没看过，所以也不能做进一步分析。</li>
+<li><a href="http://www.pythonclub.org/modules/pil/convert-png-gif" target="_blank" rel="external">http://www.pythonclub.org/modules/pil/convert-png-gif</a> 说的比较详细 可以参考</li>
+</ol>
+<hr>
+<p>##　其他</p>
+<p>下面是一些未经测试的方法。大家可以测试玩玩。</p>
+<p><a href="http://blog.csdn.net/hackjames/article/details/6950837" target="_blank" rel="external">如何截取屏幕并生成GIF动画</a></p>
+<p><a href="http://blog.csdn.net/hackjames/article/details/6950837" target="_blank" rel="external">http://blog.csdn.net/hackjames/article/details/6950837</a></p>
+<p> <a href="http://zulko.github.io/blog/2014/01/23/making-animated-gifs-from-video-files-with-python/" target="_blank" rel="external">moviepy 模块</a></p>
+<p><a href="http://codingpy.com/article/drawing-gifs-with-matplotlib/" target="_blank" rel="external">如何用 Matplotlib 画 GIF 动图</a></p>
+<p><a href="http://www.voidcn.com/blog/gripleaf/article/p-757451.html" target="_blank" rel="external">Gifsicle的Python 封装</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/25/Python2、3共存以及工作环境配置/" rel="next" title="Win下Python3/2.7共存以及工作环境配置">
+                <i class="fa fa-chevron-left"></i> Win下Python3/2.7共存以及工作环境配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/10/上海交大Hackthon活动有感/" rel="prev" title="2017上海交大Hackthon活动有感">
+                2017上海交大Hackthon活动有感 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Vast-Stars" />
+          <p class="site-author-name" itemprop="name">Vast-Stars</p>
+           
+              <p class="site-description motion-element" itemprop="description">或许是不知梦的缘故，游离之人追逐幻影</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用imageio库（py3"><span class="nav-number">1.</span> <span class="nav-text">使用imageio库（py3)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用images2gif-py"><span class="nav-number">2.</span> <span class="nav-text">使用images2gif.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用ImageMagick"><span class="nav-number">3.</span> <span class="nav-text">使用ImageMagick</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用gifmaker-py-Py2-7"><span class="nav-number">4.</span> <span class="nav-text">使用gifmaker.py(Py2.7)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PIL库（Py2、3都支持）"><span class="nav-number">5.</span> <span class="nav-text">PIL库（Py2、3都支持）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vast-Stars</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("yy4R2ce0nQiB5osrIqegmjha-gzGzoHsz", "Ai70LQutX0l8oRmalLz8EyiF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

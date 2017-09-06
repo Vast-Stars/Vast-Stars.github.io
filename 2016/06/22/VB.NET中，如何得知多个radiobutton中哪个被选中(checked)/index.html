@@ -1,0 +1,801 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+	<script type="text/javascript">
+	    var host = "vast-stars.com";
+	    if ((host == window.location.host) && (window.location.protocol != "https:"))
+	        window.location.protocol = "https";
+	</script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content=".NET," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="这类问题，遇见过不少次，不仅限于radiobutton，还可能有其他MFC组件的判断。原先我的做法是一大串if……elseif ……elseif……elseif……end if 不但麻烦，而且在添加新radiobutton(或者删除、升级)后，容易忘记添加分支语句，导致bug。现以radiobutton为例,给出个比较简洁的方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VB.NET中，取出被选中(checked)的按钮(radiobutton)">
+<meta property="og:url" content="http://www.vast-stars.com/2016/06/22/VB.NET中，如何得知多个radiobutton中哪个被选中(checked)/index.html">
+<meta property="og:site_name" content="Vast-stars' Blog">
+<meta property="og:description" content="这类问题，遇见过不少次，不仅限于radiobutton，还可能有其他MFC组件的判断。原先我的做法是一大串if……elseif ……elseif……elseif……end if 不但麻烦，而且在添加新radiobutton(或者删除、升级)后，容易忘记添加分支语句，导致bug。现以radiobutton为例,给出个比较简洁的方法。">
+<meta property="og:updated_time" content="2017-03-20T13:08:01.812Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VB.NET中，取出被选中(checked)的按钮(radiobutton)">
+<meta name="twitter:description" content="这类问题，遇见过不少次，不仅限于radiobutton，还可能有其他MFC组件的判断。原先我的做法是一大串if……elseif ……elseif……elseif……end if 不但麻烦，而且在添加新radiobutton(或者删除、升级)后，容易忘记添加分支语句，导致bug。现以radiobutton为例,给出个比较简洁的方法。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.vast-stars.com/2016/06/22/VB.NET中，如何得知多个radiobutton中哪个被选中(checked)/"/>
+
+
+
+
+
+  <title> VB.NET中，取出被选中(checked)的按钮(radiobutton) | Vast-stars' Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vast-stars' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">机器学习/算法/</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2016/06/22/VB.NET中，如何得知多个radiobutton中哪个被选中(checked)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vast-Stars">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vast-stars' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                VB.NET中，取出被选中(checked)的按钮(radiobutton)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-22T15:59:23+08:00">
+                2016-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/06/22/VB.NET中，如何得知多个radiobutton中哪个被选中(checked)/" class="leancloud_visitors" data-flag-title="VB.NET中，取出被选中(checked)的按钮(radiobutton)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这类问题，遇见过不少次，不仅限于radiobutton，还可能有其他MFC组件的判断。<br>原先我的做法是一大串if……elseif ……elseif……elseif……end if 不但麻烦，而且在添加新radiobutton(或者删除、升级)后，容易忘记添加分支语句，导致bug。<br>现以radiobutton为例,给出个比较简洁的方法。 </p>
+<a id="more"></a>
+<h1 id="第一种方法"><a href="#第一种方法" class="headerlink" title="第一种方法"></a>第一种方法</h1><hr>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Dim</span> checkedb <span class="keyword">As</span> RadioButton</div><div class="line"></div><div class="line">checkedb = GroupBox1.Controls.OfType(<span class="keyword">Of</span> RadioButton)().FirstOrDefault(<span class="keyword">Function</span>(r) r.Checked = <span class="literal">True</span>)</div><div class="line"></div><div class="line">Debug.Print(checkedb.Name)</div></pre></td></tr></table></figure>
+<p>GroupBox1是这一堆radiobutton的容器，如果没有，用Form也行。</p>
+<p>ofTyple(Of radiobutton)是筛选出容器中指定控件，过滤掉其他控件，我们这当然是radiobutton了。<br>然后FirstOrDefault是返回符合符合条件的第一个控件或者默认值。这是个LINQ查询语句。</p>
+<p>关于LINQ，附录1有其他的LINQ查询操作符，附录2有许多我查阅资料时参考的网址。</p>
+<p>最后查询操作符括号中是个委托函数(类似函数指针)，如果是简单的判断，可以直接使用匿名函数；比如这，判断条件仅仅是 if (某个按钮.checked )  所以就使用了简单的匿名函数，如果有更为复杂的判断，则使用以下语句即可</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Dim</span> func1 <span class="keyword">As</span> Func(<span class="keyword">Of</span> RadioButton, <span class="built_in">Boolean</span>) = <span class="keyword">Function</span>(<span class="keyword">ByVal</span> i <span class="keyword">As</span> RadioButton)</div><div class="line">		 ……判断过程……</div><div class="line"><span class="keyword">End</span> <span class="keyword">Function</span></div><div class="line"></div><div class="line">checkedb = GroupBox1.Controls.OfType(<span class="keyword">Of</span> RadioButton)().FirstOrDefault(func1)</div></pre></td></tr></table></figure>
+<hr>
+<h1 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h1><p>参考<a href="http://stackoverflow.com/questions/11160594/event-handler-for-groupbox-with-radiobuttons-in-c-sharp#new-answer" target="_blank" rel="external">http://stackoverflow.com/questions/11160594/event-handler-for-groupbox-with-radiobuttons-in-c-sharp#new-answer</a></p>
+<p>待测试</p>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>附录1：<br>引用自：<a href="http://www.cnblogs.com/qiuweiguo/archive/2011/08/03/2126625.html" target="_blank" rel="external">http://www.cnblogs.com/qiuweiguo/archive/2011/08/03/2126625.html</a></p>
+<blockquote>
+<p>·First - 返回集合中的第一个元素；不延迟<br>·FirstOrDefault - 返回集合中的第一个元素（如果没有则返回默认值）；不延迟<br>·Last - 返回集合中的最后一个元素；不延迟<br>·LastOrDefault - 返回集合中的最后一个元素（如果没有则返回默认值）<br>·ElementAt - 返回集合中指定索引的元素；不延迟<br>·ElementAtOrDefault - 返回集合中指定索引的元素（如果没有则返回默认值）；不延迟<br>·Contains - 判断集合中是否包含有某一元素；不延迟<br>·Any - 判断集合中是否有元素满足某一条件；不延迟<br>·All - 判断集合中是否所有元素都满足某一条件；不延迟<br>·Count - 返回集合中的元素个数，返回int；不延迟<br>·LongCount - 返回集合中的元素个数，返回long；不延迟<br>·Sum - 集合应为数字类型集合，求其和；不延迟<br>·Min - 返回集合的最小值；不延迟<br>·Max - 返回集合的最大值；不延迟<br>·Average - 集合应为数字类型集合，求其平均值；不延迟<br>·Aggregate - 根据输入的表达式获取一个聚合值；不延迟<br>·Cast - 将集合转换为强类型集合；延迟<br>·DefaultIfEmpty - 查询结果为空则返回默认值；延迟<br>·SequenceEqual - 判断两个集合是否相同；不延迟<br>·OfType - 过滤集合中的指定类型；延迟<br>·ToArray - 将集合转换为数组；不延迟<br>·ToList - 将集合转换为List集合；不延迟<br>·ToDictionary - 将集合转换为{K, V}集合；不延迟</p>
+</blockquote>
+<p>附录2：<br>MSDN:<br><a href="https://msdn.microsoft.com/zh-cn/library/bb397687.aspx%20Lambda%20%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%88C#%20%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97%EF%BC%89" target="_blank" rel="external">Lambda 表达式（C# 编程指南）</a><br><a href="https://msdn.microsoft.com/zh-cn/library/bb360913%28v=vs.100%29.aspx" target="_blank" rel="external">Enumerable.OfType(Of TResult) 方法</a><br><a href="https://msdn.microsoft.com/zh-cn/library/bb531253.aspx" target="_blank" rel="external">Lambda 表达式 (Visual Basic)</a><br><a href="http://www.cnblogs.com/ninputer/archive/2007/11/23/970460.html" target="_blank" rel="external">VS2008亮点：用Lambda表达式进行函数式编程</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NET/" rel="tag"># .NET</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/07/VBA-EXCEL/" rel="next" title="VBA-EXCEL">
+                <i class="fa fa-chevron-left"></i> VBA-EXCEL
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/12/VB-NET中使用委托-Delegate-来注册回调-callback-函数/" rel="prev" title="VB.NET中使用委托(Delegate)来注册回调(callback)函数">
+                VB.NET中使用委托(Delegate)来注册回调(callback)函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Vast-Stars" />
+          <p class="site-author-name" itemprop="name">Vast-Stars</p>
+           
+              <p class="site-description motion-element" itemprop="description">或许是不知梦的缘故，游离之人追逐幻影</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一种方法"><span class="nav-number">1.</span> <span class="nav-text">第一种方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二种方法"><span class="nav-number">2.</span> <span class="nav-text">第二种方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录"><span class="nav-number">3.</span> <span class="nav-text">附录</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vast-Stars</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("yy4R2ce0nQiB5osrIqegmjha-gzGzoHsz", "Ai70LQutX0l8oRmalLz8EyiF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
