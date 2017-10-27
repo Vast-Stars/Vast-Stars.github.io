@@ -255,6 +255,165 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2017/10/27/Majority-Element-Problem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vast-Stars">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vast-stars' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/10/27/Majority-Element-Problem/" itemprop="url">
+                  Majority Element Problem
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-27T23:16:51+08:00">
+                2017-10-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/10/27/Majority-Element-Problem/" class="leancloud_visitors" data-flag-title="Majority Element Problem">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Problem-Majority-Element"><a href="#Problem-Majority-Element" class="headerlink" title="Problem: Majority Element"></a>Problem: Majority Element</h1><h2 id="Basic-Report"><a href="#Basic-Report" class="headerlink" title="Basic Report"></a>Basic Report</h2><h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1. Description"></a>1. Description</h3><p>Given an array of size <em>n</em>, find the majority element. </p>
+<p>The majority element is the element that appears <strong>more than</strong> <code>⌊ n/2 ⌋</code> times.</p>
+<h3 id="2-Algorithm"><a href="#2-Algorithm" class="headerlink" title="2. Algorithm"></a>2. Algorithm</h3><p>We can use the nature of the problem: </p>
+<blockquote>
+<p>appears <strong>more than</strong> <code>⌊ n/2 ⌋</code> times.</p>
+</blockquote>
+<p>which means we can delete both a and b  if a≠b, and this will not change the Majority Element in the remaining part of the array.</p>
+<p>Specifically, I use a counter to record the number of occurrences of the <code>target</code>. I initialize target to <code>array[0]</code> , and sequential scan the array sequentially to <code>array[i]</code>.  The counter  will increase by 1 <code>if array[i]==target</code>, or otherwise will decrease by 1. If <code>counter==0</code>  then pick up next number as new target and continue this process until the entire array is scanned or <code>counter &gt;SIZE/2</code>(which means program find a Majority element clearly).</p>
+<h3 id="3-Source-Codes"><a href="#3-Source-Codes" class="headerlink" title="3. Source Codes"></a>3. Source Codes</h3><p>The main function is demonstrated below:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; INPUT)</span> </span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">int</span> count = <span class="number">1</span>;</div><div class="line">  <span class="keyword">int</span> target = INPUT[<span class="number">0</span>];</div><div class="line">  <span class="keyword">int</span> size = INPUT.size();</div><div class="line">  <span class="keyword">int</span> total_size = size;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i&lt;total_size &amp;&amp; count &lt;= size / <span class="number">2</span>; i++)</div><div class="line">  &#123;</div><div class="line">      <span class="keyword">if</span> (INPUT[i] == target)</div><div class="line">          count++;</div><div class="line">      <span class="keyword">else</span></div><div class="line">      &#123;</div><div class="line">          count--;</div><div class="line">          <span class="keyword">if</span> (count == <span class="number">0</span>)</div><div class="line">              <span class="keyword">if</span> (i + <span class="number">1</span> ==total_size)</div><div class="line">                  <span class="keyword">return</span> INT_MIN; <span class="comment">//Can Not Find Majority Element</span></div><div class="line">              <span class="keyword">else</span></div><div class="line">              &#123;</div><div class="line">                  target = INPUT[i + <span class="number">1</span>];</div><div class="line">                  size = total_size- i - <span class="number">1</span>;</div><div class="line">              &#125;</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> target;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Time complexity: <code>O(n)</code>               Space complexity: <code>O(1)</code></p>
+<p>This function is tested by <a href="https://leetcode.com/problems/majority-element/description/" target="_blank" rel="external">LeetCode: 169.Majority Element</a> successfully.</p>
+<h3 id="4-Recursive-process"><a href="#4-Recursive-process" class="headerlink" title="4. Recursive process"></a>4. Recursive process</h3><p><img src="/2017/10/27/Majority-Element-Problem/1.jpg" alt="1"></p>
+<h2 id="Further-Thinking"><a href="#Further-Thinking" class="headerlink" title="Further Thinking"></a>Further Thinking</h2><h3 id="1-Algorithm-optimization"><a href="#1-Algorithm-optimization" class="headerlink" title="1. Algorithm optimization"></a>1. Algorithm optimization</h3><p>  In fact, we can improve this algorithm in 2 ways.</p>
+<ol>
+<li><p>Use hash . Although it takes O(n) time complexity and O(n) space complexity, hash map(or table) is much convenient to deal with similar problem related statistics.</p>
+</li>
+<li><p>On the basis of the original algorithm, I change variable <code>size</code> in end condition <code>count &lt;= size / 2</code>. I find that <code>target</code> only needs to be greater than <strong>half the length of the remaining array</strong>, rather than half the total length. On the implementation, only one additional variable is required to record the last index(<code>i</code>) of <code>target == 0</code> and use <code>size = total_size- i - 1</code> instead of <code>size = total_size</code>.</p>
+<p>Tested in 15,000 examples(Randomly generated, see source code for details), I get the speed difference between the 2 algorithms:</p>
+<p><img src="/2017/10/27/Majority-Element-Problem/15000.bmp" alt="15000"></p>
+<p>From the graph we can know it depends on the usage scenarios to choose and optimize algorithm to play its best performance.</p>
+</li>
+</ol>
+<h3 id="2-Similar-Problem-Ⅰ-Find-the-Majority-Element-appear-greater-or-equal-to⌊-n-2-⌋-times"><a href="#2-Similar-Problem-Ⅰ-Find-the-Majority-Element-appear-greater-or-equal-to⌊-n-2-⌋-times" class="headerlink" title="2. Similar Problem Ⅰ: Find the Majority Element(appear  greater or equal to⌊ n/2 ⌋ times )"></a>2. Similar Problem Ⅰ: Find the Majority Element(appear  <strong>greater or equal</strong> to<code>⌊ n/2 ⌋</code> times )</h3><p>To be honest, it’s confusing me for some time. I consider the cases of the parity of n,  or whether there must be a solution to this problem . And it’s very difficult to generalize several cases of the algorithm together.</p>
+<p>But later I came across another Majority problem(see blow), and I solved this problem effortlessly.</p>
+<h3 id="3-Similar-Problem-Ⅱ-Find-the-Majority-Element-appear-more-than-⌊-n-3-⌋-times"><a href="#3-Similar-Problem-Ⅱ-Find-the-Majority-Element-appear-more-than-⌊-n-3-⌋-times" class="headerlink" title="3.  Similar Problem Ⅱ: Find the Majority Element(appear  more than ⌊ n/3 ⌋ times )"></a>3.  Similar Problem Ⅱ: Find the Majority Element(appear  more than <code>⌊ n/3 ⌋</code> times )</h3><p>Problem Source:   <a href="https://leetcode.com/problems/majority-element-ii/description/" target="_blank" rel="external">LeetCode 229. Majority Element II</a></p>
+<p>First of all, we can prove that there is up to 2 majority element . So it is natural to think about using 2 counters to record 2 targets(It seems to “doubled” previous algorithm).  What’s differences is we need scan the entire array to count the number of <code>target1</code> and <code>target2</code> after the first traversal.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; majorityElement(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) </div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> t1,t2;</div><div class="line">	<span class="keyword">int</span> c1=<span class="number">0</span>,c2=<span class="number">0</span>;</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i:nums)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(i==t1 || i==t2)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span>(i==t2)</div><div class="line">				c2++;</div><div class="line">			<span class="keyword">else</span></div><div class="line">				c1++;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> </div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span>(c1==<span class="number">0</span>)</div><div class="line">			&#123;</div><div class="line">				t1=i;</div><div class="line">				c1=<span class="number">1</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(c2==<span class="number">0</span>)</div><div class="line">			&#123;</div><div class="line">				t2=i;</div><div class="line">				c2=<span class="number">1</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span></div><div class="line">				c1--;c2--;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	c1=<span class="number">0</span>;c2=<span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i:nums)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(i==t1) c1++;</div><div class="line">		<span class="keyword">if</span>(i==t2) c2++;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span>(c1&gt;nums.size()/<span class="number">3</span>)</div><div class="line">		ans.push_back(t1);</div><div class="line">	<span class="keyword">if</span>(c2&gt;nums.size()/<span class="number">3</span>)</div><div class="line">		ans.push_back(t2);	</div><div class="line">	<span class="keyword">return</span> ans;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Time complexity: <code>O(n)</code>               Space complexity: <code>O(1)</code></p>
+<p>This function is tested by  <a href="https://leetcode.com/problems/majority-element-ii/description/" target="_blank" rel="external">LeetCode 229. Majority Element II</a> successfully.</p>
+<hr>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2017/09/06/Cambridge-Summer-Programme/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1487,140 +1646,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2016/10/16/关于蓝牙模块-HC-06/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vast-Stars">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vast-stars' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/16/关于蓝牙模块-HC-06/" itemprop="url">
-                   关于蓝牙模块(HC-06)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-16T14:07:58+08:00">
-                2016-10-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/10/16/关于蓝牙模块-HC-06/" class="leancloud_visitors" data-flag-title=" 关于蓝牙模块(HC-06)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>关于如何与Arduino接线、进入AT模式，请看：<a href="http://swf.com.tw/?p=712">http://swf.com.tw/?p=712</a></p>
-<p>这是HC-06所有AT指令（网上参考资料或多或少会漏，这是我整理比较齐全的）</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/10/16/关于蓝牙模块-HC-06/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1670,7 +1695,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
