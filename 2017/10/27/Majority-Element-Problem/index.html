@@ -7,7 +7,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
-	<script type="text/javascript">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><script type="text/javascript">
 	    var host = "vast-stars.com";
 	    if ((host == window.location.host) && (window.location.protocol != "https:"))
 	        window.location.protocol = "https";
@@ -92,25 +92,24 @@
 
 
 
-<meta name="description" content="Problem: Majority ElementBasic Report1. DescriptionGiven an array of size n, find the majority element. 
-The majority element is the element that appears more than ⌊ n/2 ⌋ times.
-2. AlgorithmWe can us">
+<meta name="description" content="All Code in this blog can be found in https://github.com/Vast-Stars/Algorithm/tree/master/Majority
+Basic Report1. DescriptionGiven an array of size n, find the majority element. 
+The majority element">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Majority Element Problem">
 <meta property="og:url" content="http://www.vast-stars.com/2017/10/27/Majority-Element-Problem/index.html">
 <meta property="og:site_name" content="Vast-stars' Blog">
-<meta property="og:description" content="Problem: Majority ElementBasic Report1. DescriptionGiven an array of size n, find the majority element. 
-The majority element is the element that appears more than ⌊ n/2 ⌋ times.
-2. AlgorithmWe can us">
-<meta property="og:image" content="http://www.vast-stars.com/2017/10/27/Majority-Element-Problem/1.jpg">
+<meta property="og:description" content="All Code in this blog can be found in https://github.com/Vast-Stars/Algorithm/tree/master/Majority
+Basic Report1. DescriptionGiven an array of size n, find the majority element. 
+The majority element">
 <meta property="og:image" content="http://www.vast-stars.com/2017/10/27/Majority-Element-Problem/15000.bmp">
-<meta property="og:updated_time" content="2017-10-27T15:23:46.872Z">
+<meta property="og:updated_time" content="2017-10-31T16:12:24.807Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Majority Element Problem">
-<meta name="twitter:description" content="Problem: Majority ElementBasic Report1. DescriptionGiven an array of size n, find the majority element. 
-The majority element is the element that appears more than ⌊ n/2 ⌋ times.
-2. AlgorithmWe can us">
-<meta name="twitter:image" content="http://www.vast-stars.com/2017/10/27/Majority-Element-Problem/1.jpg">
+<meta name="twitter:description" content="All Code in this blog can be found in https://github.com/Vast-Stars/Algorithm/tree/master/Majority
+Basic Report1. DescriptionGiven an array of size n, find the majority element. 
+The majority element">
+<meta name="twitter:image" content="http://www.vast-stars.com/2017/10/27/Majority-Element-Problem/15000.bmp">
 
 
 
@@ -144,7 +143,7 @@ The majority element is the element that appears more than ⌊ n/2 ⌋ times.
 
 
 
-  <title> Majority Element Problem | Vast-stars' Blog </title>
+  <title> Majority Element Problem | Vast-stars' Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -169,7 +168,7 @@ The majority element is the element that appears more than ⌊ n/2 ⌋ times.
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -346,20 +345,22 @@ The majority element is the element that appears more than ⌊ n/2 ⌋ times.
       
 
       
-        <h1 id="Problem-Majority-Element"><a href="#Problem-Majority-Element" class="headerlink" title="Problem: Majority Element"></a>Problem: Majority Element</h1><h2 id="Basic-Report"><a href="#Basic-Report" class="headerlink" title="Basic Report"></a>Basic Report</h2><h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1. Description"></a>1. Description</h3><p>Given an array of size <em>n</em>, find the majority element. </p>
+        <p>All Code in this blog can be found in <a href="https://github.com/Vast-Stars/Algorithm/tree/master/Majority" target="_blank" rel="external">https://github.com/Vast-Stars/Algorithm/tree/master/Majority</a></p>
+<h1 id="Basic-Report"><a href="#Basic-Report" class="headerlink" title="Basic Report"></a>Basic Report</h1><h2 id="1-Description"><a href="#1-Description" class="headerlink" title="1. Description"></a>1. Description</h2><p>Given an array of size <em>n</em>, find the majority element. </p>
 <p>The majority element is the element that appears <strong>more than</strong> <code>⌊ n/2 ⌋</code> times.</p>
-<h3 id="2-Algorithm"><a href="#2-Algorithm" class="headerlink" title="2. Algorithm"></a>2. Algorithm</h3><p>We can use the nature of the problem: </p>
+<h2 id="2-Algorithm"><a href="#2-Algorithm" class="headerlink" title="2. Algorithm"></a>2. Algorithm</h2><p>We can use the nature of the problem: </p>
 <blockquote>
 <p>appears <strong>more than</strong> <code>⌊ n/2 ⌋</code> times.</p>
 </blockquote>
 <p>which means we can delete both a and b  if a≠b, and this will not change the Majority Element in the remaining part of the array.</p>
 <p>Specifically, I use a counter to record the number of occurrences of the <code>target</code>. I initialize target to <code>array[0]</code> , and sequential scan the array sequentially to <code>array[i]</code>.  The counter  will increase by 1 <code>if array[i]==target</code>, or otherwise will decrease by 1. If <code>counter==0</code>  then pick up next number as new target and continue this process until the entire array is scanned or <code>counter &gt;SIZE/2</code>(which means program find a Majority element clearly).</p>
-<h3 id="3-Source-Codes"><a href="#3-Source-Codes" class="headerlink" title="3. Source Codes"></a>3. Source Codes</h3><p>The main function is demonstrated below:</p>
+<h2 id="3-Source-Codes"><a href="#3-Source-Codes" class="headerlink" title="3. Source Codes"></a>3. Source Codes</h2><p>The main function is demonstrated below:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; INPUT)</span> </span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">int</span> count = <span class="number">1</span>;</div><div class="line">  <span class="keyword">int</span> target = INPUT[<span class="number">0</span>];</div><div class="line">  <span class="keyword">int</span> size = INPUT.size();</div><div class="line">  <span class="keyword">int</span> total_size = size;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i&lt;total_size &amp;&amp; count &lt;= size / <span class="number">2</span>; i++)</div><div class="line">  &#123;</div><div class="line">      <span class="keyword">if</span> (INPUT[i] == target)</div><div class="line">          count++;</div><div class="line">      <span class="keyword">else</span></div><div class="line">      &#123;</div><div class="line">          count--;</div><div class="line">          <span class="keyword">if</span> (count == <span class="number">0</span>)</div><div class="line">              <span class="keyword">if</span> (i + <span class="number">1</span> ==total_size)</div><div class="line">                  <span class="keyword">return</span> INT_MIN; <span class="comment">//Can Not Find Majority Element</span></div><div class="line">              <span class="keyword">else</span></div><div class="line">              &#123;</div><div class="line">                  target = INPUT[i + <span class="number">1</span>];</div><div class="line">                  size = total_size- i - <span class="number">1</span>;</div><div class="line">              &#125;</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> target;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Time complexity: <code>O(n)</code>               Space complexity: <code>O(1)</code></p>
 <p>This function is tested by <a href="https://leetcode.com/problems/majority-element/description/" target="_blank" rel="external">LeetCode: 169.Majority Element</a> successfully.</p>
-<h3 id="4-Recursive-process"><a href="#4-Recursive-process" class="headerlink" title="4. Recursive process"></a>4. Recursive process</h3><p><img src="/2017/10/27/Majority-Element-Problem/1.jpg" alt="1"></p>
-<h2 id="Further-Thinking"><a href="#Further-Thinking" class="headerlink" title="Further Thinking"></a>Further Thinking</h2><h3 id="1-Algorithm-optimization"><a href="#1-Algorithm-optimization" class="headerlink" title="1. Algorithm optimization"></a>1. Algorithm optimization</h3><p>  In fact, we can improve this algorithm in 2 ways.</p>
+<h3 id="4-Recursive-process"><a href="#4-Recursive-process" class="headerlink" title="4. Recursive process"></a>4. Recursive process</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">graph LR;</div><div class="line">  a[*1*,2,3,2,1]--&gt; |Target=1 Counter=1|B[1,*2*,3,2,1] </div><div class="line">  B--&gt; |Target=1 Counter=0|C[1,2,*3*,2,1];</div><div class="line">  C--&gt; |Rest Target=3|C;</div><div class="line">  C--&gt; |Target=3 Counter=1|D[3,*2*,1];</div><div class="line">  D--&gt; |Target=3 Counter=0|E[*1*];</div><div class="line">  E--&gt; |Rest Target=1|E;</div></pre></td></tr></table></figure>
+<hr>
+<h1 id="Further-Thinking"><a href="#Further-Thinking" class="headerlink" title="Further Thinking"></a>Further Thinking</h1><h2 id="1-Algorithm-optimization"><a href="#1-Algorithm-optimization" class="headerlink" title="1. Algorithm optimization"></a>1. Algorithm optimization</h2><p>  In fact, we can improve this algorithm in 2 ways.</p>
 <ol>
 <li><p>Use hash . Although it takes O(n) time complexity and O(n) space complexity, hash map(or table) is much convenient to deal with similar problem related statistics.</p>
 </li>
@@ -369,14 +370,13 @@ The majority element is the element that appears more than ⌊ n/2 ⌋ times.
 <p>From the graph we can know it depends on the usage scenarios to choose and optimize algorithm to play its best performance.</p>
 </li>
 </ol>
-<h3 id="2-Similar-Problem-Ⅰ-Find-the-Majority-Element-appear-greater-or-equal-to⌊-n-2-⌋-times"><a href="#2-Similar-Problem-Ⅰ-Find-the-Majority-Element-appear-greater-or-equal-to⌊-n-2-⌋-times" class="headerlink" title="2. Similar Problem Ⅰ: Find the Majority Element(appear  greater or equal to⌊ n/2 ⌋ times )"></a>2. Similar Problem Ⅰ: Find the Majority Element(appear  <strong>greater or equal</strong> to<code>⌊ n/2 ⌋</code> times )</h3><p>To be honest, it’s confusing me for some time. I consider the cases of the parity of n,  or whether there must be a solution to this problem . And it’s very difficult to generalize several cases of the algorithm together.</p>
+<h2 id="2-Similar-Problem-Ⅰ-Find-the-Majority-Element-appear-greater-or-equal-to⌊-n-2-⌋-times"><a href="#2-Similar-Problem-Ⅰ-Find-the-Majority-Element-appear-greater-or-equal-to⌊-n-2-⌋-times" class="headerlink" title="2. Similar Problem Ⅰ: Find the Majority Element(appear  greater or equal to⌊ n/2 ⌋ times )"></a>2. Similar Problem Ⅰ: Find the Majority Element(appear  <strong>greater or equal</strong> to<code>⌊ n/2 ⌋</code> times )</h2><p>To be honest, it’s confusing me for some time. I consider the cases of the parity of n,  or whether there must be a solution to this problem . And it’s very difficult to generalize several cases of the algorithm together.</p>
 <p>But later I came across another Majority problem(see blow), and I solved this problem effortlessly.</p>
 <h3 id="3-Similar-Problem-Ⅱ-Find-the-Majority-Element-appear-more-than-⌊-n-3-⌋-times"><a href="#3-Similar-Problem-Ⅱ-Find-the-Majority-Element-appear-more-than-⌊-n-3-⌋-times" class="headerlink" title="3.  Similar Problem Ⅱ: Find the Majority Element(appear  more than ⌊ n/3 ⌋ times )"></a>3.  Similar Problem Ⅱ: Find the Majority Element(appear  more than <code>⌊ n/3 ⌋</code> times )</h3><p>Problem Source:   <a href="https://leetcode.com/problems/majority-element-ii/description/" target="_blank" rel="external">LeetCode 229. Majority Element II</a></p>
 <p>First of all, we can prove that there is up to 2 majority element . So it is natural to think about using 2 counters to record 2 targets(It seems to “doubled” previous algorithm).  What’s differences is we need scan the entire array to count the number of <code>target1</code> and <code>target2</code> after the first traversal.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; majorityElement(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) </div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> t1,t2;</div><div class="line">	<span class="keyword">int</span> c1=<span class="number">0</span>,c2=<span class="number">0</span>;</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i:nums)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(i==t1 || i==t2)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span>(i==t2)</div><div class="line">				c2++;</div><div class="line">			<span class="keyword">else</span></div><div class="line">				c1++;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> </div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span>(c1==<span class="number">0</span>)</div><div class="line">			&#123;</div><div class="line">				t1=i;</div><div class="line">				c1=<span class="number">1</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(c2==<span class="number">0</span>)</div><div class="line">			&#123;</div><div class="line">				t2=i;</div><div class="line">				c2=<span class="number">1</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span></div><div class="line">				c1--;c2--;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	c1=<span class="number">0</span>;c2=<span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i:nums)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(i==t1) c1++;</div><div class="line">		<span class="keyword">if</span>(i==t2) c2++;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span>(c1&gt;nums.size()/<span class="number">3</span>)</div><div class="line">		ans.push_back(t1);</div><div class="line">	<span class="keyword">if</span>(c2&gt;nums.size()/<span class="number">3</span>)</div><div class="line">		ans.push_back(t2);	</div><div class="line">	<span class="keyword">return</span> ans;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Time complexity: <code>O(n)</code>               Space complexity: <code>O(1)</code></p>
 <p>This function is tested by  <a href="https://leetcode.com/problems/majority-element-ii/description/" target="_blank" rel="external">LeetCode 229. Majority Element II</a> successfully.</p>
-<hr>
 
       
     </div>
@@ -416,6 +416,10 @@ The majority element is the element that appears more than ⌊ n/2 ⌋ times.
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/31/Fisher线性判别/" rel="prev" title="Fisher线性判别">
+                Fisher线性判别 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -479,7 +483,7 @@ The majority element is the element that appears more than ⌊ n/2 ⌋ times.
                alt="Vast-Stars" />
           <p class="site-author-name" itemprop="name">Vast-Stars</p>
            
-              <p class="site-description motion-element" itemprop="description">或许是不知梦的缘故，游离之人追逐幻影</p>
+              <p class="site-description motion-element" itemprop="description">或许是不知梦的缘故，游离之人追逐幻影   https://github.com/vast-stars</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -487,7 +491,7 @@ The majority element is the element that appears more than ⌊ n/2 ⌋ times.
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -500,7 +504,7 @@ The majority element is the element that appears more than ⌊ n/2 ⌋ times.
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -535,7 +539,7 @@ The majority element is the element that appears more than ⌊ n/2 ⌋ times.
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem-Majority-Element"><span class="nav-number">1.</span> <span class="nav-text">Problem: Majority Element</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-Report"><span class="nav-number">1.1.</span> <span class="nav-text">Basic Report</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Description"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. Description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Algorithm"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. Algorithm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Source-Codes"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. Source Codes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Recursive-process"><span class="nav-number">1.1.4.</span> <span class="nav-text">4. Recursive process</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Further-Thinking"><span class="nav-number">1.2.</span> <span class="nav-text">Further Thinking</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Algorithm-optimization"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. Algorithm optimization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Similar-Problem-Ⅰ-Find-the-Majority-Element-appear-greater-or-equal-to⌊-n-2-⌋-times"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. Similar Problem Ⅰ: Find the Majority Element(appear  greater or equal to⌊ n/2 ⌋ times )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Similar-Problem-Ⅱ-Find-the-Majority-Element-appear-more-than-⌊-n-3-⌋-times"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.  Similar Problem Ⅱ: Find the Majority Element(appear  more than ⌊ n/3 ⌋ times )</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic-Report"><span class="nav-number">1.</span> <span class="nav-text">Basic Report</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Description"><span class="nav-number">1.1.</span> <span class="nav-text">1. Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Algorithm"><span class="nav-number">1.2.</span> <span class="nav-text">2. Algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Source-Codes"><span class="nav-number">1.3.</span> <span class="nav-text">3. Source Codes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Recursive-process"><span class="nav-number">1.3.1.</span> <span class="nav-text">4. Recursive process</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Further-Thinking"><span class="nav-number">2.</span> <span class="nav-text">Further Thinking</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Algorithm-optimization"><span class="nav-number">2.1.</span> <span class="nav-text">1. Algorithm optimization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Similar-Problem-Ⅰ-Find-the-Majority-Element-appear-greater-or-equal-to⌊-n-2-⌋-times"><span class="nav-number">2.2.</span> <span class="nav-text">2. Similar Problem Ⅰ: Find the Majority Element(appear  greater or equal to⌊ n/2 ⌋ times )</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Similar-Problem-Ⅱ-Find-the-Majority-Element-appear-more-than-⌊-n-3-⌋-times"><span class="nav-number">2.2.1.</span> <span class="nav-text">3.  Similar Problem Ⅱ: Find the Majority Element(appear  more than ⌊ n/3 ⌋ times )</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -693,6 +697,28 @@ The majority element is the element that appears more than ⌊ n/2 ⌋ times.
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  
+
 
   
 
@@ -799,7 +825,24 @@ The majority element is the element that appears more than ⌊ n/2 ⌋ times.
         showTime(Counter);
       }
     });
-  </script>
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

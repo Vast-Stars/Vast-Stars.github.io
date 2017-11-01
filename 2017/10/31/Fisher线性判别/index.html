@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content=".NET," />
+  <meta name="keywords" content="Pattern-Recognition 模式识别 分类器 Fisher," />
 
 
 
@@ -92,16 +92,22 @@
 
 
 
-<meta name="description" content="这类问题，遇见过不少次，不仅限于radiobutton，还可能有其他MFC组件的判断。原先我的做法是一大串if……elseif ……elseif……elseif……end if 不但麻烦，而且在添加新radiobutton(或者删除、升级)后，容易忘记添加分支语句，导致bug。现以radiobutton为例,给出个比较简洁的方法。">
+<meta name="description" content="所有代码可以在 https://github.com/Vast-Stars/Algorithm/tree/master/Fisher 中看到。欢迎star
+一. 算法介绍这是Fisher在1936年提出的线性分类方法。对于二分类问题，训练集$D={ (\mathbf{x}_i,y_i),i=1,2\ldots n}$, 其中
+ ${\mathbf{x}_i\in \mathscr{R^d}, y_">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VB.NET中，取出被选中(checked)的按钮(radiobutton)">
-<meta property="og:url" content="http://www.vast-stars.com/2016/06/22/VB.NET中，如何得知多个radiobutton中哪个被选中(checked)/index.html">
+<meta property="og:title" content="Fisher线性判别">
+<meta property="og:url" content="http://www.vast-stars.com/2017/10/31/Fisher线性判别/index.html">
 <meta property="og:site_name" content="Vast-stars' Blog">
-<meta property="og:description" content="这类问题，遇见过不少次，不仅限于radiobutton，还可能有其他MFC组件的判断。原先我的做法是一大串if……elseif ……elseif……elseif……end if 不但麻烦，而且在添加新radiobutton(或者删除、升级)后，容易忘记添加分支语句，导致bug。现以radiobutton为例,给出个比较简洁的方法。">
-<meta property="og:updated_time" content="2017-03-20T13:08:01.812Z">
+<meta property="og:description" content="所有代码可以在 https://github.com/Vast-Stars/Algorithm/tree/master/Fisher 中看到。欢迎star
+一. 算法介绍这是Fisher在1936年提出的线性分类方法。对于二分类问题，训练集$D={ (\mathbf{x}_i,y_i),i=1,2\ldots n}$, 其中
+ ${\mathbf{x}_i\in \mathscr{R^d}, y_">
+<meta property="og:updated_time" content="2017-11-01T08:14:23.611Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VB.NET中，取出被选中(checked)的按钮(radiobutton)">
-<meta name="twitter:description" content="这类问题，遇见过不少次，不仅限于radiobutton，还可能有其他MFC组件的判断。原先我的做法是一大串if……elseif ……elseif……elseif……end if 不但麻烦，而且在添加新radiobutton(或者删除、升级)后，容易忘记添加分支语句，导致bug。现以radiobutton为例,给出个比较简洁的方法。">
+<meta name="twitter:title" content="Fisher线性判别">
+<meta name="twitter:description" content="所有代码可以在 https://github.com/Vast-Stars/Algorithm/tree/master/Fisher 中看到。欢迎star
+一. 算法介绍这是Fisher在1936年提出的线性分类方法。对于二分类问题，训练集$D={ (\mathbf{x}_i,y_i),i=1,2\ldots n}$, 其中
+ ${\mathbf{x}_i\in \mathscr{R^d}, y_">
 
 
 
@@ -129,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://www.vast-stars.com/2016/06/22/VB.NET中，如何得知多个radiobutton中哪个被选中(checked)/"/>
+  <link rel="canonical" href="http://www.vast-stars.com/2017/10/31/Fisher线性判别/"/>
 
 
 
 
 
-  <title> VB.NET中，取出被选中(checked)的按钮(radiobutton) | Vast-stars' Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> Fisher线性判别 | Vast-stars' Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -254,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2016/06/22/VB.NET中，如何得知多个radiobutton中哪个被选中(checked)/">
+    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2017/10/31/Fisher线性判别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Vast-Stars">
@@ -275,7 +281,7 @@
             
             
               
-                VB.NET中，取出被选中(checked)的按钮(radiobutton)
+                Fisher线性判别
               
             
           </h1>
@@ -290,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-22T15:59:23+08:00">
-                2016-06-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T23:41:42+08:00">
+                2017-10-31
               </time>
             
 
@@ -308,7 +314,7 @@
 
           
           
-             <span id="/2016/06/22/VB.NET中，如何得知多个radiobutton中哪个被选中(checked)/" class="leancloud_visitors" data-flag-title="VB.NET中，取出被选中(checked)的按钮(radiobutton)">
+             <span id="/2017/10/31/Fisher线性判别/" class="leancloud_visitors" data-flag-title="Fisher线性判别">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -337,23 +343,66 @@
       
 
       
-        <p>这类问题，遇见过不少次，不仅限于radiobutton，还可能有其他MFC组件的判断。<br>原先我的做法是一大串if……elseif ……elseif……elseif……end if 不但麻烦，而且在添加新radiobutton(或者删除、升级)后，容易忘记添加分支语句，导致bug。<br>现以radiobutton为例,给出个比较简洁的方法。 </p>
-<a id="more"></a>
-<h1 id="第一种方法"><a href="#第一种方法" class="headerlink" title="第一种方法"></a>第一种方法</h1><hr>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Dim</span> checkedb <span class="keyword">As</span> RadioButton</div><div class="line"></div><div class="line">checkedb = GroupBox1.Controls.OfType(<span class="keyword">Of</span> RadioButton)().FirstOrDefault(<span class="keyword">Function</span>(r) r.Checked = <span class="literal">True</span>)</div><div class="line"></div><div class="line">Debug.Print(checkedb.Name)</div></pre></td></tr></table></figure>
-<p>GroupBox1是这一堆radiobutton的容器，如果没有，用Form也行。</p>
-<p>ofTyple(Of radiobutton)是筛选出容器中指定控件，过滤掉其他控件，我们这当然是radiobutton了。<br>然后FirstOrDefault是返回符合符合条件的第一个控件或者默认值。这是个LINQ查询语句。</p>
-<p>关于LINQ，附录1有其他的LINQ查询操作符，附录2有许多我查阅资料时参考的网址。</p>
-<p>最后查询操作符括号中是个委托函数(类似函数指针)，如果是简单的判断，可以直接使用匿名函数；比如这，判断条件仅仅是 if (某个按钮.checked )  所以就使用了简单的匿名函数，如果有更为复杂的判断，则使用以下语句即可</p>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Dim</span> func1 <span class="keyword">As</span> Func(<span class="keyword">Of</span> RadioButton, <span class="built_in">Boolean</span>) = <span class="keyword">Function</span>(<span class="keyword">ByVal</span> i <span class="keyword">As</span> RadioButton)</div><div class="line">		 ……判断过程……</div><div class="line"><span class="keyword">End</span> <span class="keyword">Function</span></div><div class="line"></div><div class="line">checkedb = GroupBox1.Controls.OfType(<span class="keyword">Of</span> RadioButton)().FirstOrDefault(func1)</div></pre></td></tr></table></figure>
+        <p>所有代码可以在 <a href="https://github.com/Vast-Stars/Algorithm/tree/master/Fisher" target="_blank" rel="external">https://github.com/Vast-Stars/Algorithm/tree/master/Fisher</a> 中看到。欢迎star</p>
+<h1 id="一-算法介绍"><a href="#一-算法介绍" class="headerlink" title="一. 算法介绍"></a>一. 算法介绍</h1><p>这是Fisher在1936年提出的线性分类方法。对于二分类问题，训练集$D={ (\mathbf{x}_i,y_i),i=1,2\ldots n}$, 其中</p>
+<p> ${\mathbf{x}_i\in \mathscr{R^d}, y_i\in \lbrace 0,1\rbrace}$, 我们需要寻找一个权重向量$\mathbf{\omega}$ 和$\mathbf{\omega_0}$ 满足</p>
+<p>$$<br>\mathbf{\omega^T}\mathbf{x}+\omega_0<br>\begin{cases}<br>\lt 0  \<br>\gt 0<br>\end{cases}<br>\Rightarrow y=<br>\begin{cases}<br>0  \<br>1<br>\end{cases}<br>$$</p>
+<p>Fisher准则的思路是将d维空间中的点$\mathbf{x_i}$投影到一条直线（分类超平面的法线）上，通过适当地选择直线的方向$\mathbf{\omega}$，有可能找到能够最大限度地区分各类样本数据点的投影方向。选择直线方向的思路是：最大化投影后类间距离和类内距离比（希望样本点向所求直线投影后，不同类别之间的距离大，相同类别之间的距离小）</p>
+<p>$$<br>\begin{align}<br>J_F(\mathbf{\omega} )&amp;=\frac{\Vert{\mathbf{\omega}^T\mathbf{m_0}-\mathbf{\omega}^T\mathbf{m_1} }\Vert<em>2^2}{\mathbf{\omega}^T\mathbf{S}</em>{\mathbf{w} }\mathbf{\omega} }\<br>&amp;=\frac{\mathbf{\omega}^T({\mathbf{m_0}-\mathbf{m_1} } ){ ( {\mathbf{m_0}-\mathbf{m<em>1} } ) }^T\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}</em>{\mathbf{w} }\mathbf{\omega} }\<br>&amp;=\frac{\mathbf{\omega}^T\mathbf{S}<em>{\mathbf{b} }\mathbf{\omega} } {\mathbf{\omega}^T\mathbf{S}</em>{\mathbf{w} }\mathbf{\omega} }<br>\end{align}<br>$$</p>
+<p>其中$\mathbf{m}_i$ 表示第$i$ 类的均值。$\mathbf{S}_w$ 为类内散度矩阵(within-class scatter matrix)，$\mathbf{S}_b$ 为类内散度矩阵(between-class scatter matrix) </p>
+<p>$$<br>\begin{align}<br>\mathbf{S}_w&amp;=\mathbf{\Sigma_0}+\mathbf{\Sigma<em>1}\<br>&amp;=\sum</em>{y=0}(\mathbf{x}-\mathbf{m_0} ){ (\mathbf{x}-\mathbf{m<em>0} )}^T+\sum</em>{y=1}(\mathbf{x}-\mathbf{m_1} ){ (\mathbf{x}-\mathbf{m_1} )}^T<br>\end{align}<br>$$</p>
+<p>$$<br>\mathbf{S}_b=({\mathbf{m_0}-\mathbf{m_1} } ){ ({\mathbf{m_0}-\mathbf{m_1} } )}^T<br>$$</p>
+<p>其中$\Sigma_i$ 表示第$i$类的协方差矩阵。显然$\mathbf{S}_w$ 和$\mathbf{S}_b$ 均为对称矩阵 </p>
+<p>寻找$\mathbf{\omega}$使 $ J_F(\mathbf{\omega} )$ 最大，我们可以通过对$ J_F(\mathbf{\omega} )$ 求$\mathbf{\omega}$的偏导数并令其为$0$ 计算$\mathbf{\omega}$. </p>
+<p>注意 ${ (\mathbf{m_0}-\mathbf{m<em>1} )}^T\mathbf{\omega}$ 和 $\mathbf{\omega}^T\mathbf{S}</em>{\mathbf{w} }\mathbf{\omega}$ 均为标量，且 $\frac{\partial(\mathbf{\omega}^T\mathbf{S}\mathbf{\omega} )}{\partial \mathbf{\omega} }=(\mathbf{S}+\mathbf{S}^T)\mathbf{\omega} $ .</p>
+<p>$$<br>\begin{align}<br>\frac{\partial J<em>F(\mathbf{\omega} )}{\partial \mathbf{\omega} }&amp;=\frac{\frac{\partial(\mathbf{\omega}^T\mathbf{S}</em>{\mathbf{b} }\mathbf{\omega} )}{\partial \mathbf{\omega} }\cdot\mathbf{\omega}^T\mathbf{S}<em>{\mathbf{w} }\mathbf{\omega}-\mathbf{\omega}^T\mathbf{S}</em>{\mathbf{b} }\mathbf{\omega}\cdot\frac{\partial(\mathbf{\omega}^T\mathbf{S}<em>{\mathbf{w} }\mathbf{\omega} )}{\partial\mathbf{\omega} } }{ { (\mathbf{\omega}^T\mathbf{S}</em>{\mathbf{w} }\mathbf{\omega} )}^2}\<br>&amp;=\frac{2\mathbf{S}<em>{\mathbf{b} }\mathbf{\omega}\mathbf{\omega}^T\mathbf{S}</em>{\mathbf{w} }\mathbf{\omega}-\mathbf{\omega}^T\mathbf{S}<em>{\mathbf{b} }\mathbf{\omega}\cdot 2\mathbf{S}</em>{\mathbf{w} }\mathbf{\omega} }{ { (\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}^2}\<br>&amp;=2\cdot\frac{ (\mathbf{m_0}-\mathbf{m_1} ){ (\mathbf{m_0}-\mathbf{m<em>1} )}^T\mathbf{\omega}\mathbf{\omega}^T\mathbf{S}</em>{\mathbf{w} }\mathbf{\omega}-\mathbf{\omega}^T(\mathbf{m_0}-\mathbf{m_1} ){ (\mathbf{m_0}-\mathbf{m<em>1} )}^T\mathbf{\omega}\mathbf{S}</em>{\mathbf{w} }\mathbf{\omega} }{ { (\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}^2}\<br>&amp;=2\cdot\frac{ { (\mathbf{m_0}-\mathbf{m<em>1} )}^T\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}</em>{\mathbf{w} }\mathbf{\omega} }\cdot((\mathbf{m_0}-\mathbf{m_1} )-\frac{\mathbf{\omega}^T(\mathbf{m_0}-\mathbf{m<em>1} )\mathbf{S}</em>{\mathbf{w} }\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} } )=0<br>\end{align}<br>$$</p>
+<p>同时，由于$\frac{ { (\mathbf{m_0}-\mathbf{m<em>1} )}^T\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}</em>{\mathbf{w} }\mathbf{\omega} }$ 为标量， 因此</p>
+<p>$$<br>(\mathbf{m_0}-\mathbf{m<em>1} )-\lambda\cdot\mathbf{S}</em>{\mathbf{w} }\mathbf{\omega}=0<br>$$</p>
+<p>其中$\lambda\in \mathscr{R}$ ,由于我们在做线性分类时，主要关心直线的方向，因此可取$\lambda=1 $，如果$\mathbf{S}_w $ 可逆（如果不可逆，则用伪逆），则 </p>
+<p>$$<br>\mathbf{\omega}=\mathbf{S}_{\mathbf{w} }^{-1}(\mathbf{m_0}-\mathbf{m_1} )<br>$$</p>
+<p>关于 $\omega_0$ 的选择，有以下几种常见方法：</p>
+<ul>
+<li>我们知道当投影直线的方向确定后，d维空间中的点$\mathbf{x}<em>i$ 在直线的投影位置确定。为此，我们希望$y=0$ 类的样本点到$0$ 的距离与$y=1$ 类的样本点到$0$ 的距离越接近越好（当一条直线上两个点之间的距离确定，两点构成线段的中垂面为最好的分类超平面）。于是 $ -\sum</em>{y=0}(\mathbf{\omega^T}\mathbf{x}+\omega<em>0)=\sum</em>{y=1}(\mathbf{\omega^T}\mathbf{x}+\omega_0) $</li>
+</ul>
+<p>$$<br>-\sum_{y=0}(\mathbf{\omega^T}\mathbf{x}+\omega<em>0)=\sum</em>{y=1}(\mathbf{\omega^T}\mathbf{x}+\omega_0)<br>$$</p>
+<p>因此：<br>$$<br>\omega_0=-\frac{n_0\mathbf{\omega^T}\mathbf{m}_0+n_1\mathbf{\omega^T}\mathbf{m}_1}{n_0+n_1}<br>$$</p>
+<ul>
+<li>$\omega_0=-\frac{1}{2}(m_1+m<em>2)^T (S</em>\omega)^{-1}(m_1-m_2)-ln \frac{P(\omega_2)}{P(\omega_1)} $, 见教材P65。</li>
+<li>暂无。待补充。</li>
+</ul>
+<h1 id="二-测试"><a href="#二-测试" class="headerlink" title="二. 测试"></a>二. 测试</h1><p>为了便于计算，统一规定如下：</p>
+<ul>
+<li>$X<em>{m\times n}$   $m$ 个$n$ 维样本以行向量构成矩阵X ； $Y</em>{m\times 1}$ 对应储存着样本的类别信息（也可视作label）</li>
+<li>函数及关键语句附带说明。函数参数以及返回值附带维度信息。</li>
+<li>注明数据来源。</li>
+<li>统一采用<a href="https://zh.wikipedia.org/wiki/交叉驗證" target="_blank" rel="external">十倍交叉验证</a> 。</li>
+<li>F1=P*R/2(P+R) </li>
+</ul>
+<h2 id="1-SONAR"><a href="#1-SONAR" class="headerlink" title="1 SONAR"></a>1 SONAR</h2><p>数据集全称： <strong>Connectionist Bench (Sonar, Mines vs. Rocks) Data Set</strong> </p>
+<p>数据集来源： <a href="http://archive.ics.uci.edu/ml/machine-learning-databases/undocumented/connectionist-bench/sonar/sonar.all-data" target="_blank" rel="external">http://archive.ics.uci.edu/ml/machine-learning-databases/undocumented/connectionist-bench/sonar/sonar.all-data</a></p>
+<p>数据说明： 见<a href="http://archive.ics.uci.edu/ml/datasets/connectionist+bench+(sonar,+mines+vs.+rocks" target="_blank" rel="external">UCI官网</a>)</p>
+<p>本地文件名：  <code>SONAR.csv</code> </p>
+<p>运行结果：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">accuracy =</div><div class="line">    <span class="number">0.7286</span></div><div class="line">    </div><div class="line">precision =</div><div class="line">    <span class="number">0.7019</span></div><div class="line"></div><div class="line">recall =</div><div class="line">    <span class="number">0.7374</span></div><div class="line"></div><div class="line">f1 =</div><div class="line">    <span class="number">0.3596</span></div></pre></td></tr></table></figure>
+<p>由于算法具有随机性，每次运行会有小范围波动。</p>
+<h2 id="2-USPS-3-amp-amp-8"><a href="#2-USPS-3-amp-amp-8" class="headerlink" title="2 USPS (3 &amp;&amp; 8)"></a>2 USPS (3 &amp;&amp; 8)</h2><p>数据集全称： <strong>Optical Recognition of Handwritten Digits Data Set</strong>  </p>
+<p>数据集来源： <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.tes" target="_blank" rel="external">https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.tes</a></p>
+<p><a href="https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.tra" target="_blank" rel="external">https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.tra</a></p>
+<p>数据说明： 见<a href="https://archive.ics.uci.edu/ml/datasets/Optical+Recognition+of+Handwritten+Digits" target="_blank" rel="external">UCI官网</a></p>
+<p>本地文件名：  <code>optdigits.tes</code>   <code>optdigits.tra</code></p>
+<p>运行结果：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">accuracy =</div><div class="line">    <span class="number">0.9938</span></div><div class="line">    </div><div class="line">precision =</div><div class="line">    <span class="number">0.9982</span></div><div class="line"></div><div class="line">recall =</div><div class="line">    <span class="number">0.9895</span></div><div class="line"></div><div class="line">f1 =</div><div class="line">    <span class="number">0.4969</span></div></pre></td></tr></table></figure>
+<p>由于算法具有随机性，每次运行会有小范围波动。</p>
+<h2 id="3-IRIS-Iris-setosa-amp-amp-Iris-versicolor"><a href="#3-IRIS-Iris-setosa-amp-amp-Iris-versicolor" class="headerlink" title="3 IRIS (Iris-setosa &amp;&amp; Iris-versicolor)"></a>3 IRIS (Iris-setosa &amp;&amp; Iris-versicolor)</h2><p>数据集全称：<strong>Iris Data Set</strong> </p>
+<p>数据集来源： <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/iris/bezdekIris.data" target="_blank" rel="external">https://archive.ics.uci.edu/ml/machine-learning-databases/iris/bezdekIris.data</a></p>
+<p>数据说明： 见<a href="https://archive.ics.uci.edu/ml/datasets/iris" target="_blank" rel="external">UCI官网</a></p>
+<p>本地文件名：  <code>bezdekIris.data</code></p>
+<p>运行结果：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">accuracy =</div><div class="line">    <span class="number">1</span></div><div class="line">    </div><div class="line">precision =</div><div class="line">    <span class="number">1</span></div><div class="line"></div><div class="line">recall =</div><div class="line">    <span class="number">1</span></div><div class="line"></div><div class="line">f1 =</div><div class="line">    <span class="number">0.5</span></div></pre></td></tr></table></figure>
+<p>IRIS第一类和第二三类线性可分。Fisher收敛到正解。</p>
 <hr>
-<h1 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h1><p>参考<a href="http://stackoverflow.com/questions/11160594/event-handler-for-groupbox-with-radiobuttons-in-c-sharp#new-answer" target="_blank" rel="external">http://stackoverflow.com/questions/11160594/event-handler-for-groupbox-with-radiobuttons-in-c-sharp#new-answer</a></p>
-<p>待测试</p>
-<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>附录1：<br>引用自：<a href="http://www.cnblogs.com/qiuweiguo/archive/2011/08/03/2126625.html" target="_blank" rel="external">http://www.cnblogs.com/qiuweiguo/archive/2011/08/03/2126625.html</a></p>
-<blockquote>
-<p>·First - 返回集合中的第一个元素；不延迟<br>·FirstOrDefault - 返回集合中的第一个元素（如果没有则返回默认值）；不延迟<br>·Last - 返回集合中的最后一个元素；不延迟<br>·LastOrDefault - 返回集合中的最后一个元素（如果没有则返回默认值）<br>·ElementAt - 返回集合中指定索引的元素；不延迟<br>·ElementAtOrDefault - 返回集合中指定索引的元素（如果没有则返回默认值）；不延迟<br>·Contains - 判断集合中是否包含有某一元素；不延迟<br>·Any - 判断集合中是否有元素满足某一条件；不延迟<br>·All - 判断集合中是否所有元素都满足某一条件；不延迟<br>·Count - 返回集合中的元素个数，返回int；不延迟<br>·LongCount - 返回集合中的元素个数，返回long；不延迟<br>·Sum - 集合应为数字类型集合，求其和；不延迟<br>·Min - 返回集合的最小值；不延迟<br>·Max - 返回集合的最大值；不延迟<br>·Average - 集合应为数字类型集合，求其平均值；不延迟<br>·Aggregate - 根据输入的表达式获取一个聚合值；不延迟<br>·Cast - 将集合转换为强类型集合；延迟<br>·DefaultIfEmpty - 查询结果为空则返回默认值；延迟<br>·SequenceEqual - 判断两个集合是否相同；不延迟<br>·OfType - 过滤集合中的指定类型；延迟<br>·ToArray - 将集合转换为数组；不延迟<br>·ToList - 将集合转换为List集合；不延迟<br>·ToDictionary - 将集合转换为{K, V}集合；不延迟</p>
-</blockquote>
-<p>附录2：<br>MSDN:<br><a href="https://msdn.microsoft.com/zh-cn/library/bb397687.aspx%20Lambda%20%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%88C#%20%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97%EF%BC%89" target="_blank" rel="external">Lambda 表达式（C# 编程指南）</a><br><a href="https://msdn.microsoft.com/zh-cn/library/bb360913%28v=vs.100%29.aspx" target="_blank" rel="external">Enumerable.OfType(Of TResult) 方法</a><br><a href="https://msdn.microsoft.com/zh-cn/library/bb531253.aspx" target="_blank" rel="external">Lambda 表达式 (Visual Basic)</a><br><a href="http://www.cnblogs.com/ninputer/archive/2007/11/23/970460.html" target="_blank" rel="external">VS2008亮点：用Lambda表达式进行函数式编程</a></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://blog.leanote.com/post/directfly/Linear-Classification-Fisher-s-criterion-线性分类-Fisher准则" target="_blank" rel="external">http://blog.leanote.com/post/directfly/Linear-Classification-Fisher-s-criterion-线性分类-Fisher准则</a></p>
+<p><a href="http://blog.csdn.net/htyang725/article/details/6571550" target="_blank" rel="external">http://blog.csdn.net/htyang725/article/details/6571550</a></p>
 
       
     </div>
@@ -377,7 +426,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/NET/" rel="tag"># .NET</a>
+            <a href="/tags/Pattern-Recognition-模式识别-分类器-Fisher/" rel="tag"># Pattern-Recognition 模式识别 分类器 Fisher</a>
           
         </div>
       
@@ -390,8 +439,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/07/VBA-EXCEL/" rel="next" title="VBA-EXCEL">
-                <i class="fa fa-chevron-left"></i> VBA-EXCEL
+              <a href="/2017/10/27/Majority-Element-Problem/" rel="next" title="Majority Element Problem">
+                <i class="fa fa-chevron-left"></i> Majority Element Problem
               </a>
             
           </div>
@@ -400,8 +449,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/07/12/VB-NET中使用委托-Delegate-来注册回调-callback-函数/" rel="prev" title="VB.NET中使用委托(Delegate)来注册回调(callback)函数">
-                VB.NET中使用委托(Delegate)来注册回调(callback)函数 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/01/test/" rel="prev" title="test">
+                test <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -522,7 +571,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一种方法"><span class="nav-number">1.</span> <span class="nav-text">第一种方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二种方法"><span class="nav-number">2.</span> <span class="nav-text">第二种方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录"><span class="nav-number">3.</span> <span class="nav-text">附录</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一-算法介绍"><span class="nav-number">1.</span> <span class="nav-text">一. 算法介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-测试"><span class="nav-number">2.</span> <span class="nav-text">二. 测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-SONAR"><span class="nav-number">2.1.</span> <span class="nav-text">1 SONAR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-USPS-3-amp-amp-8"><span class="nav-number">2.2.</span> <span class="nav-text">2 USPS (3 && 8)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-IRIS-Iris-setosa-amp-amp-Iris-versicolor"><span class="nav-number">2.3.</span> <span class="nav-text">3 IRIS (Iris-setosa && Iris-versicolor)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
