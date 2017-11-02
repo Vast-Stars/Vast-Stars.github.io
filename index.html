@@ -362,18 +362,17 @@
 <p>$$<br>\mathbf{\omega}=\mathbf{S}_{\mathbf{w} }^{-1}(\mathbf{m_0}-\mathbf{m_1} )<br>$$</p>
 <p>关于 $\omega_0$ 的选择，有以下几种常见方法：</p>
 <ul>
-<li>我们知道当投影直线的方向确定后，d维空间中的点$\mathbf{x}_i$ 在直线的投影位置确定。为此，我们希望$y=0$ 类的样本点到$0$ 的距离与$y=1$ 类的样本点到$0$ 的距离越接近越好（当一条直线上两个点之间的距离确定，两点构成线段的中垂面为最好的分类超平面）。于是 $ -\sum_{y=0}(\mathbf{\omega^T}\mathbf{x}+\omega_0)=\sum_{y=1}(\mathbf{\omega^T}\mathbf{x}+\omega_0) $</li>
+<li>我们知道当投影直线的方向确定后，d维空间中的点$\mathbf{x}_i$ 在直线的投影位置确定。为此，我们希望$y=0$ 类的样本点到$0$ 的距离与$y=1$ 类的样本点到$0$ 的距离越接近越好（当一条直线上两个点之间的距离确定，两点构成线段的中垂面为最好的分类超平面）。于是 $ -\sum_{y=0}(\mathbf{\omega^T}\mathbf{x}+\omega_0)=\sum_{y=1}(\mathbf{\omega^T}\mathbf{x}+\omega_0) $ 。再设$ n_0、n_1 $ 分别为两类样本数量，因此：</li>
 </ul>
-<p>$$<br>-\sum_{y=0}(\mathbf{\omega^T}\mathbf{x}+\omega_0)=\sum_{y=1}(\mathbf{\omega^T}\mathbf{x}+\omega_0)<br>$$</p>
-<p>因此：<br>$$<br>\omega_0=-\frac{n_0\mathbf{\omega^T}\mathbf{m}_0+n_1\mathbf{\omega^T}\mathbf{m}_1}{n_0+n_1}<br>$$</p>
+<p>$$<br>\omega_0=-\frac{n_0\mathbf{\omega^T}\mathbf{m}_0+n_1\mathbf{\omega^T}\mathbf{m}_1}{n_0+n_1}<br>$$</p>
 <ul>
-<li>$\omega_0=-\frac{1}{2}(m_1+m_2)^T (S_\omega)^{-1}(m_1-m_2)-ln \frac{P(\omega_2)}{P(\omega_1)} $, 见教材P65。</li>
+<li>$\omega_0=-\frac{1}{2}(m_1+m_2)^T (S_\omega)^{-1}(m_1-m_2)-ln \frac{P(\omega_2)}{P(\omega_1)} $ </li>
 <li>暂无。待补充。</li>
 </ul>
 <h1 id="二-测试"><a href="#二-测试" class="headerlink" title="二. 测试"></a>二. 测试</h1><p>为了便于计算，统一规定如下：</p>
 <ul>
 <li>$X_{m\times n}$   $m$ 个$n$ 维样本以行向量构成矩阵X ； $Y_{m\times 1}$ 对应储存着样本的类别信息（也可视作label）</li>
-<li>函数及关键语句附带说明。函数参数以及返回值附带维度信息。</li>
+<li>函数及关键语句附带说明。</li>
 <li>注明数据来源。</li>
 <li>统一采用<a href="https://zh.wikipedia.org/wiki/交叉驗證" target="_blank" rel="external">十倍交叉验证</a> 。</li>
 <li>F1=P*R/2(P+R) </li>
