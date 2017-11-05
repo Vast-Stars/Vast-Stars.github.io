@@ -357,7 +357,7 @@
 
       
         <p>代码在<a href="https://github.com/Vast-Stars/Algorithm/tree/master/KNN" target="_blank" rel="external">https://github.com/Vast-Stars/Algorithm/tree/master/KNN</a> 上可以看到。 欢迎Star</p>
-<h1 id="一-算法介绍"><a href="#一-算法介绍" class="headerlink" title="一. 算法介绍"></a>一. 算法介绍</h1><p>Main Idea：找出 $K$ 个距离未知样本$x$ 最近的已知样本点，以其中多数已知样本的类别作为$x$ 的类别。</p>
+<h2 id="一-算法介绍"><a href="#一-算法介绍" class="headerlink" title="一. 算法介绍"></a>一. 算法介绍</h2><p>Main Idea：找出 $K$ 个距离未知样本$x$ 最近的已知样本点，以其中多数已知样本的类别作为$x$ 的类别。</p>
 <p>需要考虑的问题：</p>
 <ol>
 <li>算法优化。由于环境为Matlab，故无需考虑。</li>
@@ -377,20 +377,20 @@
 </li>
 </ol>
 <p>KNN是一种<em>lazy learning</em> 算法，不需要预先训练，只需把所有训练数据载入内存，即可构成分类器。分类器也不含参数信息。</p>
-<h1 id="二-实现"><a href="#二-实现" class="headerlink" title="二. 实现"></a>二. 实现</h1><figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test_Y</span>=<span class="title">KNN</span><span class="params">(Train_X,Train_Y,Test_X,K)</span></span></div><div class="line"><span class="comment">%% Parameter:</span></div><div class="line"><span class="comment">% 	Train_X should be m*n and Train_Y should be m*1;</span></div><div class="line"><span class="comment">% 	Test_X  should be p*n ;</span></div><div class="line"><span class="comment">%   K should be postive;</span></div><div class="line"><span class="comment">%% Return:</span></div><div class="line"><span class="comment">%   Test_Y will be p*1;</span></div><div class="line">[Dis,I]=pdist2(Train_X,Test_X,<span class="string">'euclidean'</span>,<span class="string">'Smallest'</span>,K);</div><div class="line">Test_Y=mode(Train_Y(I) )';</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<h1 id="三-测试"><a href="#三-测试" class="headerlink" title="三. 测试"></a>三. 测试</h1><ul>
+<h2 id="二-实现"><a href="#二-实现" class="headerlink" title="二. 实现"></a>二. 实现</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test_Y</span>=<span class="title">KNN</span><span class="params">(Train_X,Train_Y,Test_X,K)</span></span></div><div class="line"><span class="comment">%% Parameter:</span></div><div class="line"><span class="comment">% 	Train_X should be m*n and Train_Y should be m*1;</span></div><div class="line"><span class="comment">% 	Test_X  should be p*n ;</span></div><div class="line"><span class="comment">%   K should be postive;</span></div><div class="line"><span class="comment">%% Return:</span></div><div class="line"><span class="comment">%   Test_Y will be p*1;</span></div><div class="line">[Dis,I]=pdist2(Train_X,Test_X,<span class="string">'euclidean'</span>,<span class="string">'Smallest'</span>,K);</div><div class="line">Test_Y=mode(Train_Y(I) )';</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h2 id="三-测试"><a href="#三-测试" class="headerlink" title="三. 测试"></a>三. 测试</h2><ul>
 <li>$ X_{m \times n} $ :  $m$ 个$n$ 维样本以行向量构成矩阵X ； $Y_{m \times 1}$ 对应储存着样本的类别信息（也可视作label）</li>
 <li>统一采用<a href="https://zh.wikipedia.org/wiki/交叉驗證" target="_blank" rel="external">十倍交叉验证</a> 。</li>
 <li>研究了K对准确率的影响。</li>
 </ul>
-<h2 id="1-SONAR"><a href="#1-SONAR" class="headerlink" title="1 SONAR"></a>1 SONAR</h2><p>数据集全称： <strong>Connectionist Bench (Sonar, Mines vs. Rocks) Data Set</strong> </p>
+<h3 id="1-SONAR"><a href="#1-SONAR" class="headerlink" title="1 SONAR"></a>1 SONAR</h3><p>数据集全称： <strong>Connectionist Bench (Sonar, Mines vs. Rocks) Data Set</strong> </p>
 <p>数据集来源： <a href="http://archive.ics.uci.edu/ml/machine-learning-databases/undocumented/connectionist-bench/sonar/sonar.all-data" target="_blank" rel="external">http://archive.ics.uci.edu/ml/machine-learning-databases/undocumented/connectionist-bench/sonar/sonar.all-data</a></p>
 <p>数据说明： 见<a href="http://archive.ics.uci.edu/ml/datasets/connectionist+bench+(sonar,+mines+vs.+rocks" target="_blank" rel="external">UCI官网</a> )</p>
 <p>本地文件名：  <code>SONAR.csv</code> </p>
 <p>运行结果：</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">最高准确率：<span class="number">0.833333</span> 出现在K=<span class="number">2</span> 时</div></pre></td></tr></table></figure>
 <p><img src="/2017/11/01/KNN/SONAR.bmp" alt="SONAR"></p>
-<h2 id="2-USPS"><a href="#2-USPS" class="headerlink" title="2 USPS"></a>2 USPS</h2><p>数据集全称： <strong>Optical Recognition of Handwritten Digits Data Set</strong>  </p>
+<h3 id="2-USPS"><a href="#2-USPS" class="headerlink" title="2 USPS"></a>2 USPS</h3><p>数据集全称： <strong>Optical Recognition of Handwritten Digits Data Set</strong>  </p>
 <p>数据集来源： <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.tes" target="_blank" rel="external">https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.tes</a></p>
 <p><a href="https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.tra" target="_blank" rel="external">https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.tra</a></p>
 <p>数据说明： 见<a href="https://archive.ics.uci.edu/ml/datasets/Optical+Recognition+of+Handwritten+Digits" target="_blank" rel="external">UCI官网</a></p>
@@ -398,7 +398,7 @@
 <p>运行结果：</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">最高准确率：<span class="number">0.987011</span> 出现在K=<span class="number">3</span> 时</div></pre></td></tr></table></figure>
 <p><img src="/2017/11/01/KNN/USPS.bmp" alt="USPS"></p>
-<h2 id="3-IRIS"><a href="#3-IRIS" class="headerlink" title="3 IRIS"></a>3 IRIS</h2><p>数据集全称：<strong>Iris Data Set</strong> </p>
+<h3 id="3-IRIS"><a href="#3-IRIS" class="headerlink" title="3 IRIS"></a>3 IRIS</h3><p>数据集全称：<strong>Iris Data Set</strong> </p>
 <p>数据集来源： <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/iris/bezdekIris.data" target="_blank" rel="external">https://archive.ics.uci.edu/ml/machine-learning-databases/iris/bezdekIris.data</a></p>
 <p>数据说明： 见<a href="https://archive.ics.uci.edu/ml/datasets/iris" target="_blank" rel="external">UCI官网</a></p>
 <p>本地文件名：  <code>bezdekIris.data</code></p>
@@ -406,12 +406,12 @@
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">最高准确率：<span class="number">0.980000</span> 出现在K=    <span class="number">13</span>    <span class="number">19</span></div></pre></td></tr></table></figure>
 <p>最大准确率下K的取值波动较大。</p>
 <p><img src="/2017/11/01/KNN/IRIS.bmp" alt="IRIS"></p>
-<h1 id="四-其他"><a href="#四-其他" class="headerlink" title="四. 其他"></a>四. 其他</h1><h2 id="1-K的取值"><a href="#1-K的取值" class="headerlink" title="1. K的取值"></a>1. K的取值</h2><p>  K的取值不宜过大。 最合适的K取值应该和类间距离有关。如果多类样本虽然线性可分，但是类与类距离较近的话，K只能取较小值。 反之，如果类间距离、类内距离都比较大，则KNN算法不易出错。</p>
-<h2 id="2-插值，平滑曲线"><a href="#2-插值，平滑曲线" class="headerlink" title="2. 插值，平滑曲线"></a>2. 插值，平滑曲线</h2><p>KNN算法还可以用来做平滑曲线用，这个用法比较另类。比较适用于非连续曲线插值。</p>
-<h2 id="3-寻找K个最短距离点的算法优化"><a href="#3-寻找K个最短距离点的算法优化" class="headerlink" title="3. 寻找K个最短距离点的算法优化"></a>3. 寻找K个最短距离点的算法优化</h2><p>一般来说，小规模问题都是用搜索的方法完成，例如用<code>Dist=norm(X-repmat(x,size(X,1),1) );</code></p>
+<h2 id="四-其他"><a href="#四-其他" class="headerlink" title="四. 其他"></a>四. 其他</h2><h3 id="1-K的取值"><a href="#1-K的取值" class="headerlink" title="1. K的取值"></a>1. K的取值</h3><p>  K的取值不宜过大。 最合适的K取值应该和类间距离有关。如果多类样本虽然线性可分，但是类与类距离较近的话，K只能取较小值。 反之，如果类间距离、类内距离都比较大，则KNN算法不易出错。</p>
+<h3 id="2-插值，平滑曲线"><a href="#2-插值，平滑曲线" class="headerlink" title="2. 插值，平滑曲线"></a>2. 插值，平滑曲线</h3><p>KNN算法还可以用来做平滑曲线用，这个用法比较另类。比较适用于非连续曲线插值。</p>
+<h3 id="3-寻找K个最短距离点的算法优化"><a href="#3-寻找K个最短距离点的算法优化" class="headerlink" title="3. 寻找K个最短距离点的算法优化"></a>3. 寻找K个最短距离点的算法优化</h3><p>一般来说，小规模问题都是用搜索的方法完成，例如用<code>Dist=norm(X-repmat(x,size(X,1),1) );</code></p>
 <p>大规模问题上，可以考虑<a href="http://www.cnblogs.com/LBSer/p/3310455.html" target="_blank" rel="external">GeoHash</a> 、k-dimension tree、最大堆等算法。限于时间和篇幅，本文不予介绍。</p>
 <hr>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://blog.sciencenet.cn/blog-531885-589056.html" target="_blank" rel="external">Matlab中 pdist 函数详解(各种距离的生成) </a></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="http://blog.sciencenet.cn/blog-531885-589056.html" target="_blank" rel="external">Matlab中 pdist 函数详解(各种距离的生成) </a></p>
 <p><a href="https://wizardforcel.gitbooks.io/dm-algo-top10/content/knn.html" target="_blank" rel="external">数据挖掘十大算法–K近邻算法</a></p>
 <p><a href="http://blog.csdn.net/wangshihui512/article/details/8834782" target="_blank" rel="external">用堆排序寻找数组中最大的K个数</a></p>
 <p><a href="http://www.cnblogs.com/LBSer/p/3310455.html" target="_blank" rel="external">GeoHash核心原理解析</a></p>
@@ -581,7 +581,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一-算法介绍"><span class="nav-number">1.</span> <span class="nav-text">一. 算法介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-实现"><span class="nav-number">2.</span> <span class="nav-text">二. 实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三-测试"><span class="nav-number">3.</span> <span class="nav-text">三. 测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-SONAR"><span class="nav-number">3.1.</span> <span class="nav-text">1 SONAR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-USPS"><span class="nav-number">3.2.</span> <span class="nav-text">2 USPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-IRIS"><span class="nav-number">3.3.</span> <span class="nav-text">3 IRIS</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四-其他"><span class="nav-number">4.</span> <span class="nav-text">四. 其他</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-K的取值"><span class="nav-number">4.1.</span> <span class="nav-text">1. K的取值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-插值，平滑曲线"><span class="nav-number">4.2.</span> <span class="nav-text">2. 插值，平滑曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-寻找K个最短距离点的算法优化"><span class="nav-number">4.3.</span> <span class="nav-text">3. 寻找K个最短距离点的算法优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-算法介绍"><span class="nav-number">1.</span> <span class="nav-text">一. 算法介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-实现"><span class="nav-number">2.</span> <span class="nav-text">二. 实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-测试"><span class="nav-number">3.</span> <span class="nav-text">三. 测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-SONAR"><span class="nav-number">3.1.</span> <span class="nav-text">1 SONAR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-USPS"><span class="nav-number">3.2.</span> <span class="nav-text">2 USPS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-IRIS"><span class="nav-number">3.3.</span> <span class="nav-text">3 IRIS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-其他"><span class="nav-number">4.</span> <span class="nav-text">四. 其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-K的取值"><span class="nav-number">4.1.</span> <span class="nav-text">1. K的取值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-插值，平滑曲线"><span class="nav-number">4.2.</span> <span class="nav-text">2. 插值，平滑曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-寻找K个最短距离点的算法优化"><span class="nav-number">4.3.</span> <span class="nav-text">3. 寻找K个最短距离点的算法优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
