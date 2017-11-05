@@ -255,6 +255,192 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2017/11/01/KNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vast-Stars">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vast-stars' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/11/01/KNN/" itemprop="url">
+                  KNN
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-01T16:01:18+08:00">
+                2017-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/01/KNN/" class="leancloud_visitors" data-flag-title="KNN">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="k-nearest-neighbors-algorithm"><a href="#k-nearest-neighbors-algorithm" class="headerlink" title="k-nearest neighbors algorithm"></a>k-nearest neighbors algorithm</h1><h2 id="一-算法介绍"><a href="#一-算法介绍" class="headerlink" title="一. 算法介绍"></a>一. 算法介绍</h2><p>Main Idea：找出 $K$ 个距离未知样本$x$ 最近的已知样本点，以其中多数已知样本的类别作为$x$ 的类别。</p>
+<p>需要考虑的问题：</p>
+<ol>
+<li>算法优化。由于环境为Matlab，故无需考虑。</li>
+<li><strong><em>距离</em></strong> 的定义。根据特征空间性质定义距离，一般有以下几种：<ul>
+<li><strong>Euclidean Distance</strong> ： $ d_{s,t}^2=(x_s-x_t)·(x_s-x_t)’ $ . 欧氏距离虽然很有用，但也有明显的缺点。 一：它将样品的不同特征之间的差别等同看待，这一点有时不能满足实际要求。 二：它没有考虑各特征的数量级(量纲)，一般需要先对原始数据进行规范化处理再进行距离计算。</li>
+<li><strong>Standardized Euclidean distance</strong> : $ d_{s,t}^2=(x_s-x_t)V ^ {-1} (x_s-x_t)’ $ where V is the <em>n</em>-by-<em>n</em> diagonal matrix whose $j$th diagonal element is ${S(j) }^2 $, where $S$ is the vector of standard deviations. 相比单纯的欧氏距离，标准欧氏距离能够有效的解决上述缺点。注意，这里的$V$在许多Matlab函数中是可以自己设定的，不一定非得取标准差，可以依据各变量的重要程度设置不同的值，如<code>knnsearch</code>函数中的<code>Scale</code>属性。</li>
+<li><strong>Mahalanobis distance</strong> : $ d_{s,t}^2=(x_s-x_t)C^{-1}(x_s-x_t)’ $ , C为协方差矩阵.  与欧式距离不同的是它考虑到各种特性之间的联系,并且是尺度无关的.如果协方差矩阵为单位矩阵,那么马氏距离就简化为欧式距离,如果协方差矩阵为对角阵,则其也可称为正规化的欧氏距离。缺点是：<strong>1</strong> 马氏距离的计算是建立在总体样本的基础上的，因为C是由总样本计算而来，所以马氏距离的计算是不稳定的；<strong>2</strong> 在计算马氏距离过程中，要求总体样本数大于样本的维数。<strong>3</strong> 协方差矩阵的逆矩阵可能不存在。 </li>
+<li><strong>Manhattan Distance</strong> ：$D_{s,t}= \sum_{j=1}^n|x_{s_j}-x_{t_j}|$ . 曼哈顿距离是闵可夫斯基距离的一种特例(当$p=1$ 时)。</li>
+<li><strong>Minkowski Distance</strong> : $D_{s,t}=  \sqrt[p]{  \sum_{j=1}^n|x_{s_j}-x_{t_j} | ^p } $ .  $p=1,2, \infty $ 时，闵可夫斯基距离分别等价于曼哈顿距离、欧氏距离、切比雪夫距离。闵可夫斯基距离由于是欧氏距离的推广，所以其缺点与欧氏距离大致相同。</li>
+<li><strong>Chebychev Distance</strong> ： $D_{s,t}= \max \limits_j |x_{s_j}-x_{t_j}|$ </li>
+<li><strong>Cosine Distance</strong> :  $ D_{s,t}=1- \frac{x_s x_t’} { | x_s |_{2}  | x_t | _{2} } $  与Jaccard距离相比，Cosine距离不仅忽略0-0匹配，而且能够处理非二元向量，即考虑到变量值的大小。</li>
+<li><strong>Correlation distance</strong> : $d_{s,t}=1-  \frac{x_s x_t’} { \sqrt[]{ (x_s- \bar{x_s} )(x_t- \bar{x_t} )’}.  \sqrt{ (x_t- \bar{x_t} ).(x_t- \bar{x_t} ) ‘ } } $ . Correlation距离主要用来度量两个向量的线性相关程度。</li>
+<li><strong>Hamming Distance</strong>: $ d_{s,t}=( \frac{  \sharp (x_{s_j}  \neq x_{t_j} ) } {n} )$ . 两个向量之间的汉明距离的定义为两个向量不同的变量个数所占变量总数的百分比。</li>
+<li><strong>Jaccard Distance</strong>: $ d_{s,t}=( \frac{  \sharp [ (x_{s_j}  \neq x_{t_j} )  \cap ( (x_{s_j}  \neq 0) \cup(x_{t_j} \neq 0) ) ] } { \sharp (x_{s_j} \neq0) \cup(x_{t_j} \neq 0) } )$ .  Jaccard距离常用来处理仅包含非对称的二元(0-1)属性的对象。很显然，Jaccard距离不关心0-0匹配，而Hamming距离关心0-0匹配。</li>
+<li><strong>Spearman Distance</strong>: $d_{s,t}=1-  \frac{ (r_s- \overline{r_s} )(r_t- \overline{r_t} )’} { \sqrt[]{ (r_s- \overline{r_s} ) (r_s- \overline{r_s} )’}.  \sqrt{ (r_t- \overline{r_t} ) (r_t- \overline{r_t} )’} }$ . </li>
+</ul>
+</li>
+</ol>
+<p>KNN是一种<em>lazy learning</em> 算法，不需要预先训练，只需把所有训练数据载入内存，即可构成分类器。分类器也不含参数信息。</p>
+<h2 id="二-实现"><a href="#二-实现" class="headerlink" title="二. 实现"></a>二. 实现</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test_Y</span>=<span class="title">KNN</span><span class="params">(Train_X,Train_Y,Test_X,K)</span></span></div><div class="line"><span class="comment">%% Parameter:</span></div><div class="line"><span class="comment">% 	Train_X should be m*n and Train_Y should be m*1;</span></div><div class="line"><span class="comment">% 	Test_X  should be p*n ;</span></div><div class="line"><span class="comment">%   K should be postive;</span></div><div class="line"><span class="comment">%% Return:</span></div><div class="line"><span class="comment">%   Test_Y will be p*1;</span></div><div class="line">[Dis,I]=pdist2(Train_X,Test_X,<span class="string">'euclidean'</span>,<span class="string">'Smallest'</span>,K);</div><div class="line">Test_Y=mode(Train_Y(I) )';</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h2 id="三-测试"><a href="#三-测试" class="headerlink" title="三. 测试"></a>三. 测试</h2><ul>
+<li>$ X_{m \times n} $ :  $m$ 个$n$ 维样本以行向量构成矩阵X ； $Y_{m \times 1}$ 对应储存着样本的类别信息（也可视作label）</li>
+<li>统一采用<a href="https://zh.wikipedia.org/wiki/交叉驗證" target="_blank" rel="external">十倍交叉验证</a> 。</li>
+<li>研究了K对准确率的影响。</li>
+</ul>
+<h4 id="1-SONAR"><a href="#1-SONAR" class="headerlink" title="1 SONAR"></a>1 SONAR</h4><p>数据集全称： <strong>Connectionist Bench (Sonar, Mines vs. Rocks) Data Set</strong> </p>
+<p>数据集来源： <a href="http://archive.ics.uci.edu/ml/machine-learning-databases/undocumented/connectionist-bench/sonar/sonar.all-data" target="_blank" rel="external">http://archive.ics.uci.edu/ml/machine-learning-databases/undocumented/connectionist-bench/sonar/sonar.all-data</a></p>
+<p>数据说明： 见<a href="http://archive.ics.uci.edu/ml/datasets/connectionist+bench+(sonar,+mines+vs.+rocks" target="_blank" rel="external">UCI官网</a> )</p>
+<p>本地文件名：  <code>SONAR.csv</code> </p>
+<p>运行结果：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">最高准确率：<span class="number">0.833333</span> 出现在K=<span class="number">2</span> 时</div></pre></td></tr></table></figure>
+<p><img src="/2017/11/01/KNN/SONAR.bmp" alt="SONAR"></p>
+<h4 id="2-USPS"><a href="#2-USPS" class="headerlink" title="2 USPS"></a>2 USPS</h4><p>数据集全称： <strong>Optical Recognition of Handwritten Digits Data Set</strong>  </p>
+<p>数据集来源： <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.tes" target="_blank" rel="external">https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.tes</a></p>
+<p><a href="https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.tra" target="_blank" rel="external">https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.tra</a></p>
+<p>数据说明： 见<a href="https://archive.ics.uci.edu/ml/datasets/Optical+Recognition+of+Handwritten+Digits" target="_blank" rel="external">UCI官网</a></p>
+<p>本地文件名：  <code>optdigits.tes</code>   <code>optdigits.tra</code></p>
+<p>运行结果：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">最高准确率：<span class="number">0.987011</span> 出现在K=<span class="number">3</span> 时</div></pre></td></tr></table></figure>
+<p><img src="/2017/11/01/KNN/USPS.bmp" alt="USPS"></p>
+<h4 id="3-IRIS"><a href="#3-IRIS" class="headerlink" title="3 IRIS"></a>3 IRIS</h4><p>数据集全称：<strong>Iris Data Set</strong> </p>
+<p>数据集来源： <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/iris/bezdekIris.data" target="_blank" rel="external">https://archive.ics.uci.edu/ml/machine-learning-databases/iris/bezdekIris.data</a></p>
+<p>数据说明： 见<a href="https://archive.ics.uci.edu/ml/datasets/iris" target="_blank" rel="external">UCI官网</a></p>
+<p>本地文件名：  <code>bezdekIris.data</code></p>
+<p>运行结果：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">最高准确率：<span class="number">0.980000</span> 出现在K=    <span class="number">13</span>    <span class="number">19</span></div></pre></td></tr></table></figure>
+<p>最大准确率下K的取值波动较大。</p>
+<p><img src="/2017/11/01/KNN/IRIS.bmp" alt="IRIS"></p>
+<h2 id="四-其他"><a href="#四-其他" class="headerlink" title="四. 其他"></a>四. 其他</h2><h4 id="1-K的取值"><a href="#1-K的取值" class="headerlink" title="1. K的取值"></a>1. K的取值</h4><p>  K的取值不宜过大。 最合适的K取值应该和类间距离有关。如果多类样本虽然线性可分，但是类与类距离较近的话，K只能取较小值。 反之，如果类间距离、类内距离都比较大，则KNN算法不易出错。</p>
+<h4 id="2-插值，平滑曲线"><a href="#2-插值，平滑曲线" class="headerlink" title="2. 插值，平滑曲线"></a>2. 插值，平滑曲线</h4><p>KNN算法还可以用来做平滑曲线用，这个用法比较另类。比较适用于非连续曲线插值。</p>
+<h4 id="3-寻找K个最短距离点的算法优化"><a href="#3-寻找K个最短距离点的算法优化" class="headerlink" title="3. 寻找K个最短距离点的算法优化"></a>3. 寻找K个最短距离点的算法优化</h4><p>一般来说，小规模问题都是用搜索的方法完成，例如用<code>Dist=norm(X-repmat(x,size(X,1),1) );</code></p>
+<p>大规模问题上，可以考虑<a href="http://www.cnblogs.com/LBSer/p/3310455.html" target="_blank" rel="external">GeoHash</a> 、k-dimension tree、最大堆等算法。限于时间和篇幅，本文不予介绍。</p>
+<hr>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://blog.sciencenet.cn/blog-531885-589056.html" target="_blank" rel="external">Matlab中 pdist 函数详解(各种距离的生成) </a></p>
+<p><a href="https://wizardforcel.gitbooks.io/dm-algo-top10/content/knn.html" target="_blank" rel="external">数据挖掘十大算法–K近邻算法</a></p>
+<p><a href="http://blog.csdn.net/wangshihui512/article/details/8834782" target="_blank" rel="external">用堆排序寻找数组中最大的K个数</a></p>
+<p><a href="http://www.cnblogs.com/LBSer/p/3310455.html" target="_blank" rel="external">GeoHash核心原理解析</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2017/10/31/Fisher线性判别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -530,7 +716,7 @@
       
         
           
-            <p>All Code in this blog can be found in <a href="https://github.com/Vast-Stars/Algorithm/tree/master/Majority" target="_blank" rel="external">https://github.com/Vast-Stars/Algorithm/tree/master/Majority</a></p>
+            <p>All Code in this essay can be found in <a href="https://github.com/Vast-Stars/Algorithm/tree/master/Majority" target="_blank" rel="external">https://github.com/Vast-Stars/Algorithm/tree/master/Majority</a></p>
 <h1 id="Basic-Report"><a href="#Basic-Report" class="headerlink" title="Basic Report"></a>Basic Report</h1><h2 id="1-Description"><a href="#1-Description" class="headerlink" title="1. Description"></a>1. Description</h2><p>Given an array of size <em>n</em>, find the majority element. </p>
 <p>The majority element is the element that appears <strong>more than</strong> <code>⌊ n/2 ⌋</code> times.</p>
 <h2 id="2-Algorithm"><a href="#2-Algorithm" class="headerlink" title="2. Algorithm"></a>2. Algorithm</h2><p>We can use the nature of the problem: </p>
@@ -1561,141 +1747,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2016/11/18/Cent-7-2-搭建OpenVPN/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vast-Stars">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vast-stars' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/18/Cent-7-2-搭建OpenVPN/" itemprop="url">
-                  CentOS7.2 搭建OpenVPN 及 用户认证
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-18T16:05:15+08:00">
-                2016-11-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/11/18/Cent-7-2-搭建OpenVPN/" class="leancloud_visitors" data-flag-title="CentOS7.2 搭建OpenVPN 及 用户认证">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="第一部分-搭建"><a href="#第一部分-搭建" class="headerlink" title="第一部分: 搭建"></a>第一部分: 搭建</h1><p>环境:Azure OpenLogic(CentOS) 7.2 64位<br>OpenVPN版本：<br>OpenVPN 2.3.12 x86_64-redhat-linux-gnu [SSL (OpenSSL)] [LZO] [EPOLL] [PKCS11] [MH] [IPv6] built on Aug 23 2016</p>
-<p>主要参考教程：<a href="https://www.phpini.com/linux/centos-7-install-openvpn-server">https://www.phpini.com/linux/centos-7-install-openvpn-server</a></p>
-<p>安装过程中出现了一些问题，记录如下：</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/11/18/Cent-7-2-搭建OpenVPN/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1745,7 +1796,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1757,10 +1808,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">10</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
