@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="VB.NET," />
+  <meta name="keywords" content="Algorithm,A*," />
 
 
 
@@ -92,22 +92,19 @@
 
 
 
-<meta name="description" content="前些日子捣鼓了下VFW，里面注册回调(callback)函数是通过sendmessage函数实现的，也就是把回调函数的指针作为参数发送给hWnd即可。折腾了不少时间，下面是代码
-这是C/C++代码
-1234567891011121314151617181920212223typedef struct videohdr_tag &amp;#123;LPBYTE      lpData;DWORD">
+<meta name="description" content="先放中文wiki的代码，时间为2017年11月18日16:08:08。
+1234567891011121314151617181920212223242526272829303132333435363738function A*(start,goal)     closedset := the empty set                 //已经被估算的节点集合     openset :">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VB.NET中使用委托(Delegate)来注册回调(callback)函数">
-<meta property="og:url" content="http://www.vast-stars.com/2016/07/12/VB-NET中使用委托-Delegate-来注册回调-callback-函数/index.html">
+<meta property="og:title" content="维基百科A*算法的错误">
+<meta property="og:url" content="http://www.vast-stars.com/2017/11/18/维基百科A-算法的错误/index.html">
 <meta property="og:site_name" content="Vast-stars' Blog">
-<meta property="og:description" content="前些日子捣鼓了下VFW，里面注册回调(callback)函数是通过sendmessage函数实现的，也就是把回调函数的指针作为参数发送给hWnd即可。折腾了不少时间，下面是代码
-这是C/C++代码
-1234567891011121314151617181920212223typedef struct videohdr_tag &amp;#123;LPBYTE      lpData;DWORD">
-<meta property="og:updated_time" content="2017-03-06T11:38:19.768Z">
+<meta property="og:description" content="先放中文wiki的代码，时间为2017年11月18日16:08:08。
+1234567891011121314151617181920212223242526272829303132333435363738function A*(start,goal)     closedset := the empty set                 //已经被估算的节点集合     openset :">
+<meta property="og:updated_time" content="2017-11-18T12:49:38.093Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VB.NET中使用委托(Delegate)来注册回调(callback)函数">
-<meta name="twitter:description" content="前些日子捣鼓了下VFW，里面注册回调(callback)函数是通过sendmessage函数实现的，也就是把回调函数的指针作为参数发送给hWnd即可。折腾了不少时间，下面是代码
-这是C/C++代码
-1234567891011121314151617181920212223typedef struct videohdr_tag &amp;#123;LPBYTE      lpData;DWORD">
+<meta name="twitter:title" content="维基百科A*算法的错误">
+<meta name="twitter:description" content="先放中文wiki的代码，时间为2017年11月18日16:08:08。
+1234567891011121314151617181920212223242526272829303132333435363738function A*(start,goal)     closedset := the empty set                 //已经被估算的节点集合     openset :">
 
 
 
@@ -135,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://www.vast-stars.com/2016/07/12/VB-NET中使用委托-Delegate-来注册回调-callback-函数/"/>
+  <link rel="canonical" href="http://www.vast-stars.com/2017/11/18/维基百科A-算法的错误/"/>
 
 
 
 
 
-  <title> VB.NET中使用委托(Delegate)来注册回调(callback)函数 | Vast-stars' Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 维基百科A*算法的错误 | Vast-stars' Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2016/07/12/VB-NET中使用委托-Delegate-来注册回调-callback-函数/">
+    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2017/11/18/维基百科A-算法的错误/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Vast-Stars">
@@ -281,7 +278,7 @@
             
             
               
-                VB.NET中使用委托(Delegate)来注册回调(callback)函数
+                维基百科A*算法的错误
               
             
           </h1>
@@ -296,8 +293,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-12T11:22:03+08:00">
-                2016-07-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-18T16:05:58+08:00">
+                2017-11-18
               </time>
             
 
@@ -314,7 +311,7 @@
 
           
           
-             <span id="/2016/07/12/VB-NET中使用委托-Delegate-来注册回调-callback-函数/" class="leancloud_visitors" data-flag-title="VB.NET中使用委托(Delegate)来注册回调(callback)函数">
+             <span id="/2017/11/18/维基百科A-算法的错误/" class="leancloud_visitors" data-flag-title="维基百科A*算法的错误">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -343,13 +340,74 @@
       
 
       
-        <p>前些日子捣鼓了下VFW，里面注册回调(callback)函数是通过sendmessage函数实现的，也就是把回调函数的指针作为参数发送给hWnd即可。折腾了不少时间，下面是代码</p>
-<p>这是C/C++代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">typedef struct videohdr_tag &#123;</div><div class="line">LPBYTE      lpData;</div><div class="line">DWORD       dwBufferLength;</div><div class="line">DWORD       dwBytesUsed;</div><div class="line">DWORD       dwTimeCaptured;</div><div class="line">DWORD       dwUser;</div><div class="line">DWORD       dwFlags;</div><div class="line">DWORD       dwReserved[4];</div><div class="line">&#125; VIDEOHDR, *PVIDEOHDR, *LPVIDEOHDR;</div><div class="line"></div><div class="line">#define capSetCallbackOnVideoStream(handle, callback) </div><div class="line"> (safeSendMessage (handle, WM_CAP_SET_CALLBACK_VIDEOSTREAM, 0, callback))</div><div class="line"></div><div class="line">capSetCallbackOnVideoStream(mhwnd, VideoCallback);</div><div class="line"></div><div class="line">LRESULT CALLBACK VDCaptureDriverVFW::VideoCallback(HWND hwnd, LPVIDEOHDR lpVHdr) &#123;</div><div class="line">VDCaptureDriverVFW *pThis = (VDCaptureDriverVFW *)capGetUserData(hwnd);</div><div class="line"></div><div class="line">if (pThis-&gt;mpCB &amp;&amp; !pThis-&gt;mbBlockVideoFrames) &#123;</div><div class="line">    DO SOMETHING……</div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;12345678910111213141516171819202122231234567891011121314151617181920212223</div></pre></td></tr></table></figure>
-<p>下面是VB.NET的代码，因为.NET里不允许使用指针，就必须使用委托（Delegate）来实现</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">    Structure LPVIDEOHDR</div><div class="line">            Public lpData As IntPtr            'point to the buffer</div><div class="line">            Public dwBufferLength As UInt32     'length of buffer</div><div class="line">            Public dwBytesUsed As UInt32        'buffer's Byte</div><div class="line">            Public dwTimeCaptured As UInt32     'time:ms</div><div class="line">            Public dwUser As UInt64             '</div><div class="line">            Public dwFlags As UInt32            '</div><div class="line">            Public dwReserved() As UInt64      'Reserved for driver.</div><div class="line">            Public Sub New(ByVal Size As UShort) '</div><div class="line">                dwReserved = New UInt64(Size) &#123;&#125;</div><div class="line">            End Sub</div><div class="line">    End Structure</div><div class="line"></div><div class="line">Public lpVHdr As LPVIDEOHDR = New LPVIDEOHDR(4)</div><div class="line"></div><div class="line"> Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" (</div><div class="line">                                                                        ByVal hWnd As Integer,</div><div class="line">                                                                        ByVal wMsg As Integer,</div><div class="line">                                                                        ByVal wParam As Integer,</div><div class="line">                                                                        ByVal IParam As callback)</div><div class="line"></div><div class="line"></div><div class="line">Public Delegate Function callback(ByVal whnd As IntPtr, ByVal lpVhdr As IntPtr)   </div><div class="line"></div><div class="line"></div><div class="line">Dim a1 As callback = Function(ByVal whnd As IntPtr, ByVal lpVhdr As IntPtr)</div><div class="line">                         If count &lt; 30 Then</div><div class="line">                             Clipboard.GetImage.Save("D:\" &amp; count &amp; ".bmp")</div><div class="line">                             count = count + 1</div><div class="line">                         End If</div><div class="line">                         Return True</div><div class="line">                     End Function</div><div class="line"></div><div class="line">Public Function fuckcallback(ByVal whnd As IntPtr, ByVal FramePoint As IntPtr) As Boolean</div><div class="line">    DO SOMETHING</div><div class="line">    Return True</div><div class="line">End Function</div><div class="line"></div><div class="line">Dim a2 As callback = AddressOf fuckcallback</div><div class="line"></div><div class="line">Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click</div><div class="line">        'SendMessage(hwnd, Cam.WM_CAP_SET_CALLBACK_FRAME, 0, a2)</div><div class="line">        'SendMessage(hwnd, Cam.WM_CAP_SET_CALLBACK_FRAME, 0, a1)</div><div class="line">        'SendMessage(hwnd, Cam.WM_CAP_SET_CALLBACK_FRAME, 0, AddressOf fuckcallback)</div><div class="line">        '上面3个都行</div><div class="line">End Sub1234567891011121314151617181920212223242526272829303132333435363738394041424344454612345678910111213141516171819202122232425262728293031323334353637383940414243444546</div></pre></td></tr></table></figure>
-<p>上面其实是有问题的，排查了半天，才发现是声明委托的时候，漏了函数返回值<br>Public Delegate Function callback(ByVal whnd As IntPtr, ByVal lpVhdr As IntPtr) 改成<br>Public Delegate Function callback(ByVal whnd As IntPtr, ByVal lpVhdr As IntPtr) as integer 即可 。</p>
-<p>PS：以后可能不会再用VB.NET了，这篇文章算是个End.</p>
+        <p>先放中文wiki的代码，时间为2017年11月18日16:08:08。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">function A*(start,goal)</div><div class="line">     closedset := the empty <span class="built_in">set</span>                 <span class="comment">//已经被估算的节点集合</span></div><div class="line">     openset := <span class="built_in">set</span> containing the initial node <span class="comment">//将要被估算的节点集合，初始只包含start</span></div><div class="line">     came_from := empty <span class="built_in">map</span></div><div class="line">     g_score[start] := <span class="number">0</span>                        <span class="comment">//g(n)</span></div><div class="line">     h_score[start] := heuristic_estimate_of_distance(start, goal)    <span class="comment">//通过估计函数 估计h(start)</span></div><div class="line">     f_score[start] := h_score[start]            <span class="comment">//f(n)=h(n)+g(n)，由于g(n)=0，所以省略</span></div><div class="line">     <span class="keyword">while</span> openset is not empty                 <span class="comment">//当将被估算的节点存在时，执行循环</span></div><div class="line">         x := the node in openset having the lowest f_score[] value   <span class="comment">//在将被估计的集合中找到f(x)最小的节点</span></div><div class="line">         <span class="keyword">if</span> x = goal            <span class="comment">//若x为终点，执行</span></div><div class="line">             <span class="keyword">return</span> reconstruct_path(came_from,goal)   <span class="comment">//返回到x的最佳路径</span></div><div class="line">         remove x from openset      <span class="comment">//将x节点从将被估算的节点中删除</span></div><div class="line">         add x to closedset      <span class="comment">//将x节点插入已经被估算的节点</span></div><div class="line">         <span class="keyword">for</span> each y in neighbor_nodes(x)  <span class="comment">//循环遍历与x相邻节点</span></div><div class="line">             <span class="keyword">if</span> y in closedset           <span class="comment">//若y已被估值，跳过</span></div><div class="line">                 <span class="keyword">continue</span></div><div class="line">             tentative_g_score := g_score[x] + dist_between(x,y)    <span class="comment">//从起点到节点y的距离</span></div><div class="line"> </div><div class="line">             <span class="keyword">if</span> y not in openset          <span class="comment">//若y不是将被估算的节点</span></div><div class="line">                 add y to openset         <span class="comment">//将y插入将被估算的节点中</span></div><div class="line">                 tentative_is_better := <span class="literal">true</span>     <span class="comment">//暂时判断为更好</span></div><div class="line">             elseif tentative_g_score &lt; g_score[y]         <span class="comment">//如果起点到y的距离小于y的实际距离</span></div><div class="line">                 tentative_is_better := <span class="literal">true</span>         <span class="comment">//暂时判断为更好</span></div><div class="line">             <span class="keyword">else</span></div><div class="line">                 tentative_is_better := <span class="literal">false</span>           <span class="comment">//否则判断为更差</span></div><div class="line">             <span class="keyword">if</span> tentative_is_better = <span class="literal">true</span>            <span class="comment">//如果判断为更好</span></div><div class="line">                 came_from[y] := x                  <span class="comment">//将y设为x的子节点</span></div><div class="line">                 g_score[y] := tentative_g_score    <span class="comment">//更新y到原点的距离</span></div><div class="line">                 h_score[y] := heuristic_estimate_of_distance(y, goal) <span class="comment">//估计y到终点的距离</span></div><div class="line">                 f_score[y] := g_score[y] + h_score[y]</div><div class="line">     <span class="keyword">return</span> failure</div><div class="line"> </div><div class="line"> function reconstruct_path(came_from,current_node)</div><div class="line">     <span class="keyword">if</span> came_from[current_node] is <span class="built_in">set</span></div><div class="line">         p = reconstruct_path(came_from,came_from[current_node])</div><div class="line">         <span class="keyword">return</span> (p + current_node)</div><div class="line">     <span class="keyword">else</span></div><div class="line">         <span class="keyword">return</span> current_node</div></pre></td></tr></table></figure>
+<p>基友猴哥告诉我，wiki上拓展子节点的时候，如果子节点出现在Close表中话，不做任何处理。而教材<a href="https://www.amazon.cn/普通高等教育本科国家级规划教材-人工智能及其应用-蔡自兴/dp/B01K1TSJS4/ref=sr_1_1?ie=UTF8&amp;qid=1510992874&amp;sr=8-1&amp;keywords=人工智能及其应用&amp;dpID=41kn9qn0ADL&amp;preST=_SY344_BO1,204,203,200_QL70_&amp;dpSrc=srch" target="_blank" rel="external">人工智能及其应用</a>、<a href="https://book.douban.com/subject/1154204/" target="_blank" rel="external">算法艺术与信息学竞赛</a> 中均对子节点的F值进行了计算，如果小于表中已有的，则必须更新(加入)到Open表中。而wiki上不论中英文版本均不做处理。那么有什么影响？</p>
+<p>抽象的想，从起点S开始有p1、p2两条路径均可到达中间某节点A。假设从p1到达A之后，拓展A的子节点，此时A已加入到S表中，且A的子节点是在A的基础上计算的G值。那么如果路径p2到达A的代价值(G)比p1小，按照wiki的流程图，最终结果还是采用p1这条代价更大的走法，从而无法收敛到最优解(从p2到A)。</p>
+<p>多说无益，下面我构造了个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">graph LR;</div><div class="line">    S&#123;S 20&#125;--12--&gt;A&#123;A 13&#125;;</div><div class="line">    S--10--&gt;B&#123;B 16&#125;;</div><div class="line">    B--1--&gt;A;</div><div class="line">    A--15--&gt;D&#123;D 10&#125;;</div></pre></td></tr></table></figure>
+<p>起点是S，目标是X(未画出，在D之后)。节点内部的数字表示H估值，变上面的数字代表G代价。以下是按照wiki的流程：</p>
+<p>格式为：A(G,H)  粗体表示最小F值节点。 斜体表示新加入节点。</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Open</th>
+<th>Close</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong><em>A(12,13)</em></strong>  <em>B(10,16)</em></td>
+<td>null</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>B(10,18)</strong>  <em>D(12+15,10)</em></td>
+<td><em>A(12,13)</em></td>
+</tr>
+<tr>
+<td>3</td>
+<td>D(12+15,10)</td>
+<td>A(12,13)</td>
+</tr>
+</tbody>
+</table>
+<p>到这里，拓展B的时候发现A已经在Close表中，就不采取任何操作，而D(F=37)和D之后节点的G值都是在A 12的基础上计算，明显比S→B→A(只需要11)大，故在这种情况下得到的不是最优解。</p>
+<p>而采用更像放回Open表中的情况呢?</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Open</th>
+<th>Close</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong><em>A(12,13)</em></strong>  <em>B(10,16)</em></td>
+<td>null</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>B(10,18)</strong>  <em>D(12+15,10)</em></td>
+<td><em>A(12,13)</em></td>
+</tr>
+<tr>
+<td>3</td>
+<td>D(12+5,10) <strong><em>A(10+1,13)</em></strong></td>
+<td>B(10,18)</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong><em>D(10+1+15,10)</em></strong></td>
+<td>B(10,18)   A(10+1,13)</td>
+</tr>
+</tbody>
+</table>
+<p>此时D的F值为26+10=36，路径是S→B→A→D，是最优路径。</p>
 
       
     </div>
@@ -373,7 +431,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/VB-NET/" rel="tag"># VB.NET</a>
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+            <a href="/tags/A/" rel="tag"># A*</a>
           
         </div>
       
@@ -386,8 +446,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/22/VB.NET中，如何得知多个radiobutton中哪个被选中(checked)/" rel="next" title="VB.NET中，取出被选中(checked)的按钮(radiobutton)">
-                <i class="fa fa-chevron-left"></i> VB.NET中，取出被选中(checked)的按钮(radiobutton)
+              <a href="/2017/11/16/A-Algorithm-and-8-Puzzle-Problem/" rel="next" title="A* Algorithm and 8 Puzzle  Problem">
+                <i class="fa fa-chevron-left"></i> A* Algorithm and 8 Puzzle  Problem
               </a>
             
           </div>
@@ -395,10 +455,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/16/阿里大于短信平台-Python3-初体验/" rel="prev" title="阿里大于短信平台 Python3 初体验">
-                阿里大于短信平台 Python3 初体验 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
