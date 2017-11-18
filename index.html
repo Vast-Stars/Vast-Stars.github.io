@@ -353,22 +353,22 @@
 <p>具体步骤:</p>
 <ol>
 <li>新建一个<code>Open</code>和<code>Closed</code>表，置空，将初始状态放入<code>Open</code>表中。</li>
-<li>将<code>Open</code>表中<strong>最小</strong>FF值状态取出放入<code>Closed</code>表中，若找到目标状态，则中断过程，此时状态的GG值就是最短路径（在八数码是最少步骤），否则生成其下一步<strong>所有</strong>能转移的状态集SS</li>
-<li>计算状态集SS每个状态的G,HG,H值，得出F=G+HF=G+H值，这里的GG可取前一个状态（父状态）的GG值加一，为了寻得最短路径，可将其指向父状态。</li>
+<li>将<code>Open</code>表中<strong>最小</strong>F值状态取出放入<code>Closed</code>表中，若找到目标状态，则中断过程，此时状态的GG值就是最短路径（在八数码是最少步骤），否则生成其下一步<strong>所有</strong>能转移的状态集S</li>
+<li>计算状态集S每个状态的F,G,H值，得出F=G+H值，这里的G可取前一个状态（父状态）的GG值加一，为了寻得最短路径，可将其指向父状态。</li>
 <li>枚举状态集，按5, 6处理</li>
-<li>若状态集SS的状态在<code>Closed</code>表中，则不理会，否则6</li>
-<li>若状态集SS的状态在<code>Open</code>表中且其FF值较小，则更新（因为有最优的路径啊当然要更新），否则不理会，若不在<code>Open</code>表中，则插入。</li>
+<li>若状态集S的状态在<code>Closed</code>表中，则不理会，否则6</li>
+<li>若状态集S的状态在<code>Open</code>表中且其F值较小，则更新（因为有最优的路径啊当然要更新），否则不理会，若不在<code>Open</code>表中，则插入。</li>
 <li>进入2</li>
 </ol>
 <p>伪代码：(源自wiki)</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">function A*(start,goal)</div><div class="line">    closedset := the empty <span class="built_in">set</span>                 <span class="comment">//已经被估算的节点集合</span></div><div class="line">    openset := <span class="built_in">set</span> containing the initial node <span class="comment">//将要被估算的节点集合，初始只包含start</span></div><div class="line">    came_from := empty <span class="built_in">map</span></div><div class="line">    g_score[start] := <span class="number">0</span>                        <span class="comment">//g(n)</span></div><div class="line">    h_score[start] := heuristic_estimate_of_distance(start, goal)    <span class="comment">//通过估计函数 估计h(start)</span></div><div class="line">    f_score[start] := h_score[start]            <span class="comment">//f(n)=h(n)+g(n)，由于g(n)=0，所以省略</span></div><div class="line">    <span class="keyword">while</span> openset is not empty                 <span class="comment">//当将被估算的节点存在时，执行循环</span></div><div class="line">        x := the node in openset having the lowest f_score[] value   <span class="comment">//在将被估计的集合中找到f(x)最小的节点</span></div><div class="line">        <span class="keyword">if</span> x = goal            <span class="comment">//若x为终点，执行</span></div><div class="line">            <span class="keyword">return</span> reconstruct_path(came_from,goal)   <span class="comment">//返回到x的最佳路径</span></div><div class="line">        remove x from openset      <span class="comment">//将x节点从将被估算的节点中删除</span></div><div class="line">        add x to closedset      <span class="comment">//将x节点插入已经被估算的节点</span></div><div class="line">        <span class="keyword">for</span> each y in neighbor_nodes(x)  <span class="comment">//循环遍历与x相邻节点</span></div><div class="line">            <span class="keyword">if</span> y in closedset           <span class="comment">//若y已被估值，跳过</span></div><div class="line">                <span class="keyword">continue</span></div><div class="line">            tentative_g_score := g_score[x] + dist_between(x,y)    <span class="comment">//从起点到节点y的距离</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> y not in openset          <span class="comment">//若y不是将被估算的节点</span></div><div class="line">                add y to openset         <span class="comment">//将y插入将被估算的节点中</span></div><div class="line">                tentative_is_better := <span class="literal">true</span>     <span class="comment">//暂时判断为更好</span></div><div class="line">            elseif tentative_g_score &lt; g_score[y]         <span class="comment">//如果起点到y的距离小于y的实际距离</span></div><div class="line">                tentative_is_better := <span class="literal">true</span>         <span class="comment">//暂时判断为更好</span></div><div class="line">            <span class="keyword">else</span></div><div class="line">                tentative_is_better := <span class="literal">false</span>           <span class="comment">//否则判断为更差</span></div><div class="line">            <span class="keyword">if</span> tentative_is_better = <span class="literal">true</span>            <span class="comment">//如果判断为更好</span></div><div class="line">                came_from[y] := x                  <span class="comment">//将y设为x的子节点</span></div><div class="line">                g_score[y] := tentative_g_score    <span class="comment">//更新y到原点的距离</span></div><div class="line">                h_score[y] := heuristic_estimate_of_distance(y, goal) <span class="comment">//估计y到终点的距离</span></div><div class="line">                f_score[y] := g_score[y] + h_score[y]</div><div class="line">    <span class="keyword">return</span> failure</div><div class="line"></div><div class="line">function reconstruct_path(came_from,current_node)</div><div class="line">    <span class="keyword">if</span> came_from[current_node] is <span class="built_in">set</span></div><div class="line">        p = reconstruct_path(came_from,came_from[current_node])</div><div class="line">        <span class="keyword">return</span> (p + current_node)</div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="keyword">return</span> current_node</div></pre></td></tr></table></figure>
 <h4 id="1-1-3-其他"><a href="#1-1-3-其他" class="headerlink" title="1.1.3 其他"></a>1.1.3 其他</h4><ul>
-<li>如果<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d4ad18070e494503403daf39398e711c1378348e" alt="g(n)">为0，即只计算任意顶点<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n">到目标的评估函数<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/125976c5970a395422e1baf572a26f31ae5e0b7d" alt="h(n)">，而不计算起点到顶点<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n">的距离，则算法转化为使用贪心策略的Best-First Search，速度最快，但可能得不出最优解；</li>
-<li>如果<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/125976c5970a395422e1baf572a26f31ae5e0b7d" alt="h(n)">不高于实际到目标顶点的距离，则一定可以求出最优解，而且<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/125976c5970a395422e1baf572a26f31ae5e0b7d" alt="h(n)">越小，需要计算的节点越多，算法效率越低，常见的评估函数有——<a href="https://zh.wikipedia.org/wiki/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E8%B7%9D%E7%A6%BB" target="_blank" rel="external">欧几里得距离</a>、<a href="https://zh.wikipedia.org/wiki/%E6%9B%BC%E5%93%88%E9%A0%93%E8%B7%9D%E9%9B%A2" target="_blank" rel="external">曼哈顿距离</a>、<a href="https://zh.wikipedia.org/wiki/%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E8%B7%9D%E7%A6%BB" target="_blank" rel="external">切比雪夫距离</a>；</li>
-<li>如果<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/125976c5970a395422e1baf572a26f31ae5e0b7d" alt="h(n)">为0，即只需求出起点到任意顶点<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n">的最短路径<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d4ad18070e494503403daf39398e711c1378348e" alt="g(n)">，而不计算任何评估函数<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/125976c5970a395422e1baf572a26f31ae5e0b7d" alt="h(n)">，则转化为<a href="https://zh.wikipedia.org/w/index.php?title=%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84&amp;action=edit&amp;redlink=1" target="_blank" rel="external">单源最短路径</a>问题，即<a href="https://zh.wikipedia.org/wiki/Dijkstra%E7%AE%97%E6%B3%95" target="_blank" rel="external">Dijkstra算法</a>，此时需要计算最多的定点；</li>
+<li>如果$g(n)$ 为0，即只计算任意顶点$n$ 到目标的评估函数$h(n)$ ，而不计算起点到顶点$n$ 的距离，则算法转化为使用贪心策略的Best-First Search，速度最快，但可能得不出最优解；</li>
+<li>如果$h(n)$ 不高于实际到目标顶点的距离，则<strong>一定可以求出最优解</strong>，而且$h(n)$ 越小，需要计算的节点越多，算法效率越低，常见的评估函数有——<a href="https://zh.wikipedia.org/wiki/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E8%B7%9D%E7%A6%BB" target="_blank" rel="external">欧几里得距离</a>、<a href="https://zh.wikipedia.org/wiki/%E6%9B%BC%E5%93%88%E9%A0%93%E8%B7%9D%E9%9B%A2" target="_blank" rel="external">曼哈顿距离</a>、<a href="https://zh.wikipedia.org/wiki/%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E8%B7%9D%E7%A6%BB" target="_blank" rel="external">切比雪夫距离</a>；</li>
+<li>如果$h(n)$ 为0，即只需求出起点到任意顶点$n$的最短路径 ，而不计算任何评估函数$h(n)$ ，则转化为<a href="https://zh.wikipedia.org/w/index.php?title=%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84&amp;action=edit&amp;redlink=1" target="_blank" rel="external">单源最短路径</a>问题，即<a href="https://zh.wikipedia.org/wiki/Dijkstra%E7%AE%97%E6%B3%95" target="_blank" rel="external">Dijkstra算法</a>，此时需要计算最多的定点；</li>
 </ul>
 <h3 id="1-2-C-实现"><a href="#1-2-C-实现" class="headerlink" title="1.2 C++实现"></a>1.2 C++实现</h3><h4 id="1-2-1-数据结构"><a href="#1-2-1-数据结构" class="headerlink" title="1.2.1 数据结构"></a>1.2.1 数据结构</h4><p>A*算法主要数据结构为<code>Open</code>表和<code>Close</code>表。其中，<code>Open</code> 表有取最小值、查找、插入、删除操作，<code>Close</code> 表有查找、插入操作。比较好的实现方案是<code>Open</code> 表用<strong>优先队列（最小堆）</strong> 来实现，<code>Close</code> 表用<strong>排序二叉树</strong> 来实现。</p>
-<p>表中元素的类型取决于具体问题。但该类型的成员应该能(唯一的)表示状态、父节点、g值、h值。且应当定义该类型的拓展子节点(<code>extend</code>)方法、大小比较(operator&lt;)方法、相等判断(operator==)方法。</p>
+<p>表中元素的类型取决于具体问题。但该类型的成员应该能(唯一的)表示状态、父节点、g值、h值。且应当定义该类型的拓展子节点(<code>extend</code>)方法、相等判断(operator==)方法、大小比较等。</p>
 <h4 id="1-2-2-实现"><a href="#1-2-2-实现" class="headerlink" title="1.2.2 实现"></a>1.2.2 实现</h4><p>由于具体问题不可预知，故使用模板类型T作为接口。由于时间仓促，使用<code>std::vector</code> 作为Open、Close表载体。</p>
 <p>所有源码见<code>AStar.h</code> 文件。以下只给出主要类、函数声明及含义。</p>
 <p><code>Class Configure</code> :用于设置T类型的相关操作，取决于具体问题。</p>
@@ -385,12 +385,11 @@
 </li>
 <li><p>拓展子节点只与空格位置有关；故下文用<code>u d l r</code> 分别代表空格的上下左右移动。</p>
 </li>
-<li><p>把$N \times N$ 的二维棋盘“拉伸”成一维数组(下文记为a_1, ,a_2 ,a_3 …a_n*n )，便于处理。</p>
+<li><p>把$N \times N$ 的二维棋盘“拉伸”成一维数组(下文记为$a_1,a_2, a_3 \cdots a_{n*n}$ )，便于处理。</p>
 </li>
 <li><p>有些资料中以”1234678X”为目标状态，而另外一些则采用螺旋形”1238X4765”为目标状态。考虑到算法通用性，目标状态不应局限于以上两种。</p>
 </li>
-<li><p>最终求解的是最短路径，且任意节点可由路径推断出父节点、祖父节点……故不需要再用指针指向父节点</p>
-<p>​</p>
+<li><p>最终求解的是最短路径，且任意节点可由路径推断出父节点、祖父节点……故使用一个成员变量记录路径之后便不需要再用指针指向父节点</p>
 </li>
 </ul>
 <p>为保证算法正常工作，还必须证明算法的收敛性和可解性。补充如下数学定理。</p>
@@ -1146,10 +1145,10 @@
 </tbody>
 </table>
 <p>在Matlab中画图比较如下：</p>
-<p><img src="/2017/11/16/A-Algorithm-and-8-Puzzle-Problem/Users\86527\Desktop\AI\AStar\time.bmp" alt="time"></p>
-<p><img src="/2017/11/16/A-Algorithm-and-8-Puzzle-Problem/Users\86527\Desktop\AI\AStar\rom.bmp" alt="rom"></p>
-<p><img src="/2017/11/16/A-Algorithm-and-8-Puzzle-Problem/Users\86527\Desktop\AI\AStar\Open.bmp" alt="Open"></p>
-<p><img src="/2017/11/16/A-Algorithm-and-8-Puzzle-Problem/Users\86527\Desktop\AI\AStar\Close.bmp" alt="Close"></p>
+<p><img src="/2017/11/16/A-Algorithm-and-8-Puzzle-Problem/time.bmp" alt="time"></p>
+<p><img src="/2017/11/16/A-Algorithm-and-8-Puzzle-Problem/rom.bmp" alt="rom"></p>
+<p><img src="/2017/11/16/A-Algorithm-and-8-Puzzle-Problem/Open.bmp" alt="Open"></p>
+<p><img src="/2017/11/16/A-Algorithm-and-8-Puzzle-Problem/Close.bmp" alt="Close"></p>
 <p>可以看到四种H评估函数都基本能得到最优解。</p>
 <p>但是在时间上，二维曼哈顿和一维曼哈顿表现比较好。</p>
 <p>空间上，同样是二维曼哈顿和一维曼哈顿表现较好。</p>
@@ -1302,7 +1301,8 @@
       
         
           
-            
+            <p>To be Updated……</p>
+
           
         
       
