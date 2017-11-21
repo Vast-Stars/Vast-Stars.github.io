@@ -134,6 +134,7 @@
 
 
 
+
   <title> Vast-stars' Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
@@ -235,7 +236,9 @@
 </nav>
 
 
-
+<script src="//cdn.bootcss.com/mermaid/6.0.0/mermaid.min.js"></script>
+<link rel="stylesheet" type="text/css" 
+    href="https://cdn.bootcss.com/mermaid/6.0.0/mermaid.min.css">
  </div>
     </header>
 
@@ -348,7 +351,14 @@
 <p>基友猴哥告诉我，wiki上拓展子节点的时候，如果子节点出现在Close表中话，不做任何处理。而教材<a href="https://www.amazon.cn/普通高等教育本科国家级规划教材-人工智能及其应用-蔡自兴/dp/B01K1TSJS4/ref=sr_1_1?ie=UTF8&amp;qid=1510992874&amp;sr=8-1&amp;keywords=人工智能及其应用&amp;dpID=41kn9qn0ADL&amp;preST=_SY344_BO1,204,203,200_QL70_&amp;dpSrc=srch" target="_blank" rel="external">人工智能及其应用</a>、<a href="https://book.douban.com/subject/1154204/" target="_blank" rel="external">算法艺术与信息学竞赛</a> 中均对子节点的F值进行了计算，如果小于表中已有的，则必须更新(加入)到Open表中。而wiki上不论中英文版本均不做处理。那么有什么影响？</p>
 <p>抽象的想，从起点S开始有p1、p2两条路径均可到达中间某节点A。假设从p1到达A之后，拓展A的子节点，此时A已加入到S表中，且A的子节点是在A的基础上计算的G值。那么如果路径p2到达A的代价值(G)比p1小，按照wiki的流程图，最终结果还是采用p1这条代价更大的走法，从而无法收敛到最优解(从p2到A)。</p>
 <p>多说无益，下面我构造了个例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">graph LR;</div><div class="line">    S&#123;S 20&#125;--12--&gt;A&#123;A 13&#125;;</div><div class="line">    S--10--&gt;B&#123;B 16&#125;;</div><div class="line">    B--1--&gt;A;</div><div class="line">    A--15--&gt;D&#123;D 10&#125;;</div></pre></td></tr></table></figure>
+<div class="mermaid">
+  graph LR;
+    S{S 20}--12-->A{A 13};
+    S--10-->B{B 16};
+    B--1-->A;
+    A--15-->D{D 10};
+</div>
+
 <p>起点是S，目标是X(未画出，在D之后)。节点内部的数字表示H估值，变上面的数字代表G代价。以下是按照wiki的流程：</p>
 <p>格式为：A(G,H)  粗体表示最小F值节点。 斜体表示新加入节点。</p>
 <table>
@@ -556,7 +566,7 @@
 <li>若状态集S的状态在<code>Open</code>表中且其F值较小，则更新（因为有最优的路径啊当然要更新），否则不理会，若不在<code>Open</code>表中，则插入。</li>
 <li>进入2</li>
 </ol>
-<p>伪代码：(源自wiki)</p>
+<p><del>伪代码：(源自wiki)</del> <strong>有错误</strong>  见<a href="http://www.vast-stars.com/2017/11/18/维基百科A-算法的错误/">我的博客</a></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">function A*(start,goal)</div><div class="line">    closedset := the empty <span class="built_in">set</span>                 <span class="comment">//已经被估算的节点集合</span></div><div class="line">    openset := <span class="built_in">set</span> containing the initial node <span class="comment">//将要被估算的节点集合，初始只包含start</span></div><div class="line">    came_from := empty <span class="built_in">map</span></div><div class="line">    g_score[start] := <span class="number">0</span>                        <span class="comment">//g(n)</span></div><div class="line">    h_score[start] := heuristic_estimate_of_distance(start, goal)    <span class="comment">//通过估计函数 估计h(start)</span></div><div class="line">    f_score[start] := h_score[start]            <span class="comment">//f(n)=h(n)+g(n)，由于g(n)=0，所以省略</span></div><div class="line">    <span class="keyword">while</span> openset is not empty                 <span class="comment">//当将被估算的节点存在时，执行循环</span></div><div class="line">        x := the node in openset having the lowest f_score[] value   <span class="comment">//在将被估计的集合中找到f(x)最小的节点</span></div><div class="line">        <span class="keyword">if</span> x = goal            <span class="comment">//若x为终点，执行</span></div><div class="line">            <span class="keyword">return</span> reconstruct_path(came_from,goal)   <span class="comment">//返回到x的最佳路径</span></div><div class="line">        remove x from openset      <span class="comment">//将x节点从将被估算的节点中删除</span></div><div class="line">        add x to closedset      <span class="comment">//将x节点插入已经被估算的节点</span></div><div class="line">        <span class="keyword">for</span> each y in neighbor_nodes(x)  <span class="comment">//循环遍历与x相邻节点</span></div><div class="line">            <span class="keyword">if</span> y in closedset           <span class="comment">//若y已被估值，跳过</span></div><div class="line">                <span class="keyword">continue</span></div><div class="line">            tentative_g_score := g_score[x] + dist_between(x,y)    <span class="comment">//从起点到节点y的距离</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> y not in openset          <span class="comment">//若y不是将被估算的节点</span></div><div class="line">                add y to openset         <span class="comment">//将y插入将被估算的节点中</span></div><div class="line">                tentative_is_better := <span class="literal">true</span>     <span class="comment">//暂时判断为更好</span></div><div class="line">            elseif tentative_g_score &lt; g_score[y]         <span class="comment">//如果起点到y的距离小于y的实际距离</span></div><div class="line">                tentative_is_better := <span class="literal">true</span>         <span class="comment">//暂时判断为更好</span></div><div class="line">            <span class="keyword">else</span></div><div class="line">                tentative_is_better := <span class="literal">false</span>           <span class="comment">//否则判断为更差</span></div><div class="line">            <span class="keyword">if</span> tentative_is_better = <span class="literal">true</span>            <span class="comment">//如果判断为更好</span></div><div class="line">                came_from[y] := x                  <span class="comment">//将y设为x的子节点</span></div><div class="line">                g_score[y] := tentative_g_score    <span class="comment">//更新y到原点的距离</span></div><div class="line">                h_score[y] := heuristic_estimate_of_distance(y, goal) <span class="comment">//估计y到终点的距离</span></div><div class="line">                f_score[y] := g_score[y] + h_score[y]</div><div class="line">    <span class="keyword">return</span> failure</div><div class="line"></div><div class="line">function reconstruct_path(came_from,current_node)</div><div class="line">    <span class="keyword">if</span> came_from[current_node] is <span class="built_in">set</span></div><div class="line">        p = reconstruct_path(came_from,came_from[current_node])</div><div class="line">        <span class="keyword">return</span> (p + current_node)</div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="keyword">return</span> current_node</div></pre></td></tr></table></figure>
 <h4 id="1-1-3-其他"><a href="#1-1-3-其他" class="headerlink" title="1.1.3 其他"></a>1.1.3 其他</h4><ul>
 <li>如果$g(n)$ 为0，即只计算任意顶点$n$ 到目标的评估函数$h(n)$ ，而不计算起点到顶点$n$ 的距离，则算法转化为使用贪心策略的Best-First Search，速度最快，但可能得不出最优解；</li>
@@ -1351,6 +1361,7 @@
 <p>BFS时间和空间都随着深度而近似指数增加，效率太低。</p>
 <hr>
 <h2 id="三-其他"><a href="#三-其他" class="headerlink" title="三 其他"></a>三 其他</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>本报告相关内容将发表在我的博客上(不定期更新)：</p>
+<p><a href="http://www.vast-stars.com/2017/11/18/维基百科A-算法的错误/">维基百科A-算法的错误</a></p>
 <p><a href="http://www.vast-stars.com/2017/11/16/A-Algorithm-and-8-Puzzle-Problem/">A-Algorithm-and-8-Puzzle-Problem</a></p>
 <p><a href="http://www.vast-stars.com/2017/11/16/八数码最优解是否唯一判定/">八数码最优解是否唯一判定</a></p>
 <p>代码(不定时更新)：<a href="https://github.com/Vast-Stars/Algorithm/tree/master/8digit" target="_blank" rel="external">https://github.com/Vast-Stars/Algorithm/tree/master/8digit</a></p>
@@ -1360,7 +1371,8 @@
 <p><a href="https://github.com/netcan/SlidePuzzle" target="_blank" rel="external">https://github.com/netcan/SlidePuzzle</a></p>
 <p>华容道：</p>
 <p><img src="http://chinesepuzzles.org/dev/wp-content/uploads/2011/08/Huarong-Pass-configuration.jpg" width="300" height="300" alt="图片名称" align="center"></p>
-<h3 id="3"><a href="#3" class="headerlink" title="3"></a>3</h3><p>有个小问题：维基百科上的A*算法流程中，若子节点出现在Close表中，则不采取任何操作，这和书上更新F值相矛盾，为什么？</p>
+<h3 id="3"><a href="#3" class="headerlink" title="3"></a>3</h3><p><del>有个小问题：维基百科上的A*算法流程中，若子节点出现在Close表中，则不采取任何操作，这和书上更新F值相矛盾，为什么？</del> </p>
+<p><a href="http://www.vast-stars.com/2017/11/18/维基百科A-算法的错误/">维基百科A-算法的错误</a></p>
 <hr>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="http://www.cnblogs.com/luxiaoxun/archive/2012/08/05/2624115.html" target="_blank" rel="external">http://www.cnblogs.com/luxiaoxun/archive/2012/08/05/2624115.html</a></p>
 <p><a href="http://blog.csdn.net/tiaotiaoyly/article/details/2008233" target="_blank" rel="external">八数码问题有解的条件及其推广</a></p>
@@ -2163,7 +2175,16 @@
             <h1 id="剑桥暑期游学心得"><a href="#剑桥暑期游学心得" class="headerlink" title="剑桥暑期游学心得"></a>剑桥暑期游学心得</h1><p>今年暑假我有幸参加了剑桥游学项目，不但认识结交了一群有趣小伙伴，还体验了原汁原味的剑桥生活与英国文化，感受颇多。本篇博文主要分为两部分：一是日程安排以及活动详情，二是心得体会。</p>
 <hr>
 <h2 id="一-日程"><a href="#一-日程" class="headerlink" title="一  日程"></a>一  日程</h2><h3 id="1-1-日程安排"><a href="#1-1-日程安排" class="headerlink" title="1.1 日程安排"></a>1.1 日程安排</h3><p><img src="/2017/09/06/Cambridge-Summer-Programme/0001.jpg" alt="0001"><img src="/2017/09/06/Cambridge-Summer-Programme/0002.jpg" alt="0002"></p>
-<h3 id="1-2-课程"><a href="#1-2-课程" class="headerlink" title="1.2 课程"></a>1.2 课程</h3><p>既然是游学项目，“学”自然必不可少。本次项目中共有4门课程，分别是纳米技术(Nanotechnology, 3课时 + 1课时观赏)、应用信息论(Applied Information Theory，2课时+Presentation)、可再生电能(Renewable Electrical Power 2课时)、莎士比亚和英文诗(Shakespeare and English Poetry 2课时)，每课时3小时。以下分别介绍。</p>
+<h3 id="1-2-课程"><a href="#1-2-课程" class="headerlink" title="1.2 课程"></a>1.2 课程</h3><p>既然是游学项目，“学”自然必不可少。本次项目中共有4门课程，分别是纳米技术(Nanotechnology, 3课时 + 1课时观赏)、应用信息论(Applied Information Theory，2课时+Presentation)、可再生电能(Renewable Electrical Power 2课时)、莎士比亚和英文诗(Shakespeare &amp; English Poetry 2课时)，每课时3小时。以下分别介绍。</p>
+<h4 id="1-2-1-Nanotechnology"><a href="#1-2-1-Nanotechnology" class="headerlink" title="1.2.1 Nanotechnology"></a>1.2.1 Nanotechnology</h4><p>上的第一门课。以科普介绍为主。从物理学史发展开始入手，逐步引入纳米尺度，然后开始介绍纳米技术——<strong>这是一类技术的总称，没有很严格的界定</strong>。纳米技术也是各个领域都频繁交叉使用的技术，最常见的如材料、生物、能源、半导体工业等都大量使用了纳米技术。</p>
+<p>课程对专注力、听力要求较高。跟不上的话很容易犯困o(╯□╰)o。老师人很有意思，联想发散无所不谈，比如吐槽了伦敦（英国？）政府打算在2040年禁止非电动汽车……从剑桥镇雨后的颗粒物到羡慕中国学生几乎没有过敏的……当然还有很多想不起来了，回头得翻翻教材和笔记……</p>
+<p>晚上是助教（他手下读博的一个中国男生）来和我们聊天~真的超级棒！因为是同胞又都是电子领域的同志（这批去的几乎全是电院的），他和我们介绍了半导体的生产工艺概述、目前行业发展情况（恰好暑假IBM做出5nm的三极管，学长一直在佩服），后边部分几乎全是问了下读硕读博（尤其是英国高校），总结一下：门槛高、费用高、压力小、毕业快（硕士只要一年多）。就业环境也不错，不过学长还是有考虑回国助力国内半导体工业的发展……</p>
+<p>最后一节是展示课，教授还真把贵重的AFM(原子力显微镜)搬到教室（他笑称是这个设备工作过环境最恶劣的地方了）。我也觉得出乎意料，因为这种高精尖的玩意走在路上损坏了不说，拿到教室来常温下精度也差的没法用了吧（原子做高速热运动还怎么观测）……不过还是大饱眼福了。</p>
+<h4 id="1-2-2-Applied-Information-Theory"><a href="#1-2-2-Applied-Information-Theory" class="headerlink" title="1.2.2 Applied Information Theory"></a>1.2.2 Applied Information Theory</h4><p>第二门也是压力最大的一门。。。一个presentation把我们都虐成狗……先空着不写……内容太多了我得好好理一理</p>
+<h4 id="1-2-3-Renewable-Electrical-Power"><a href="#1-2-3-Renewable-Electrical-Power" class="headerlink" title="1.2.3 Renewable Electrical Power"></a>1.2.3 Renewable Electrical Power</h4><p>无力吐槽的一门课。（几乎）学不到什么东西。。然后作业是把一道小学应用题加各种约束加各种条件然后玩出花来的既视感。。其实就是个二元函数的求最小值问题，只不过中间计算层和规则比较多。真·无话可说。最让我震惊的是老师做科学计算是用Excel，而且这个二元函数求最小值是靠手动调整搜索试出来的…………一个工科的教授不会不知道多元问题优化啊，难道他是临时随便做了个非专业方向的课程准备就来和我们上课了？还是说觉得中国学生理解不了这个问题的本质（EXO ME???) </p>
+<p>总之，这门课，我给差评！</p>
+<h4 id="1-2-4-Shakespeare-amp-English-Poetry"><a href="#1-2-4-Shakespeare-amp-English-Poetry" class="headerlink" title="1.2.4 Shakespeare &amp; English Poetry"></a>1.2.4 Shakespeare &amp; English Poetry</h4><p>这下算是管中窥豹、见识到了西方全面的素质教育了。虽然才2节课，但却是分别由2个老师来上的（他们还是一对夫妻，ORZ），妻子第一节课教Shakespeare丈夫之后教英文诗。教的非常非常非常非常好！而且口语、听力要求特别特别低，互动性太强（我在国内就还没上过这么互动的课），上着很有趣很高兴。课程虽短但也五脏俱全，我们每个组还演了一个小短剧（太欢乐了），但也算是入了门（有能力自行从不同方面欣赏体会莎士比亚作品）。</p>
+<p>这门课强烈安利！</p>
 
           
         
