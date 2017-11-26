@@ -258,6 +258,167 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2017/05/10/上海交大Hackthon活动有感/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vast-Stars">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vast-stars' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/10/上海交大Hackthon活动有感/" itemprop="url">
+                  2017上海交大Hackthon活动有感
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-10T23:29:36+08:00">
+                2017-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/05/10/上海交大Hackthon活动有感/" class="leancloud_visitors" data-flag-title="2017上海交大Hackthon活动有感">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/2017/05/10/上海交大Hackthon活动有感/01.jpg" alt="img"></p>
+<p>首先，很有幸能参加今年的Hackthon活动。以下是比赛过程和一些感想。</p>
+<p>5月5日19点开始开幕式，请到了IBM、NVIDA、英语流利说、青云的代表发言。不但说到技术-创新也关系，也谈了从市场、用户角度看待一个新技术新产品。开幕式完成后就是现场组队环节。我很幸运之前在线上认识了几位来组不同高校的研究生学长学姐，在一起简单自我介绍相互认识之后就开始头脑风暴构思、策划方案。</p>
+<p>根据<a href="https://sjtu.hackx.org/" target="_blank" rel="external">SJTU×HACK官网</a>的介绍 ：</p>
+<blockquote>
+<p>此项活动将通过借助各家企业开源的API（Application Programming Interface）和SDK（Software Development Kit），以此为学生们提供在短时间内开发软件和硬件的竞赛平台，最终来促进学生们充分地利用所学的科技开发技能去完成设计插件或搭建各类应用项目的雏形。</p>
+</blockquote>
+<p>而本次比赛各提供的<a href="https://www.hackx.org/competitions/hackxsjtu2017" target="_blank" rel="external">赞助</a>主要有：</p>
+<ul>
+<li>IBM: <a href="https://www.hackx.org/technologies/5" target="_blank" rel="external">Bluemix</a>、<a href="https://www.hackx.org/technologies/13" target="_blank" rel="external">Watson</a>、<a href="https://www.hackx.org/technologies/35" target="_blank" rel="external">PowerAI</a>、<a href="https://www.hackx.org/technologies/34" target="_blank" rel="external">Apach OpenWhisk</a></li>
+<li>SenseTime(商汤科技)：<a href="https://www.hackx.org/technologies/24" target="_blank" rel="external">人脸技术SDK</a>、<a href="https://www.hackx.org/technologies/26" target="_blank" rel="external">手势、人脸技术SDK</a>、<a href="https://www.hackx.org/technologies/27" target="_blank" rel="external">人脸技术API</a></li>
+<li>NVIDIA: 搭载强力GPU的小车、嵌入式开发平台等。</li>
+<li>英语流利说：<a href="https://www.hackx.org/technologies/1" target="_blank" rel="external">语音识别以及打分API</a></li>
+<li>青云：容器、VPS等</li>
+</ul>
+<p>奖项设置方面，主办方会评选出第1、2、3名，上述4个赞助商加上Github分别再根据团队使用API的情况评出各自奖项。</p>
+<p>考虑到这些比赛规则，我们首先想到的就是NVIDIA的小车任务（在提供的小车上跑起图像识别，驱动车轮完成指定动作即可），然而晚了一步已经没小车了。那只能从软件角度考虑，可供挖掘的主要是商汤科技和流利说的API，一个是图像(人物)识别一个是语音处理（从最后作品来看多数团队思路也和我们一样）。</p>
+<p>再进一步细分、讨论我们做一个基于图像的多目标识别、面部数据统计相关的程序，顺便加上语音输入、输出等。由于赞助商提供的API直接就能给出检测后的结果，所以我们分工：一边调用API，一边做Web前后端。我负责调用英语流利说的在线API<br>（福利：这个API在赛后不会回收，且不需要权限验证）。第一次接触Pocp library，误当做Socket处理（实际上是web socket），在Python浪费了不少时间。还好最终按时完成。这里必需吐槽一下英语流利说给出的API和文档，README一看就是仓促之下完成的，给出的web demo在比赛期间也还中断了一天。另外商汤科技的SDK也是有点乱（看上面就知道），果断调用在线API是个明智的选择。至于前后端开发我没参与，十分佩服学长学姐能在短时间内用Python完成一个站点，还有一个简洁却不失优雅的UI。</p>
+<p>因为我们做的东西比较简单，工作量是比较少的，成型速度快，但实际应用场景也着实有点尴尬：最早想的是在教室检测学生的表情，通过犯困、低头等判断这节课的质量以及学生学习情况。做到一半突然发现另外一个队也和我们想的基本一样，于是我又绞尽脑汁想了个公共场合反恐。。实际上通过测试发现，商汤科技对人脸属性的精确判断需要高分辨率的正面人脸信息，如果实际应用不论是哪种场合都需要前期图像的预处理以及对视频流的优化处理算法。</p>
+<p>总得来说，这次Hackthon活动处处是企业的身影，商业气息过于浓厚，<strong>创意 &gt; 技术</strong>；各类公司提供一些API/SDK，而参赛选手则开脑洞，实现一个新的产品或者拓宽此类技术的适用面。</p>
+<p>另外组队可以认为是此类活动的另一个决定性因素了。每个人的技术栈千差万别，而要在短短36小时内开发出一套完整的系统就必须要求每人都高效工作、无缝衔接； 要是团队已经经历过磨合那自然事半功倍，而一群陌生人临时组成的队伍无论在沟通交流还是开发实现上都要额外花费精力和时间。另外值得一提的是，研究生多为个人参赛，而本科生则有不少三五成群来参赛的(尤其SJTU本校)。或许是本科生时间精力充裕的缘故吧。</p>
+<p>另外上交的环境是真心棒，电院群楼里面一大片的机房，不少学生深夜还守在机子旁，比我电（连开源社区都没地方呆、开放给学生的实验室少得可怜）不知道高到哪里去了。</p>
+<p>下面是一些图片</p>
+<p>上海交大：</p>
+<p><img src="/2017/05/10/上海交大Hackthon活动有感/04.jpg" alt="img"></p>
+<p><img src="/2017/05/10/上海交大Hackthon活动有感/03.jpg" alt="img"></p>
+<p>比赛海报：</p>
+<p><img src="/2017/05/10/上海交大Hackthon活动有感/02.png" alt="02"></p>
+<p>标配自行车专用道：</p>
+<p><img src="/2017/05/10/上海交大Hackthon活动有感/06.jpg" alt="06"></p>
+<p>窄路上也有：（真心照顾学生）</p>
+<p><img src="/2017/05/10/上海交大Hackthon活动有感/05.jpg" alt="05">别人家的后勤部：</p>
+<p><img src="/2017/05/10/上海交大Hackthon活动有感/06.png" alt="06"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2016/12/29/关于python生成gif图/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1586,144 +1747,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2016/05/07/VBA-EXCEL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vast-Stars">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vast-stars' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/07/VBA-EXCEL/" itemprop="url">
-                  VBA-EXCEL
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-07T18:11:13+08:00">
-                2016-05-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/05/07/VBA-EXCEL/" class="leancloud_visitors" data-flag-title="VBA-EXCEL">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="初始设定"><a href="#初始设定" class="headerlink" title="初始设定"></a>初始设定</h1><figure class="highlight vb"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Dim</span> oExcel, oWb, oSheet</div><div class="line"><span class="keyword">Set</span> oExcel = CreateObject(<span class="string">"Excel.Application"</span>)</div><div class="line"><span class="keyword">Set</span> oWb = GetObject(, <span class="string">"Excel.Application"</span>)  	使用已打开的文件</div><div class="line"><span class="comment">'oWb= oExcel.Workbooks.Open("E:\其他\新装电话表.xls") 		使用本地文件</span></div><div class="line"><span class="keyword">Set</span> oSheet = oWb.Sheets(<span class="string">"Sheet1"</span>)</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/05/07/VBA-EXCEL/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1768,7 +1796,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

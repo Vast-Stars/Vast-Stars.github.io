@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Arduino," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -92,19 +92,35 @@
 
 
 
-<meta name="description" content="关于如何与Arduino接线、进入AT模式，请看：http://swf.com.tw/?p=712
-这是HC-06所有AT指令（网上参考资料或多或少会漏，这是我整理比较齐全的）">
+<meta name="description" content="杂谈 Cost Functioncost function 又称为代价函数，又记为loss。本文选取了一些有意思例子来介绍。
+先看看我们学过课程中的：
+最优化： 调整 $w$  拟合f(x)   loss=均方误差
+模式识别： 分类器，以SVM为例，loss=    经验误差 - 几何边缘区 (即在经验误差最小的基础上，尽可能增大分类间隔。减法只是便于理解的一种记号)
+人工智能概论：  A*算法中">
 <meta property="og:type" content="article">
-<meta property="og:title" content=" 关于蓝牙模块(HC-06)">
-<meta property="og:url" content="http://www.vast-stars.com/2016/10/16/关于蓝牙模块-HC-06/index.html">
+<meta property="og:title" content="浅谈Cost Function">
+<meta property="og:url" content="http://www.vast-stars.com/2017/11/27/浅谈Cost-Function/index.html">
 <meta property="og:site_name" content="Vast-stars' Blog">
-<meta property="og:description" content="关于如何与Arduino接线、进入AT模式，请看：http://swf.com.tw/?p=712
-这是HC-06所有AT指令（网上参考资料或多或少会漏，这是我整理比较齐全的）">
-<meta property="og:updated_time" content="2017-03-20T13:08:31.951Z">
+<meta property="og:description" content="杂谈 Cost Functioncost function 又称为代价函数，又记为loss。本文选取了一些有意思例子来介绍。
+先看看我们学过课程中的：
+最优化： 调整 $w$  拟合f(x)   loss=均方误差
+模式识别： 分类器，以SVM为例，loss=    经验误差 - 几何边缘区 (即在经验误差最小的基础上，尽可能增大分类间隔。减法只是便于理解的一种记号)
+人工智能概论：  A*算法中">
+<meta property="og:image" content="https://github.com/Vast-Stars/Genetic-Algorithm-Visualization/raw/master/2.gif">
+<meta property="og:image" content="http://www.vast-stars.com/2017/11/27/浅谈Cost-Function/大学\大三上\optimal method\REPORT\TravelingSalesmanUSCapitals2.gif">
+<meta property="og:image" content="https://pic2.zhimg.com/50/0252264574541896996f3c01d2aca6b5_hd.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/50/be24daa979474a550b85358a30d26942_hd.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/50/cb8f4f5468586748c5b890f95e8b2e5b_hd.jpg">
+<meta property="og:image" content="http://n.sinaimg.cn/translate/20171103/1mdJ-fynnnsc4684071.jpg">
+<meta property="og:updated_time" content="2017-11-26T23:08:11.666Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=" 关于蓝牙模块(HC-06)">
-<meta name="twitter:description" content="关于如何与Arduino接线、进入AT模式，请看：http://swf.com.tw/?p=712
-这是HC-06所有AT指令（网上参考资料或多或少会漏，这是我整理比较齐全的）">
+<meta name="twitter:title" content="浅谈Cost Function">
+<meta name="twitter:description" content="杂谈 Cost Functioncost function 又称为代价函数，又记为loss。本文选取了一些有意思例子来介绍。
+先看看我们学过课程中的：
+最优化： 调整 $w$  拟合f(x)   loss=均方误差
+模式识别： 分类器，以SVM为例，loss=    经验误差 - 几何边缘区 (即在经验误差最小的基础上，尽可能增大分类间隔。减法只是便于理解的一种记号)
+人工智能概论：  A*算法中">
+<meta name="twitter:image" content="https://github.com/Vast-Stars/Genetic-Algorithm-Visualization/raw/master/2.gif">
 
 
 
@@ -132,14 +148,14 @@
 
 
 
-  <link rel="canonical" href="http://www.vast-stars.com/2016/10/16/关于蓝牙模块-HC-06/"/>
+  <link rel="canonical" href="http://www.vast-stars.com/2017/11/27/浅谈Cost-Function/"/>
 
 
 
 
 
 
-  <title>  关于蓝牙模块(HC-06) | Vast-stars' Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 浅谈Cost Function | Vast-stars' Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +276,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2016/10/16/关于蓝牙模块-HC-06/">
+    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2017/11/27/浅谈Cost-Function/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Vast-Stars">
@@ -281,7 +297,7 @@
             
             
               
-                 关于蓝牙模块(HC-06)
+                浅谈Cost Function
               
             
           </h1>
@@ -296,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-16T14:07:58+08:00">
-                2016-10-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T04:27:03+08:00">
+                2017-11-27
               </time>
             
 
@@ -314,7 +330,7 @@
 
           
           
-             <span id="/2016/10/16/关于蓝牙模块-HC-06/" class="leancloud_visitors" data-flag-title=" 关于蓝牙模块(HC-06)">
+             <span id="/2017/11/27/浅谈Cost-Function/" class="leancloud_visitors" data-flag-title="浅谈Cost Function">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -343,120 +359,40 @@
       
 
       
-        <p>关于如何与Arduino接线、进入AT模式，请看：<a href="http://swf.com.tw/?p=712" target="_blank" rel="external">http://swf.com.tw/?p=712</a></p>
-<p>这是HC-06所有AT指令（网上参考资料或多或少会漏，这是我整理比较齐全的）</p>
-<a id="more"></a>
-<table>
-<thead>
-<tr>
-<th>Command</th>
-<th>Response</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>AT</td>
-<td>OK</td>
-<td>Used to verify communication  验证</td>
-</tr>
-<tr>
-<td>AT+VERSION</td>
-<td>OKlinvorV1.8</td>
-<td>The firmware version (version might depend on firmware)</td>
-</tr>
-<tr>
-<td>AT+NAMExyz</td>
-<td>OKsetname</td>
-<td>设置设备名称</td>
-</tr>
-<tr>
-<td>AT+PIN1234</td>
-<td>OKsetPIN</td>
-<td>设置PIN码</td>
-</tr>
-<tr>
-<td>AT+BAUD1</td>
-<td>OK1200</td>
-<td>Sets the baud rate to 1200 波特率 下同</td>
-</tr>
-<tr>
-<td>AT+BAUD2</td>
-<td>OK2400</td>
-<td>Sets the baud rate to 2400</td>
-</tr>
-<tr>
-<td>AT+BAUD3</td>
-<td>OK4800</td>
-<td>Sets the baud rate to 4800</td>
-</tr>
-<tr>
-<td>AT+BAUD4</td>
-<td>OK9600</td>
-<td>Sets the baud rate to 9600</td>
-</tr>
-<tr>
-<td>AT+BAUD5</td>
-<td>OK19200</td>
-<td>Sets the baud rate to 19200</td>
-</tr>
-<tr>
-<td>AT+BAUD6</td>
-<td>OK38400</td>
-<td>Sets the baud rate to 38400</td>
-</tr>
-<tr>
-<td>AT+BAUD7</td>
-<td>OK57600</td>
-<td>Sets the baud rate to 57600</td>
-</tr>
-<tr>
-<td>AT+BAUD8</td>
-<td>OK115200</td>
-<td>Sets the baud rate to 115200</td>
-</tr>
-<tr>
-<td>AT+BAUD9</td>
-<td>OK230400</td>
-<td>Sets the baud rate to 230400</td>
-</tr>
-<tr>
-<td>AT+BAUDA</td>
-<td>OK460800</td>
-<td>Sets the baud rate to 460800</td>
-</tr>
-<tr>
-<td>AT+BAUDB</td>
-<td>OK921600</td>
-<td>Sets the baud rate to 921600</td>
-</tr>
-<tr>
-<td>AT+BAUDC</td>
-<td>OK1382400</td>
-<td>Sets the baud rate to 1382400</td>
-</tr>
-<tr>
-<td>AT+ROLE=M 或 AT+ROLE=S</td>
-<td>OK+ROLE：M 或 OK+ROLE：S</td>
-<td>设置模式为Mast或 Slave （注：即使切换为Mast也无法主动连接其他Slave，因为固件不含相关指令</td>
-</tr>
-</tbody>
-</table>
-<p>下面是2个调试使用的程序：</p>
-<p>第一个：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line"> Serial.begin(<span class="number">9600</span>);</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">while</span>(Serial.available())</div><div class="line">   &#123;</div><div class="line">     delay(<span class="number">2</span>);</div><div class="line">     Serial.println(<span class="string">"Get Infomation："</span>);</div><div class="line">     <span class="keyword">while</span>(Serial.available())</div><div class="line">     &#123;</div><div class="line">     Serial.print(<span class="keyword">char</span>( Serial.read()));</div><div class="line">     delay(<span class="number">2</span>);</div><div class="line">     &#125;</div><div class="line">     Serial.println();</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>效果：手机（或其他主机）连接上蓝牙后，发送消息，可在Arduino串口监视器里得到消息。在串口监视器（PC）向Arduino发送消息，在手机蓝牙软件也能收到。相当于Arduino板子只是传递消息。</p>
-<p>分析：从代码里其实也能看出来，都是Serial.read(print) ,对于Arduino来说，PC和蓝牙模块的接口都是Serial， 所以会把信息直接传过去。。不过还有个小疑问，为何PC传入的消息不会原路输出??、</p>
-<p>(猜测：可能是Arduino自动转发到另外一个Serial了)</p>
-<p>第二个：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;SoftwareSerial.h&gt;</span>   <span class="comment">// 引用程式庫</span></span></div><div class="line"> </div><div class="line"><span class="comment">// 定義連接藍牙模組的序列埠</span></div><div class="line"><span class="function">SoftwareSerial <span class="title">BT</span><span class="params">(<span class="number">8</span>, <span class="number">9</span>)</span></span>; <span class="comment">// 接收腳, 傳送腳</span></div><div class="line"><span class="keyword">char</span> val;  <span class="comment">// 儲存接收資料的變數</span></div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</div><div class="line">  Serial.begin(<span class="number">9600</span>);   <span class="comment">// 與電腦序列埠連線</span></div><div class="line">  Serial.println(<span class="string">"BT is ready!"</span>);</div><div class="line">  <span class="comment">// 設定藍牙模組的連線速率</span></div><div class="line">  <span class="comment">// 如果是HC-05，請改成38400</span></div><div class="line">  BT.begin(<span class="number">9600</span>);</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="comment">// 若收到「序列埠監控視窗」的資料，則送到藍牙模組</span></div><div class="line">  <span class="keyword">if</span> (Serial.available()) &#123;</div><div class="line">    val = Serial.read();</div><div class="line">    BT.print(val);</div><div class="line">  &#125;</div><div class="line">  <span class="comment">// 若收到藍牙模組的資料，則送到「序列埠監控視窗」</span></div><div class="line">  <span class="keyword">if</span> (BT.available()) &#123;</div><div class="line">    val = BT.read();</div><div class="line">    Serial.print(val);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>接线：蓝牙模块RX接9，TX接8</p>
-<p>效果：</p>
-<p>①串口连PC时：可以让电脑发送AT指令作调试用，结果能返回到PC上。</p>
-<p>②串口连PC时、蓝牙于手机匹配：手机发送的内容能显示在PC上，PC输入内容无效。</p>
-<p>③只通过蓝牙连手机：只能发送消息，没看到返回。（是否与手机调试软件有关？）</p>
-<p>关于HC-05\06 配对 请看：<a href="http://www.arduino.cn/forum.php?mod=viewthread&amp;tid=2961&amp;highlight=HC05" target="_blank" rel="external">http://www.arduino.cn/forum.php?mod=viewthread&amp;tid=2961&amp;highlight=HC05</a></p>
-<p>注意：正常情况下HC-05只能作为从机。有兴趣的同志可以试一试刷成HC-06的固件。</p>
+        <h2 id="杂谈-Cost-Function"><a href="#杂谈-Cost-Function" class="headerlink" title="杂谈 Cost Function"></a>杂谈 Cost Function</h2><p>cost function 又称为代价函数，又记为loss。本文选取了一些有意思例子来介绍。</p>
+<p>先看看我们学过课程中的：</p>
+<p>最优化： 调整 $w$  拟合f(x)   loss=均方误差</p>
+<p>模式识别： 分类器，以SVM为例，loss=    经验误差 - 几何边缘区 (即在经验误差最小的基础上，尽可能增大分类间隔。减法只是便于理解的一种记号)</p>
+<p>人工智能概论：  A*算法中的 f=h+g;</p>
+<h3 id="1-遗传算法："><a href="#1-遗传算法：" class="headerlink" title="1 遗传算法："></a>1 遗传算法：</h3><h4 id="1-1-画图"><a href="#1-1-画图" class="headerlink" title="1.1 画图"></a>1.1 画图</h4><p><img src="https://github.com/Vast-Stars/Genetic-Algorithm-Visualization/raw/master/2.gif" alt="1"></p>
+<p>Win下编译好的文件 见<a href="https://github.com/Vast-Stars/Vast-Stars.github.io/blob/master/EvoLisa.zip" target="_blank" rel="external">这里</a>, 需要<code>windows .net framework 4.0</code> 环境。360等杀毒软件可能会拦截。</p>
+<p>可以在 <a href="https://chriscummins.cc/s/genetics/#" target="_blank" rel="external">遗传算法图片特效 </a> 在线使用。</p>
+<p>loss应该定义成画的图和原图的差距。差距越小则loss函数越小，遗传算法可以通过收敛到最优解来使图形越来越准确。</p>
+<hr>
+<h4 id="1-2-解TSP（旅行商问题）"><a href="#1-2-解TSP（旅行商问题）" class="headerlink" title="1.2 解TSP（旅行商问题）"></a>1.2 解TSP（旅行商问题）</h4><p><img src="/2017/11/27/浅谈Cost-Function/大学\大三上\optimal method\REPORT\TravelingSalesmanUSCapitals2.gif" alt="TravelingSalesmanUSCapitals2"></p>
+<p>loss=路径总长度。越短越好。</p>
+<h3 id="2-蚁群算法："><a href="#2-蚁群算法：" class="headerlink" title="2 蚁群算法："></a>2 蚁群算法：</h3><p><a href="http://video.tudou.com/v/XMTc4NjQzMDAxNg==.html" target="_blank" rel="external">http://video.tudou.com/v/XMTc4NjQzMDAxNg==.html</a></p>
+<p>实验很简单，用黏菌避光的特性，<strong>用光斑模拟海岸线和地形</strong>，在东京附近重要的地铁站对应的位置放上食物：<br>这是只有海岸线的时候，黏菌铺张、求出最省连通路径的过程图：</p>
+<p><img src="https://pic2.zhimg.com/50/0252264574541896996f3c01d2aca6b5_hd.jpg" alt="3"></p>
+<p>下面是用光的强度模拟水域和地势的结果，<strong>灰度越高代表光强度越弱</strong>（海拔在海平面以上同时越低）。</p>
+<p><img src="https://pic3.zhimg.com/50/be24daa979474a550b85358a30d26942_hd.jpg" alt="2"></p>
+<p>专业的建模分析就不赘述了，科学家最后的原理是黏菌形成的微网络当中，<strong>“远路”携带的营养运送过程中消耗大，因而流速低，直径逐渐收缩；而“捷径”流速更大，直径逐渐增大</strong>。这样，整个网格就逐渐收缩到最优解上。实际上是一种类似于蚁群算法的退火算法。<br>实验者模拟了一下这个算法，解出来的结果和黏菌搜索的结果相差无几：</p>
+<p><img src="https://pic4.zhimg.com/50/cb8f4f5468586748c5b890f95e8b2e5b_hd.jpg" alt="1"></p>
+<p><strong>loss是运输单位“食物”所耗费的能量(即通道长度)。</strong></p>
+<h3 id="3深度学习相关："><a href="#3深度学习相关：" class="headerlink" title="3深度学习相关："></a>3深度学习相关：</h3><p>大家可以自己想想以下项目的loss该怎么设置才能达到预期效果。</p>
+<ul>
+<li><p><a href="http://seeleit.com/songci" target="_blank" rel="external">http://seeleit.com/songci</a>   RNN 宋词生成器     </p>
+</li>
+<li><p><a href="http://demos.algorithmia.com/colorize-photos/" target="_blank" rel="external">http://demos.algorithmia.com/colorize-photos/</a>   黑白图片上色</p>
+</li>
+<li><p><a href="https://www.twitch.tv/sentdex" target="_blank" rel="external">https://www.twitch.tv/sentdex</a> AI GTA5主播</p>
+</li>
+<li><p><a href="http://www.cs.toronto.edu/~graves/handwriting.cgi?text=i+am+luoyi.+i+am+excited+today.&amp;style=..%2Fdata%2Ftrainset_diff_no_start_all_labels.nc%2C1082%2B554&amp;bias=0.05&amp;samples=3" target="_blank" rel="external">http://www.cs.toronto.edu/~graves/handwriting.cgi?text=i+am+luoyi.+i+am+excited+today.&amp;style=..%2Fdata%2Ftrainset_diff_no_start_all_labels.nc%2C1082%2B554&amp;bias=0.05&amp;samples=3</a>  手写体模仿阿里鲁班：<strong>2017年双11将有4亿张人工智能海报由机器人设计。</strong></p>
+</li>
+</ul>
+<p><img src="http://n.sinaimg.cn/translate/20171103/1mdJ-fynnnsc4684071.jpg" alt="img"></p>
+<p><a href="https://junyanz.github.io/CycleGAN/" target="_blank" rel="external">Cycle GAN</a>  内容很多，科研+工程的典范。</p>
+<p>里面有个直播换脸的视频可能无法访问 ，可以见<a href="https://weibo.com/1402400261/FpdgrlxoY?type=comment。" target="_blank" rel="external">https://weibo.com/1402400261/FpdgrlxoY?type=comment。</a></p>
 
       
     </div>
@@ -478,12 +414,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Arduino/" rel="tag"># Arduino</a>
-          
-        </div>
-      
 
       
         
@@ -493,8 +423,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/16/阿里大于短信平台-Python3-初体验/" rel="next" title="阿里大于短信平台 Python3 初体验">
-                <i class="fa fa-chevron-left"></i> 阿里大于短信平台 Python3 初体验
+              <a href="/2017/11/18/维基百科A-算法的错误/" rel="next" title="维基百科A*算法的错误">
+                <i class="fa fa-chevron-left"></i> 维基百科A*算法的错误
               </a>
             
           </div>
@@ -502,10 +432,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/04/新博客！/" rel="prev" title="CentOS 6 搭建 Nginx+Hexo全过程">
-                CentOS 6 搭建 Nginx+Hexo全过程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -552,8 +478,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -606,6 +541,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#杂谈-Cost-Function"><span class="nav-number">1.</span> <span class="nav-text">杂谈 Cost Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-遗传算法："><span class="nav-number">1.1.</span> <span class="nav-text">1 遗传算法：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-画图"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 画图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-解TSP（旅行商问题）"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 解TSP（旅行商问题）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-蚁群算法："><span class="nav-number">1.2.</span> <span class="nav-text">2 蚁群算法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3深度学习相关："><span class="nav-number">1.3.</span> <span class="nav-text">3深度学习相关：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
