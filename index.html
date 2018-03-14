@@ -258,6 +258,165 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2018/03/13/感知器学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vast-Stars">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vast-stars' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/03/13/感知器学习笔记/" itemprop="url">
+                  感知器学习笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T20:32:36+08:00">
+                2018-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/13/感知器学习笔记/" class="leancloud_visitors" data-flag-title="感知器学习笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近杨老师课上又学了一遍感知器。。唔，算做个总结吧。 时间仓促，难免有疏漏，望各位指正!(email: vast2stars@gmail.com)</p>
+<h2 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h2><p>感知器函数定义：<br>$$<br>f(x)=sign(w\cdot x+b)<br>$$<br>其中$w$ 和$b$ 为感知器模型参数，分别为权值和阈值。在特征空间$R^n$ 中，$w$ 是感知器决策超平面的法向量（恒指向正类$^{[1]}$），$b$ 是超平面的截距。$f(x)$ 输出$+1,-1$ 。</p>
+<p>记感知器学习策略的损失函数为$L(w,b)$。 <strong>该函数不能定义成误分类点的数量</strong>，因为此时$L$ 不是关于$w,b$ 的连续可到函数$^{[2]}$，不易优化。通常采用<strong>所有误分类点(集合M)到超平面的距离总和</strong>作为损失函数。推导过程如下：</p>
+<p>任意点到超平面的距离为<br>$$<br>\begin{equation}<br>\frac{|w\cdot x_i+b|}{||w||}<br>\end{equation}<br>\tag{1}<br>$$<br><strong>消除误分类点的符号差异性：</strong> 式(1)分子含有绝对值，不利于求微分进行优化。如果删去绝对值，那么假阴性(false negative, FN)样本的计算值为负，而假阳性(false positive, FP)为正，错误相互抵消而非累加。为了解决该问题，使用$-y_i(w\cdot x_i+b)/||w||$ 作为修正后的距离（不论FN还是FP，该函数值恒为正）。</p>
+<p>删去$1/||w||$ $^{[3]}$ 并累积求和，得到最终的损失函数：</p>
+<p>$$<br>L(w,b)=-\sum_{x_i\in M}y_i(w\cdot x_i+b)<br>$$</p>
+<p>对上式求微分，即可得到感知器的训练规则。此处略过。</p>
+<h2 id="三个不等式"><a href="#三个不等式" class="headerlink" title="三个不等式"></a>三个不等式</h2><p>记$\hat{w}=(w^T,b)^T$，$\hat{x}=(x^T,1)^T$,显然$\hat{w}\cdot \hat{x}=w\cdot x+b$。若训练数据集线性可分，则存在超平面可将数据集完全分开，取此超平面为$\hat{w_{opt}}\cdot \hat{x}=0$,且不妨令$||\hat{w}_{opt}||=1$.</p>
+<p>取 $\gamma=min_i{y_i(w_{opt}\cdot x_i+b_{opt})}$ 。其实$\gamma$ 就是误分类样本点到超平面距离的最小值。</p>
+<p>记$\hat{w}_k$是第$k$次迭代后的参数，学习过程：<br>$$<br>\hat{w}_k=\hat{w}_{k-1}+\eta y_k\hat{x}_k \tag{2.1}<br>$$</p>
+<h3 id="hat-w-k-上界"><a href="#hat-w-k-上界" class="headerlink" title="$||\hat{w}_k||$上界"></a>$||\hat{w}_k||$上界</h3><p>由三角不等式及式(2.1)，有：$||\hat{w}_k||\le||\hat{w}_{k-1}||+||\eta y_k\hat{x}_k||=||\hat{w}_{k-1}||+\eta ||y_k||\cdot||\hat{x}_k||$</p>
+<p>考虑到$y_k$ 符号不确定，我们平方处理：<br>$$<br>\begin{align<em>}<br>||\hat{w}_{k}||^2&amp;=<br>\hat{w}_{k}\cdot \hat{w}_{k}\\<br>&amp;=[\hat{w}_{k-1}+\eta y_k\hat{x}_k]\cdot[\hat{w}_{k-1}+\eta y_k\hat{x}_k]\\<br>&amp;=\hat{w}_{k-1}\cdot[\hat{w}_{k-1}+\eta y_k\hat{x}_k]^T+\eta y_k\hat{x}_k\cdot[\hat{w}_{k-1}+\eta y_k\hat{x}_k]\\<br>&amp;=||\hat{w}_{k-1}||^2+\hat{w}_{k-1}\cdot\eta y_k \hat{x}_k+\eta y_k\hat{x}_k\cdot\hat{w}_{k-1}+\eta y_k||\hat{x}_k||^2\\<br>&amp;=||\hat{w}_{k-1}||^2+2\eta y_k\hat{w}_{k-1}\cdot \hat{x}_k+\eta^2 y_k^2||\hat{x}_k||^2\\<br>\end{align</em>}<br>$$</p>
+<p>考虑$y_k\hat{w}_{k-1}\cdot \hat{x}_k$， 由于第$k$个样本$\hat{x}_k$相对于参数$\hat{w}_{k-1}$是错误的，则$\hat{w}_{k-1}\cdot \hat{x}_k$ 一定与$y_k$异号（见上文<em>消除误分类点的符号差异性</em> ），故$y_k\hat{w}_{k-1}\cdot \hat{x}_k\le0$。</p>
+<p>所以我们有：<br>$$<br>||\hat{w}_k||^2\le||\hat{w}_{k-1}||^2+\eta^2 ||\hat{x}_k||^2 \tag{2.2}\le \eta^2\sum_{i=1}^{i=k}||\hat{x}_i||^2\le k\eta^2R^2\\<br>R=max{||\hat{x}_i||}<br>$$</p>
+<h3 id="hat-w-k-下界"><a href="#hat-w-k-下界" class="headerlink" title="$||\hat{w}_k||$下界"></a>$||\hat{w}_k||$下界</h3><p>$$<br>\begin{align<em>}<br>\hat{w}_k\cdot \hat{w}_{opt} &amp;= \hat{w}_{k-1}\cdot \hat{w_{opt}}+\eta y_i\hat{x_i}\cdot\hat{w_{opt}}\\<br>&amp;\ge \hat{w}_{k-1}\cdot \hat{w_{opt}}+\eta\gamma\\<br>&amp;\ge \hat{w_{k-2}}\cdot \hat{w_{opt}}+2\eta\gamma\\<br>&amp;\cdots\\<br>&amp;\ge k\eta\gamma<br>\tag{2.3}<br>\end{align</em>}<br>$$</p>
+<p>所以就$\hat{w}_k\ge\frac{k\eta\gamma}{\hat{w}_{opt}}$ ？大错特错。2个向量之间不能比较大小。况且点乘【$\cdot$ 】 不是实数的乘法。</p>
+<p>考虑$k\eta\gamma\le\hat{w}_k\cdot\hat{w}_{opt}\le||\hat{w}_k||\times||\hat{w}_{opt}||$ ,所以我们有:<br>$$<br>||\hat{w}_k||\ge\frac{k\eta\gamma}{||\hat{w}_{opt}||}<br>$$</p>
+<h3 id="k-上界"><a href="#k-上界" class="headerlink" title="$k$上界"></a>$k$上界</h3><p>结合(2.2)和(2.3)，且$||\hat{w}_{opt}||=1$，我们有：<br>$$<br>k\eta\gamma\le||\hat{w}_k||\times||\hat{w}_{opt}||\le\sqrt{k}\eta R<br>$$<br>即$k^2\gamma^2\le kR^2$ ,得:<br>$$<br>k\le\frac{R^2}{\gamma^2}<br>$$</p>
+<h2 id="变形"><a href="#变形" class="headerlink" title="变形"></a>变形</h2><p>假设感知器的函数输出函数<code>sign()</code> 以及样本类标$y_i$类标为0和+1，那么如何进行以上证明？</p>
+<p>首先考虑到以上所有推导证明都不涉及感知器的输出函数<code>sign</code> ，而公式里大多都和$y_i$ 有关。下面从$y_i$ 角度考虑。</p>
+<p>同样，到超平面的距离仍然是式(1)。但是在<em>消除误分类点的符号差异性</em>时，有两种方法：</p>
+<ol>
+<li>取$y^{new}_i=2\times (y_i-0.5)$, 这样就把${0,+1}$ 映射到${-1,+1}$ ，所有后面的证明都相同。</li>
+<li>上课说的，取$y^{new}_i=y_i-\hat{w}\cdot\hat{x}$, 若是FP，$\hat{w}\cdot\hat{x}&gt;0$ ,$y_i^{new}<0$ ;若是fn,同理$y_i^{new}="">0$ 映射到$(-\infty,0)\cup(0,\infty)$ 。当然这个变换关于FP和FN是不对称的，且输出值不是固定值，不如方法1方便。</0$></li>
+</ol>
+<h2 id="补充证明："><a href="#补充证明：" class="headerlink" title="补充证明："></a>补充证明：</h2><h3 id="1-法向量恒指向正样本"><a href="#1-法向量恒指向正样本" class="headerlink" title="1 法向量恒指向正样本"></a>1 法向量恒指向正样本</h3><p>证明： 假设$x_0​$ 恰好位于决策超平面上，即$w\cdot x_0+b=0​$ ,那么从该点引出法向量指向$x_1​$，即$x_1=x_0+\alpha w​$ 。不失一般性，设$\alpha=1​$ 。那么<br>$$<br>\begin{align<em>}<br> f(x) &amp;= f(x_1)\\<br> &amp;=sign(w x_1+b) \\<br> &amp;=sign(w(x_0+w)+b)\\<br> &amp;=sign(w\cdot x_0+b+w^2)\\<br> &amp;=sign(w^2)=1<br>\end{align</em>}<br>$$</p>
+<h3 id="2-不连续"><a href="#2-不连续" class="headerlink" title="2 不连续"></a>2 不连续</h3><p>在$L$ 定义成误分类点的个数时，$L$ 很难(几乎不可能？)写成关于$w,b$ 的解析形式。就算有，那么也是包含数量巨大的脉冲函数（难以求微分）。在这种情况下要求得极小值，相当于一个超高维且分布规律弱的离散优化问题。</p>
+<h3 id="3-不考虑-w"><a href="#3-不考虑-w" class="headerlink" title="3 不考虑$||w||$"></a>3 不考虑$||w||$</h3><p>显然$w$ 和$b$ 同时按比例放大缩小时，对决策超平面没有任何影响，而感知器学习目标是改进决策超平面的位置。且分子分母同时带有$w$ 不易于函数优化（尤其分母还是欧氏距离函数）。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>统计学习方法</p>
+<p>杨老师的PPT</p>
+<p><a href="http://blog.csdn.net/fox64194167/article/details/8147460" target="_blank" rel="external">http://blog.csdn.net/fox64194167/article/details/8147460</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2017/11/27/浅谈Cost-Function/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -355,17 +514,18 @@
 <p>Win下编译好的文件 见<a href="https://github.com/Vast-Stars/Vast-Stars.github.io/blob/master/EvoLisa.zip" target="_blank" rel="external">这里</a>, 需要<code>windows .net framework 4.0</code> 环境。360等杀毒软件可能会拦截。</p>
 <p>可以在 <a href="https://chriscummins.cc/s/genetics/#" target="_blank" rel="external">遗传算法图片特效 </a> 在线使用。</p>
 <p>loss应该定义成画的图和原图的差距。差距越小则loss函数越小，遗传算法可以通过收敛到最优解来使图形越来越准确。</p>
+<p>原理说明见：<a href="http://songshuhui.net/archives/10462" target="_blank" rel="external">http://songshuhui.net/archives/10462</a></p>
 <hr>
 <h4 id="1-2-解TSP（旅行商问题）"><a href="#1-2-解TSP（旅行商问题）" class="headerlink" title="1.2 解TSP（旅行商问题）"></a>1.2 解TSP（旅行商问题）</h4><p><img src="/2017/11/27/浅谈Cost-Function/TravelingSalesmanUSCapitals2.gif" alt="TravelingSalesmanUSCapitals2"></p>
 <p>loss=路径总长度。越短越好。</p>
 <h3 id="2-蚁群算法："><a href="#2-蚁群算法：" class="headerlink" title="2 蚁群算法："></a>2 蚁群算法：</h3><p><a href="http://video.tudou.com/v/XMTc4NjQzMDAxNg==.html" target="_blank" rel="external">http://video.tudou.com/v/XMTc4NjQzMDAxNg==.html</a></p>
 <p>实验很简单，用黏菌避光的特性，<strong>用光斑模拟海岸线和地形</strong>，在东京附近重要的地铁站对应的位置放上食物：<br>这是只有海岸线的时候，黏菌铺张、求出最省连通路径的过程图：</p>
-<p><img src="https://pic2.zhimg.com/50/0252264574541896996f3c01d2aca6b5_hd.jpg" alt="3"></p>
+<p><img src="/2017/11/27/浅谈Cost-Function/1.jpg" alt="3"></p>
 <p>下面是用光的强度模拟水域和地势的结果，<strong>灰度越高代表光强度越弱</strong>（海拔在海平面以上同时越低）。</p>
-<p><img src="https://pic3.zhimg.com/50/be24daa979474a550b85358a30d26942_hd.jpg" alt="2"></p>
+<p><img src="/2017/11/27/浅谈Cost-Function/2.jpg" alt="2"></p>
 <p>专业的建模分析就不赘述了，科学家最后的原理是黏菌形成的微网络当中，<strong>“远路”携带的营养运送过程中消耗大，因而流速低，直径逐渐收缩；而“捷径”流速更大，直径逐渐增大</strong>。这样，整个网格就逐渐收缩到最优解上。实际上是一种类似于蚁群算法的退火算法。<br>实验者模拟了一下这个算法，解出来的结果和黏菌搜索的结果相差无几：</p>
-<p><img src="https://pic4.zhimg.com/50/cb8f4f5468586748c5b890f95e8b2e5b_hd.jpg" alt="1"></p>
-<p><strong>loss是运输单位“食物”所耗费的能量(即通道长度)。</strong></p>
+<p><img src="/2017/11/27/浅谈Cost-Function/3.jpg" alt="1"></p>
+<p><strong>loss≈总能量/总食物   即运输单位“食物”所耗费的能量(即通道长度)。</strong></p>
 <h3 id="3深度学习相关："><a href="#3深度学习相关：" class="headerlink" title="3深度学习相关："></a>3深度学习相关：</h3><p>大家可以自己想想以下项目的loss该怎么设置才能达到预期效果。</p>
 <ul>
 <li><p><a href="http://seeleit.com/songci" target="_blank" rel="external">http://seeleit.com/songci</a>   RNN 宋词生成器     </p>
@@ -382,6 +542,7 @@
 <p>里面有个直播换脸的视频可能无法访问 ，可以见<a href="https://weibo.com/1402400261/FpdgrlxoY?type=comment。" target="_blank" rel="external">https://weibo.com/1402400261/FpdgrlxoY?type=comment。</a></p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://rogerjohansson.blog/2008/12/07/genetic-programming-evolution-of-mona-lisa/" target="_blank" rel="external">https://rogerjohansson.blog/2008/12/07/genetic-programming-evolution-of-mona-lisa/</a></p>
 <p><a href="https://rogerjohansson.blog/2008/12/11/genetic-gallery/" target="_blank" rel="external">https://rogerjohansson.blog/2008/12/11/genetic-gallery/</a></p>
+<p><a href="https://daily.zhihu.com/story/7634981" target="_blank" rel="external">https://daily.zhihu.com/story/7634981</a></p>
 
           
         
@@ -2516,146 +2677,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2017/06/04/TensorFlow-TFrecord探究/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vast-Stars">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vast-stars' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/04/TensorFlow-TFrecord探究/" itemprop="url">
-                  TensorFlow Example
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-04T16:01:18+08:00">
-                2017-06-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/06/04/TensorFlow-TFrecord探究/" class="leancloud_visitors" data-flag-title="TensorFlow Example">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>测试环境：Windows 10 ; TensorFlow 1.1</p>
-<p>测试样例：输入是30张128*128 jpg格式图片，大小96.4KB；标签是[0:30]</p>
-<h2 id="第一种："><a href="#第一种：" class="headerlink" title="第一种："></a>第一种：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_TFrecord</span><span class="params">(files_list,labels_list,to_file=<span class="string">"train.tfrecords"</span>)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    生成一个TFrecord文件</div><div class="line">    :param files_list: 文件列表，例如 ['1.jpg','/dataset/2.jpg']</div><div class="line">    :param labels_list: 和文件列表对应的标签列表,例如[0,4]</div><div class="line">    :param to_file: 写入目标TFrecord文件</div><div class="line">    :return: NULL</div><div class="line">    """</div><div class="line">    writer = tf.python_io.TFRecordWriter(to_file)</div><div class="line">    <span class="keyword">for</span> (file,label) <span class="keyword">in</span> zip(files_list,labels_list):</div><div class="line">        img = Image.open(file)</div><div class="line">        img_raw = img.tobytes()  <span class="comment">#转成byte</span></div><div class="line">        example = tf.train.Example(features=tf.train.Features(</div><div class="line">            feature=&#123;</div><div class="line">                <span class="string">"label"</span>: tf.train.Feature(int64_list=tf.train.Int64List(value=[label])),</div><div class="line">                <span class="string">'img_raw'</span>: tf.train.Feature(bytes_list=tf.train.BytesList(value=[img_raw]))</div><div class="line">            &#125;))</div><div class="line">        writer.write(example.SerializeToString())<span class="comment">#写入TFrecord文件</span></div><div class="line">    writer.close()</div></pre></td></tr></table></figure>
-<p>生成TFrecord大小：1.40MB</p>
-<hr>
-<h2 id="第二种："><a href="#第二种：" class="headerlink" title="第二种："></a>第二种：</h2><p>直接用数组形式存下每个像素的值。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_TFrecord2</span><span class="params">(files_list,labels_list,to_file=<span class="string">"train.tfrecords"</span>)</span>:</span></div><div class="line"></div><div class="line">    writer = tf.python_io.TFRecordWriter(to_file)</div><div class="line">    <span class="keyword">for</span> (file,label) <span class="keyword">in</span> zip(files_list,labels_list):</div><div class="line">        img = Image.open(file)</div><div class="line">        <span class="comment">#img_raw = img.tobytes()  #转成byte</span></div><div class="line">        img_raw = (numpy.array(img).reshape(<span class="number">-1</span>).tolist())</div><div class="line">        example = tf.train.Example(features=tf.train.Features(</div><div class="line">            feature=&#123;</div><div class="line">                <span class="string">"label"</span>: tf.train.Feature(int64_list=tf.train.Int64List(value=[label])),</div><div class="line">                <span class="string">'img_raw'</span>: tf.train.Feature(int64_list=tf.train.Int64List(value=img_raw))</div><div class="line">            &#125;))</div><div class="line">        writer.write(example.SerializeToString())<span class="comment">#写入TFrecord文件</span></div><div class="line">    writer.close()</div></pre></td></tr></table></figure>
-<p>测试结果：1.79MB</p>
-<hr>
-<h2 id="第三种"><a href="#第三种" class="headerlink" title="第三种"></a>第三种</h2><p>使用<code>tf.train.SequenceExample</code>代替<code>tf.train.Example</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_TFrecord_SequenceExample</span><span class="params">(files_list,labels_list,to_file=<span class="string">"train.tfrecords"</span>)</span>:</span></div><div class="line">    writer = tf.python_io.TFRecordWriter(to_file)</div><div class="line">    <span class="keyword">for</span> (file,label) <span class="keyword">in</span> zip(files_list,labels_list):</div><div class="line">        img = Image.open(file)</div><div class="line">        img_raw = img.tobytes()  <span class="comment">#转成byte</span></div><div class="line"></div><div class="line">        feature_input=tf.train.Feature(bytes_list=tf.train.BytesList(value=[img_raw]))</div><div class="line">        feature_label= tf.train.Feature(int64_list=tf.train.Int64List(value=[label]))</div><div class="line"></div><div class="line">        feature_list_input= tf.train.FeatureList(feature=[feature_input])</div><div class="line">        feature_list_label=tf.train.FeatureList(feature=[feature_label])</div><div class="line">        feature_list = &#123;</div><div class="line">            <span class="string">'imgs'</span>: feature_list_input,</div><div class="line">            <span class="string">'labels'</span>: feature_list_label</div><div class="line">        &#125;</div><div class="line">        feature_lists = tf.train.FeatureLists(feature_list=feature_list)</div><div class="line">        example= tf.train.SequenceExample(feature_lists=feature_lists)</div><div class="line">        <span class="comment">#以上语句等同于下面3行。</span></div><div class="line">        <span class="comment"># example=tf.train.SequenceExample()</span></div><div class="line">        <span class="comment"># example.feature_lists.feature_list["imgs"].feature.add().bytes_list.value.append(img_raw)</span></div><div class="line">        <span class="comment"># example.feature_lists.feature_list["labels"].feature.add().int64_list.value.append(label)</span></div><div class="line">        writer.write(example.SerializeToString())<span class="comment">#写入TFrecord文件</span></div><div class="line">    writer.close()</div></pre></td></tr></table></figure>
-<p>测试结果：1.40MB</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2705,7 +2726,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2718,7 +2739,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2760,7 +2781,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

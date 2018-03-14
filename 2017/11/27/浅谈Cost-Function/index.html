@@ -108,11 +108,11 @@
 人工智能概论：  A*算法中">
 <meta property="og:image" content="https://github.com/Vast-Stars/Genetic-Algorithm-Visualization/raw/master/2.gif">
 <meta property="og:image" content="http://www.vast-stars.com/2017/11/27/浅谈Cost-Function/TravelingSalesmanUSCapitals2.gif">
-<meta property="og:image" content="https://pic2.zhimg.com/50/0252264574541896996f3c01d2aca6b5_hd.jpg">
-<meta property="og:image" content="https://pic3.zhimg.com/50/be24daa979474a550b85358a30d26942_hd.jpg">
-<meta property="og:image" content="https://pic4.zhimg.com/50/cb8f4f5468586748c5b890f95e8b2e5b_hd.jpg">
+<meta property="og:image" content="http://www.vast-stars.com/2017/11/27/浅谈Cost-Function/1.jpg">
+<meta property="og:image" content="http://www.vast-stars.com/2017/11/27/浅谈Cost-Function/2.jpg">
+<meta property="og:image" content="http://www.vast-stars.com/2017/11/27/浅谈Cost-Function/3.jpg">
 <meta property="og:image" content="http://n.sinaimg.cn/translate/20171103/1mdJ-fynnnsc4684071.jpg">
-<meta property="og:updated_time" content="2017-11-26T23:12:16.413Z">
+<meta property="og:updated_time" content="2017-11-27T08:41:22.637Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈Cost Function">
 <meta name="twitter:description" content="杂谈 Cost Functioncost function 又称为代价函数，又记为loss。本文选取了一些有意思例子来介绍。
@@ -368,17 +368,18 @@
 <p>Win下编译好的文件 见<a href="https://github.com/Vast-Stars/Vast-Stars.github.io/blob/master/EvoLisa.zip" target="_blank" rel="external">这里</a>, 需要<code>windows .net framework 4.0</code> 环境。360等杀毒软件可能会拦截。</p>
 <p>可以在 <a href="https://chriscummins.cc/s/genetics/#" target="_blank" rel="external">遗传算法图片特效 </a> 在线使用。</p>
 <p>loss应该定义成画的图和原图的差距。差距越小则loss函数越小，遗传算法可以通过收敛到最优解来使图形越来越准确。</p>
+<p>原理说明见：<a href="http://songshuhui.net/archives/10462" target="_blank" rel="external">http://songshuhui.net/archives/10462</a></p>
 <hr>
 <h4 id="1-2-解TSP（旅行商问题）"><a href="#1-2-解TSP（旅行商问题）" class="headerlink" title="1.2 解TSP（旅行商问题）"></a>1.2 解TSP（旅行商问题）</h4><p><img src="/2017/11/27/浅谈Cost-Function/TravelingSalesmanUSCapitals2.gif" alt="TravelingSalesmanUSCapitals2"></p>
 <p>loss=路径总长度。越短越好。</p>
 <h3 id="2-蚁群算法："><a href="#2-蚁群算法：" class="headerlink" title="2 蚁群算法："></a>2 蚁群算法：</h3><p><a href="http://video.tudou.com/v/XMTc4NjQzMDAxNg==.html" target="_blank" rel="external">http://video.tudou.com/v/XMTc4NjQzMDAxNg==.html</a></p>
 <p>实验很简单，用黏菌避光的特性，<strong>用光斑模拟海岸线和地形</strong>，在东京附近重要的地铁站对应的位置放上食物：<br>这是只有海岸线的时候，黏菌铺张、求出最省连通路径的过程图：</p>
-<p><img src="https://pic2.zhimg.com/50/0252264574541896996f3c01d2aca6b5_hd.jpg" alt="3"></p>
+<p><img src="/2017/11/27/浅谈Cost-Function/1.jpg" alt="3"></p>
 <p>下面是用光的强度模拟水域和地势的结果，<strong>灰度越高代表光强度越弱</strong>（海拔在海平面以上同时越低）。</p>
-<p><img src="https://pic3.zhimg.com/50/be24daa979474a550b85358a30d26942_hd.jpg" alt="2"></p>
+<p><img src="/2017/11/27/浅谈Cost-Function/2.jpg" alt="2"></p>
 <p>专业的建模分析就不赘述了，科学家最后的原理是黏菌形成的微网络当中，<strong>“远路”携带的营养运送过程中消耗大，因而流速低，直径逐渐收缩；而“捷径”流速更大，直径逐渐增大</strong>。这样，整个网格就逐渐收缩到最优解上。实际上是一种类似于蚁群算法的退火算法。<br>实验者模拟了一下这个算法，解出来的结果和黏菌搜索的结果相差无几：</p>
-<p><img src="https://pic4.zhimg.com/50/cb8f4f5468586748c5b890f95e8b2e5b_hd.jpg" alt="1"></p>
-<p><strong>loss是运输单位“食物”所耗费的能量(即通道长度)。</strong></p>
+<p><img src="/2017/11/27/浅谈Cost-Function/3.jpg" alt="1"></p>
+<p><strong>loss≈总能量/总食物   即运输单位“食物”所耗费的能量(即通道长度)。</strong></p>
 <h3 id="3深度学习相关："><a href="#3深度学习相关：" class="headerlink" title="3深度学习相关："></a>3深度学习相关：</h3><p>大家可以自己想想以下项目的loss该怎么设置才能达到预期效果。</p>
 <ul>
 <li><p><a href="http://seeleit.com/songci" target="_blank" rel="external">http://seeleit.com/songci</a>   RNN 宋词生成器     </p>
@@ -395,6 +396,7 @@
 <p>里面有个直播换脸的视频可能无法访问 ，可以见<a href="https://weibo.com/1402400261/FpdgrlxoY?type=comment。" target="_blank" rel="external">https://weibo.com/1402400261/FpdgrlxoY?type=comment。</a></p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://rogerjohansson.blog/2008/12/07/genetic-programming-evolution-of-mona-lisa/" target="_blank" rel="external">https://rogerjohansson.blog/2008/12/07/genetic-programming-evolution-of-mona-lisa/</a></p>
 <p><a href="https://rogerjohansson.blog/2008/12/11/genetic-gallery/" target="_blank" rel="external">https://rogerjohansson.blog/2008/12/11/genetic-gallery/</a></p>
+<p><a href="https://daily.zhihu.com/story/7634981" target="_blank" rel="external">https://daily.zhihu.com/story/7634981</a></p>
 
       
     </div>
@@ -434,6 +436,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/13/感知器学习笔记/" rel="prev" title="感知器学习笔记">
+                感知器学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -505,7 +511,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -518,7 +524,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -576,7 +582,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
