@@ -567,9 +567,9 @@ k\le\frac{R^2}{\gamma^2}</script><h2 id="变形"><a href="#变形" class="header
 <p>同样，到超平面的距离仍然是式(1)。但是在<em>消除误分类点的符号差异性</em>时，有两种方法：</p>
 <ol>
 <li>取$y^{new}_i=2\times (y_i-0.5)$, 这样就把$\{0,+1\}$ 映射到$\{-1,+1\}$ ，所有后面的证明都相同。</li>
-<li>上课说的，取 $y^{new}_i=y_i-\hat{w}\cdot\hat{x} $, 若是FP，$\hat{w}\cdot\hat{x}&gt;0$ ,  $y_i^{new}<0$ ;="" 若是fn,="" 同理$y_i^{new}="">0$ 映射到$(-\infty,0)\cup(0,\infty)$ 。当然这个变换关于FP和FN是不对称的，且输出值不是固定值，不如方法1方便。</0$></li>
+<li>上课说的，取 $y^{new}_i=y_i-\hat{w}\cdot\hat{x} $, 若是FP，$\hat{w}\cdot\hat{x}&gt;0$ ,  $y_i^{new}<0$ ;="" 若是fn,="" 同理$y_i^{new}="">0$ 映射到$(-\infty,0)\cup(0,\infty)$ 。当然这个变换缺陷是关于FP和FN是不对称的，且输出值不是固定值，不如方法1方便。优点是对所有样本都可以进行该变换，如果是分类正确的样本，$y_i^{new}=0$ ，在计算$L(w,b)$ 时就可以直接对全体样本代入计算，不用判断是否为误分类样本。</0$></li>
 </ol>
-<h2 id="补充证明："><a href="#补充证明：" class="headerlink" title="补充证明："></a>补充证明：</h2><h3 id="1-法向量恒指向正样本"><a href="#1-法向量恒指向正样本" class="headerlink" title="1 法向量恒指向正样本"></a>1 法向量恒指向正样本</h3><p>证明： 假设$x_0$ 恰好位于决策超平面上，即$w\cdot x_0+b=0$ ,那么从该点引出法向量指向$x_1$，即$x_1=x_0+\alpha w$ 。不失一般性，设$\alpha=1$ 。那么</p>
+<h2 id="补充证明"><a href="#补充证明" class="headerlink" title="补充证明"></a>补充证明</h2><h3 id="1-法向量恒指向正样本"><a href="#1-法向量恒指向正样本" class="headerlink" title="1 法向量恒指向正样本"></a>1 法向量恒指向正样本</h3><p>证明： 假设$x_0$ 恰好位于决策超平面上，即$w\cdot x_0+b=0$ ,那么从该点引出法向量指向$x_1$，即$x_1=x_0+\alpha w$ 。不失一般性，设$\alpha=1$ 。那么</p>
 <script type="math/tex; mode=display">
 \begin{align*}
  f(x) &= f(x_1)\\

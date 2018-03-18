@@ -104,7 +104,7 @@ f(x)=sign(w\cdot x+b)其中$w$ 和$b$ 为感知器模型参数，分别为权值
 基本感知器函数定义：
 
 f(x)=sign(w\cdot x+b)其中$w$ 和$b$ 为感知器模型参数，分别为权值和阈值。在特征空间$R^n$ 中，$w$ 是感知器决策超平面的法向量（恒指向正类$^{[1]}$），$b$ 是超平面的截距。$f(x)$">
-<meta property="og:updated_time" content="2018-03-17T17:48:36.024Z">
+<meta property="og:updated_time" content="2018-03-18T04:59:32.207Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="感知器学习笔记">
 <meta name="twitter:description" content="最近杨老师课上又学了一遍感知器。。唔，算做个总结吧。 时间仓促，难免有疏漏，望各位指正!(email: vast2stars@gmail.com)
@@ -401,9 +401,9 @@ k\le\frac{R^2}{\gamma^2}</script><h2 id="变形"><a href="#变形" class="header
 <p>同样，到超平面的距离仍然是式(1)。但是在<em>消除误分类点的符号差异性</em>时，有两种方法：</p>
 <ol>
 <li>取$y^{new}_i=2\times (y_i-0.5)$, 这样就把$\{0,+1\}$ 映射到$\{-1,+1\}$ ，所有后面的证明都相同。</li>
-<li>上课说的，取 $y^{new}_i=y_i-\hat{w}\cdot\hat{x} $, 若是FP，$\hat{w}\cdot\hat{x}&gt;0$ ,  $y_i^{new}<0$ ;="" 若是fn,="" 同理$y_i^{new}="">0$ 映射到$(-\infty,0)\cup(0,\infty)$ 。当然这个变换关于FP和FN是不对称的，且输出值不是固定值，不如方法1方便。</0$></li>
+<li>上课说的，取 $y^{new}_i=y_i-\hat{w}\cdot\hat{x} $, 若是FP，$\hat{w}\cdot\hat{x}&gt;0$ ,  $y_i^{new}<0$ ;="" 若是fn,="" 同理$y_i^{new}="">0$ 映射到$(-\infty,0)\cup(0,\infty)$ 。当然这个变换缺陷是关于FP和FN是不对称的，且输出值不是固定值，不如方法1方便。优点是对所有样本都可以进行该变换，如果是分类正确的样本，$y_i^{new}=0$ ，在计算$L(w,b)$ 时就可以直接对全体样本代入计算，不用判断是否为误分类样本。</0$></li>
 </ol>
-<h2 id="补充证明："><a href="#补充证明：" class="headerlink" title="补充证明："></a>补充证明：</h2><h3 id="1-法向量恒指向正样本"><a href="#1-法向量恒指向正样本" class="headerlink" title="1 法向量恒指向正样本"></a>1 法向量恒指向正样本</h3><p>证明： 假设$x_0$ 恰好位于决策超平面上，即$w\cdot x_0+b=0$ ,那么从该点引出法向量指向$x_1$，即$x_1=x_0+\alpha w$ 。不失一般性，设$\alpha=1$ 。那么</p>
+<h2 id="补充证明"><a href="#补充证明" class="headerlink" title="补充证明"></a>补充证明</h2><h3 id="1-法向量恒指向正样本"><a href="#1-法向量恒指向正样本" class="headerlink" title="1 法向量恒指向正样本"></a>1 法向量恒指向正样本</h3><p>证明： 假设$x_0$ 恰好位于决策超平面上，即$w\cdot x_0+b=0$ ,那么从该点引出法向量指向$x_1$，即$x_1=x_0+\alpha w$ 。不失一般性，设$\alpha=1$ 。那么</p>
 <script type="math/tex; mode=display">
 \begin{align*}
  f(x) &= f(x_1)\\
@@ -588,7 +588,7 @@ conv(S)=\{x=\sum_{i=1}^{k}\lambda_ix_i \Bigg | \sum_{i=1}^k\lambda_i=1,\lambda_i
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本"><span class="nav-number">1.</span> <span class="nav-text">基本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三个不等式"><span class="nav-number">2.</span> <span class="nav-text">三个不等式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hat-w-k-上界"><span class="nav-number">2.1.</span> <span class="nav-text">$||\hat{w}_k||$上界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hat-w-k-下界"><span class="nav-number">2.2.</span> <span class="nav-text">$||\hat{w}_k||$下界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#k-上界"><span class="nav-number">2.3.</span> <span class="nav-text">$k$上界</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变形"><span class="nav-number">3.</span> <span class="nav-text">变形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充证明："><span class="nav-number">4.</span> <span class="nav-text">补充证明：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-法向量恒指向正样本"><span class="nav-number">4.1.</span> <span class="nav-text">1 法向量恒指向正样本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-不连续"><span class="nav-number">4.2.</span> <span class="nav-text">2 不连续</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-不考虑-w"><span class="nav-number">4.3.</span> <span class="nav-text">3 不考虑$||w||$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-额外证明"><span class="nav-number">4.4.</span> <span class="nav-text">4 额外证明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本"><span class="nav-number">1.</span> <span class="nav-text">基本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三个不等式"><span class="nav-number">2.</span> <span class="nav-text">三个不等式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hat-w-k-上界"><span class="nav-number">2.1.</span> <span class="nav-text">$||\hat{w}_k||$上界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hat-w-k-下界"><span class="nav-number">2.2.</span> <span class="nav-text">$||\hat{w}_k||$下界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#k-上界"><span class="nav-number">2.3.</span> <span class="nav-text">$k$上界</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变形"><span class="nav-number">3.</span> <span class="nav-text">变形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充证明"><span class="nav-number">4.</span> <span class="nav-text">补充证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-法向量恒指向正样本"><span class="nav-number">4.1.</span> <span class="nav-text">1 法向量恒指向正样本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-不连续"><span class="nav-number">4.2.</span> <span class="nav-text">2 不连续</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-不考虑-w"><span class="nav-number">4.3.</span> <span class="nav-text">3 不考虑$||w||$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-额外证明"><span class="nav-number">4.4.</span> <span class="nav-text">4 额外证明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
