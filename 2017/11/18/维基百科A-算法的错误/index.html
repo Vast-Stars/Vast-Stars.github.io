@@ -358,6 +358,7 @@
 
 <p>起点是S，目标是X(未画出，在D之后)。节点内部的数字表示H估值，变上面的数字代表G代价。以下是按照wiki的流程：</p>
 <p>格式为：A(G,H)  粗体表示最小F值节点。 斜体表示新加入节点。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -384,8 +385,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>到这里，拓展B的时候发现A已经在Close表中，就不采取任何操作，而D(F=37)和D之后节点的G值都是在A 12的基础上计算，明显比S→B→A(只需要11)大，故在这种情况下得到的不是最优解。</p>
 <p>而采用更像放回Open表中的情况呢?</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -417,6 +420,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>此时D的F值为26+10=36，路径是S→B→A→D，是最优路径。</p>
 
       
@@ -531,7 +535,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -721,26 +725,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
   
 
 

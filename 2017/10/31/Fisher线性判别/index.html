@@ -349,26 +349,46 @@
         <p>所有代码可以在 <a href="https://github.com/Vast-Stars/Algorithm/tree/master/Fisher" target="_blank" rel="external">https://github.com/Vast-Stars/Algorithm/tree/master/Fisher</a> 中看到。欢迎star</p>
 <h1 id="一-算法介绍"><a href="#一-算法介绍" class="headerlink" title="一. 算法介绍"></a>一. 算法介绍</h1><p>这是Fisher在1936年提出的线性分类方法。对于二分类问题，训练集$D={ (\mathbf{x}_i,y_i),i=1,2\ldots n}$, 其中</p>
 <p> ${\mathbf{x}_i\in \mathscr{R^d}, y_i\in \lbrace 0,1\rbrace}$, 我们需要寻找一个权重向量$\mathbf{\omega}$ 和$\mathbf{\omega_0}$ 满足</p>
-<p>$$<br>\mathbf{\omega^T}\mathbf{x}+\omega_0<br>\begin{cases}<br>\lt 0  \\<br>\gt 0<br>\end{cases}<br>\Rightarrow y=<br>\begin{cases}<br>0  \ 1<br>\end{cases}<br>$$</p>
-<p>Fisher准则的思路是将d维空间中的点$\mathbf{x_i}$投影到一条直线（分类超平面的法线）上，通过适当地选择直线的方向$\mathbf{\omega}$，有可能找到能够最大限度地区分各类样本数据点的投影方向。选择直线方向的思路是：最大化投影后类间距离和类内距离比（希望样本点向所求直线投影后，不同类别之间的距离大，相同类别之间的距离小）</p>
-<p>$$<br>\begin{align}<br>J_F(\mathbf{\omega} )&amp;=\frac{\Vert{\mathbf{\omega}^T\mathbf{m_0}-\mathbf{\omega}^T\mathbf{m_1} }\Vert_2^2}{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }\\<br>&amp;=\frac{\mathbf{\omega}^T({\mathbf{m_0}-\mathbf{m_1} } ){ ( {\mathbf{m_0}-\mathbf{m_1} } ) }^T\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }\\<br>&amp;=\frac{\mathbf{\omega}^T\mathbf{S}_{\mathbf{b} }\mathbf{\omega} } {\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }<br>\end{align}<br>$$</p>
-<p>其中$\mathbf{m}_i$ 表示第$i$ 类的均值。$\mathbf{S}_w$ 为类内散度矩阵(within-class scatter matrix)，$\mathbf{S}_b$ 为类内散度矩阵(between-class scatter matrix) </p>
-<p>$$<br>\begin{align}<br>\mathbf{S}_w&amp;=\mathbf{\Sigma_0}+\mathbf{\Sigma_1 } \\<br>&amp;=\sum_{y=0}(\mathbf{x}-\mathbf{m_0} ){ (\mathbf{x}-\mathbf{m_0} )}^T+\sum_{y=1}(\mathbf{x}-\mathbf{m_1} ){ (\mathbf{x}-\mathbf{m_1} )}^T<br>\end{align}<br>$$</p>
-<p>$$<br>\mathbf{S}_b=({\mathbf{m_0}-\mathbf{m_1} } ){ ({\mathbf{m_0}-\mathbf{m_1} } )}^T<br>$$</p>
-<p>其中$\Sigma_i$ 表示第$i$类的协方差矩阵。显然$\mathbf{S}_w$ 和$\mathbf{S}_b$ 均为对称矩阵 </p>
+<script type="math/tex; mode=display">
+\mathbf{\omega^T}\mathbf{x}+\omega_0 
+\begin{cases}
+\lt 0  \\
+\gt 0
+\end{cases}
+\Rightarrow y=
+\begin{cases}
+0  \\ 1
+\end{cases}</script><p>Fisher准则的思路是将d维空间中的点$\mathbf{x_i}$投影到一条直线（分类超平面的法线）上，通过适当地选择直线的方向$\mathbf{\omega}$，有可能找到能够最大限度地区分各类样本数据点的投影方向。选择直线方向的思路是：最大化投影后类间距离和类内距离比（希望样本点向所求直线投影后，不同类别之间的距离大，相同类别之间的距离小）</p>
+<script type="math/tex; mode=display">
+\begin{align}
+J_F(\mathbf{\omega} )&=\frac{\Vert{\mathbf{\omega}^T\mathbf{m_0}-\mathbf{\omega}^T\mathbf{m_1} }\Vert_2^2}{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }\\
+&=\frac{\mathbf{\omega}^T({\mathbf{m_0}-\mathbf{m_1} } ){ ( {\mathbf{m_0}-\mathbf{m_1} } ) }^T\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }\\
+&=\frac{\mathbf{\omega}^T\mathbf{S}_{\mathbf{b} }\mathbf{\omega} } {\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }
+\end{align}</script><p>其中$\mathbf{m}_i$ 表示第$i$ 类的均值。$\mathbf{S}_w$ 为类内散度矩阵(within-class scatter matrix)，$\mathbf{S}_b$ 为类内散度矩阵(between-class scatter matrix) </p>
+<script type="math/tex; mode=display">
+\begin{align}
+\mathbf{S}_w&=\mathbf{\Sigma_0}+\mathbf{\Sigma_1 } \\
+&=\sum_{y=0}(\mathbf{x}-\mathbf{m_0} ){ (\mathbf{x}-\mathbf{m_0} )}^T+\sum_{y=1}(\mathbf{x}-\mathbf{m_1} ){ (\mathbf{x}-\mathbf{m_1} )}^T
+\end{align}</script><script type="math/tex; mode=display">
+\mathbf{S}_b=({\mathbf{m_0}-\mathbf{m_1} } ){ ({\mathbf{m_0}-\mathbf{m_1} } )}^T</script><p>其中$\Sigma_i$ 表示第$i$类的协方差矩阵。显然$\mathbf{S}_w$ 和$\mathbf{S}_b$ 均为对称矩阵 </p>
 <p>寻找$\mathbf{\omega}$使 $ J_F(\mathbf{\omega} )$ 最大，我们可以通过对$ J_F(\mathbf{\omega} )$ 求$\mathbf{\omega}$的偏导数并令其为$0$ 计算$\mathbf{\omega}$. </p>
 <p>注意 ${ (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega}$ 和 $\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega}$ 均为标量，且 $\frac{\partial(\mathbf{\omega}^T\mathbf{S}\mathbf{\omega} )}{\partial \mathbf{\omega} }=(\mathbf{S}+\mathbf{S}^T)\mathbf{\omega} $ .</p>
-<p>$$<br>\begin{align}<br>\frac{\partial J_F(\mathbf{\omega} )}{\partial \mathbf{\omega} }&amp;=\frac{\frac{\partial(\mathbf{\omega}^T\mathbf{S}_{\mathbf{b} }\mathbf{\omega} )}{\partial \mathbf{\omega} }\cdot\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega}-\mathbf{\omega}^T\mathbf{S}_{\mathbf{b} }\mathbf{\omega}\cdot\frac{\partial(\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}{\partial\mathbf{\omega}}}{ { (\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}^2}\\<br>&amp;=\frac{2\mathbf{S}_{\mathbf{b} }\mathbf{\omega}\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega}-\mathbf{\omega}^T\mathbf{S}_{\mathbf{b} }\mathbf{\omega}\cdot 2\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }{ { (\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}^2}\\<br>&amp;=2\cdot\frac{ (\mathbf{m_0}-\mathbf{m_1} ){ (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega}\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega}-\mathbf{\omega}^T(\mathbf{m_0}-\mathbf{m_1} ){ (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega}\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }{ { (\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}^2}\\<br>&amp;=2\cdot\frac{ { (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }\cdot((\mathbf{m_0}-\mathbf{m_1} )-\frac{\mathbf{\omega}^T(\mathbf{m_0}-\mathbf{m_1} )\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} } )=0<br>\end{align}<br>$$</p>
-<p>同时，由于$\frac{ { (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }$ 为标量， 因此</p>
-<p>$$<br>(\mathbf{m_0}-\mathbf{m_1} )-\lambda\cdot\mathbf{S}_{\mathbf{w} }\mathbf{\omega}=0<br>$$</p>
-<p>其中$\lambda\in \mathscr{R}$ ,由于我们在做线性分类时，主要关心直线的方向，因此可取$\lambda=1 $，如果$\mathbf{S}_w $ 可逆（如果不可逆，则用伪逆），则 </p>
-<p>$$<br>\mathbf{\omega}=\mathbf{S}_{\mathbf{w} }^{-1}(\mathbf{m_0}-\mathbf{m_1} )<br>$$</p>
-<p>关于 $\omega_0$ 的选择，有以下几种常见方法：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\partial J_F(\mathbf{\omega} )}{\partial \mathbf{\omega} }&=\frac{\frac{\partial(\mathbf{\omega}^T\mathbf{S}_{\mathbf{b} }\mathbf{\omega} )}{\partial \mathbf{\omega} }\cdot\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega}-\mathbf{\omega}^T\mathbf{S}_{\mathbf{b} }\mathbf{\omega}\cdot\frac{\partial(\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}{\partial\mathbf{\omega}}}{ { (\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}^2}\\
+&=\frac{2\mathbf{S}_{\mathbf{b} }\mathbf{\omega}\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega}-\mathbf{\omega}^T\mathbf{S}_{\mathbf{b} }\mathbf{\omega}\cdot 2\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }{ { (\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}^2}\\
+&=2\cdot\frac{ (\mathbf{m_0}-\mathbf{m_1} ){ (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega}\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega}-\mathbf{\omega}^T(\mathbf{m_0}-\mathbf{m_1} ){ (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega}\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }{ { (\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}^2}\\
+&=2\cdot\frac{ { (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }\cdot((\mathbf{m_0}-\mathbf{m_1} )-\frac{\mathbf{\omega}^T(\mathbf{m_0}-\mathbf{m_1} )\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} } )=0
+\end{align}</script><p>同时，由于$\frac{ { (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }$ 为标量， 因此</p>
+<script type="math/tex; mode=display">
+(\mathbf{m_0}-\mathbf{m_1} )-\lambda\cdot\mathbf{S}_{\mathbf{w} }\mathbf{\omega}=0</script><p>其中$\lambda\in \mathscr{R}$ ,由于我们在做线性分类时，主要关心直线的方向，因此可取$\lambda=1 $，如果$\mathbf{S}_w $ 可逆（如果不可逆，则用伪逆），则 </p>
+<script type="math/tex; mode=display">
+\mathbf{\omega}=\mathbf{S}_{\mathbf{w} }^{-1}(\mathbf{m_0}-\mathbf{m_1} )</script><p>关于 $\omega_0$ 的选择，有以下几种常见方法：</p>
 <ul>
 <li>我们知道当投影直线的方向确定后，d维空间中的点$\mathbf{x}_i$ 在直线的投影位置确定。为此，我们希望$y=0$ 类的样本点到$0$ 的距离与$y=1$ 类的样本点到$0$ 的距离越接近越好（当一条直线上两个点之间的距离确定，两点构成线段的中垂面为最好的分类超平面）。于是 $ -\sum_{y=0}(\mathbf{\omega^T}\mathbf{x}+\omega_0)=\sum_{y=1}(\mathbf{\omega^T}\mathbf{x}+\omega_0) $ 。再设$ n_0、n_1 $ 分别为两类样本数量，因此：</li>
 </ul>
-<p>$$<br>\omega_0=-\frac{n_0\mathbf{\omega^T}\mathbf{m}_0+n_1\mathbf{\omega^T}\mathbf{m}_1}{n_0+n_1}<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+\omega_0=-\frac{n_0\mathbf{\omega^T}\mathbf{m}_0+n_1\mathbf{\omega^T}\mathbf{m}_1}{n_0+n_1}</script><ul>
 <li>$\omega_0=-\frac{1}{2}(m_1+m_2)^T (S_\omega)^{-1}(m_1-m_2)-ln \frac{P(\omega_2)}{P(\omega_1)} $ </li>
 <li>暂无。待补充。</li>
 </ul>
@@ -533,7 +553,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -739,26 +759,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
   
 
 

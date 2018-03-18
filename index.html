@@ -258,6 +258,175 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2018/03/18/线性可分与凸壳/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vast-Stars">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vast-stars' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/03/18/线性可分与凸壳/" itemprop="url">
+                  线性可分与凸壳
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-18T01:18:49+08:00">
+                2018-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/18/线性可分与凸壳/" class="leancloud_visitors" data-flag-title="线性可分与凸壳">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>题目出自《统计学习方法》 P36：设集合$S\subset R^n$ 是由$R^n$中的$k$个点所组成的集合，即$S=\{x_1,x_2,\cdots,x_k\}$，定义$S$的凸壳$conv(S)$为：</p>
+<script type="math/tex; mode=display">
+conv(S)=\{x=\sum_{i=1}^{k}\lambda_ix_i \Bigg | \sum_{i=1}^k\lambda_i=1,\lambda_i\ge0,i=1,2,\cdots,k \}</script><p> 证明以下定理：样本集线性可分的充分必要条件是正实例点集所构成的凸壳与负实例点集所构成的凸壳互不相交。</p>
+<p>上网查了一遍，只找到半份比较好的证明：<a href="http://blog.csdn.net/y954877035/article/details/52210734" target="_blank" rel="external">http://blog.csdn.net/y954877035/article/details/52210734</a> 对充分性证明起了很大作用（其实是本菜鸡整理补充了一下他的证明过程）。</p>
+<h2 id="必要性"><a href="#必要性" class="headerlink" title="必要性"></a>必要性</h2><p><strong>必要性：</strong> 若样本集线性可分，则正实例点集所构成的凸壳与负实例点集所构成的凸壳互不相交。</p>
+<p>采用反证法，假设超平面$f(\hat{x})=\hat{w}\cdot\hat{x}$能完全分开正负样本，即$f(x_+)&gt;0$，$f(x_-)&lt;0$。</p>
+<p>假设正类凸壳和负类凸壳相交部分样本点为$z$ ，有定义可知：</p>
+<script type="math/tex; mode=display">
+z=\sum_{i=1}^{k_1}\lambda_ix_{+i}</script><p>其中$ \sum_{i=1}^k\lambda_i=1,\lambda_i\ge0,i=1,2,\cdots,k_1 $<br>即样本$z$分别可由正样本和负样本按线性加权表示。现考虑$f(z)$:</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+f(z)&=f(\sum_{i=1}^{k_1}\lambda_ix_{+i})\\
+&=\hat{w}\cdot\sum_{i=1}^{k_1}\lambda_ix_{+i}\\
+&=\sum_{i=1}^{k_1}\lambda_ix_{+i}\cdot\hat{w}\\
+&=\sum_{i=1}^{k_1}\lambda_if(x_{+i})>0
+\end{align*}</script><p>同理可得，$f(z)&lt;0$,矛盾，故必要性得证。</p>
+<h2 id="充分性"><a href="#充分性" class="headerlink" title="充分性"></a>充分性</h2><p>（该部分主要来源于<a href="http://blog.csdn.net/y954877035/article/details/52210734" target="_blank" rel="external">http://blog.csdn.net/y954877035/article/details/52210734</a>  特别感谢该CSDN博主！）</p>
+<p><strong>再证充分性：</strong>若正实例点集所构成的凸壳与负实例点集所构成的凸壳互不相交，则样本集线性可分。</p>
+<p>从距离入手。定义两点间的距离为 $dist(x_1,x_2)=\sqrt{(x_1-x_2)\cdot(x_1-x_2)}=\Vert x_1-x_2\Vert _2$  ，也就是二范数。</p>
+<p>定义凸壳间的距离为$dist(conv(S_+),conv(S_-))=min\{dist(x_+,x_-) \quad \big| \quad x_+\in conv(S_+),x_-\in conv(S_-) \}$ ，也就是两个凸壳上最接近的点之间的距离。下文记该点对为$x_{+0}$ 和$x_{-0}$ 。</p>
+<p>那么显然：对任意$x_+\in conv(S_+),x_-\in conv(S_-)$ , $dist(x_+,x_-)\ge dist(conv(S_+),conv(S_-))=dist(x_{+0},x_{-0}) \tag{3.1}$</p>
+<p>引理1：$dist(x_+,x_{-0})&gt;dist(x_+,x_{+0})$ ,即正类凸壳上的任意点到负类凸壳的距离一定比该点到$x_{+0}$ 的距离大。</p>
+<p>其实很显然。想象成过河的情景，你到对面岸的距离显然比你到自己这个岸边的距离要更远。然而证明起来还<del>有点</del> 非常费劲。。</p>
+<p>反证法，假设$dist(x_+,x_{-0}) \le dist(x_+,x_{+0})$ ，又有式(2): $dist(x_+,x_{-0})d \ge dist(x_{+0},x_{-0})$ .</p>
+<p>即$dist(x_{+0},x_{-0}) \le dist(x_+,x_{-0}) \le dist(x_+,x_{+0}) \tag{3.2}$</p>
+<p>取</p>
+<script type="math/tex; mode=display">
+t=\frac{(x_{-0}-x_{+0})\cdot(x_+-x_{+0})}{\Vert x_+-x_{+0}\Vert _2^2}=\frac{\Vert x_{-0}-x_{+0}\Vert _2cos\theta}{\Vert x_+-x_{+0}\Vert _2}</script><p>由式(3.2)可知$t<1$ 。$\theta$="" 表示向量$\overrightarrow{="" x_{+0}="" x_{-0}}$="" 与向量$\overrightarrow{="" x_{+}}$="" 间的夹角。$\theta$="" 所对的边是$\overline{x_+x_{-0}}$="" ，由式(3.2)可知该边为最短的边，故$\theta$="" 小于$90^\circ$="" ,="" 故$t="">0$ 。</1$></p>
+<p>取 $z=tx_++(1-t)x_{+0}$ ，故点$z\in conv(S_+)$ 且在线段$\overline{x_{+0} x_+}$ 上。显然$dist(z,x_{-0})&lt;dist(x_{+0},x_{-0})$ ,这与式(3.1)矛盾，引理得证。</p>
+<p><img src="/2018/03/18/线性可分与凸壳/1.png" alt="1"></p>
+<p>下面开始正式证明。直接以线段$\overline{x_{+0}+x_{-0}}$ 的中垂超平面作为判决函数：</p>
+<script type="math/tex; mode=display">
+w=x_{+0}-x_{-0}
+\\b=\frac{x_{-0}\cdot x_{-0}-x_{+0}\cdot x_{+0}}{2}</script><p>考虑对任意正样本$x_+$：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+w\cdot x_+ +b &=(x_{+0}-x_{-0})\cdot x_+ +\frac{x_{-0}\cdot x_{-0}-x_{+0}\cdot x_{+0}}{2}\\
+&=\frac{2x_{+0}\cdot x_{+}-2x_{-0}\cdot x_{+}+x_{-0}\cdot x_{-0}-x_{+0}\cdot x_{+0}}{2}\\
+&=\frac{dist(x_+,x_{-0})^2-dist(x_+,x_{+0})^2}{2}>0
+\end{align}</script><p>同理，对任意负样本有$w\cdot x_-+b &lt;0$ ，该数据集线性可分。</p>
+<p>其实有个<strong>凸集分离定理知</strong> 直接就证完了，有兴趣的同学可以自行了解。。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2018/03/13/感知器学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -347,36 +516,76 @@
         
           
             <p>最近杨老师课上又学了一遍感知器。。唔，算做个总结吧。 时间仓促，难免有疏漏，望各位指正!(email: vast2stars@gmail.com)</p>
-<h2 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h2><p>感知器函数定义：<br>$$<br>f(x)=sign(w\cdot x+b)<br>$$<br>其中$w$ 和$b$ 为感知器模型参数，分别为权值和阈值。在特征空间$R^n$ 中，$w$ 是感知器决策超平面的法向量（恒指向正类$^{[1]}$），$b$ 是超平面的截距。$f(x)$ 输出$+1,-1$ 。</p>
+<h2 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h2><p>感知器函数定义：</p>
+<script type="math/tex; mode=display">
+f(x)=sign(w\cdot x+b)</script><p>其中$w$ 和$b$ 为感知器模型参数，分别为权值和阈值。在特征空间$R^n$ 中，$w$ 是感知器决策超平面的法向量（恒指向正类$^{[1]}$），$b$ 是超平面的截距。$f(x)$ 输出$+1,-1$ 。</p>
 <p>记感知器学习策略的损失函数为$L(w,b)$。 <strong>该函数不能定义成误分类点的数量</strong>，因为此时$L$ 不是关于$w,b$ 的连续可到函数$^{[2]}$，不易优化。通常采用<strong>所有误分类点(集合M)到超平面的距离总和</strong>作为损失函数。推导过程如下：</p>
-<p>任意点到超平面的距离为<br>$$<br>\begin{equation}<br>\frac{|w\cdot x_i+b|}{||w||}<br>\end{equation}<br>\tag{1}<br>$$<br><strong>消除误分类点的符号差异性：</strong> 式(1)分子含有绝对值，不利于求微分进行优化。如果删去绝对值，那么假阴性(false negative, FN)样本的计算值为负，而假阳性(false positive, FP)为正，错误相互抵消而非累加。为了解决该问题，使用$-y_i(w\cdot x_i+b)/||w||$ 作为修正后的距离（不论FN还是FP，该函数值恒为正）。</p>
+<p>任意点到超平面的距离为：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\frac{|w\cdot x_i+b|}{||w||}
+\end{equation}
+\tag{1}</script><p><strong>消除误分类点的符号差异性：</strong> 式(1)分子含有绝对值，不利于求微分进行优化。如果删去绝对值，那么假阴性(false negative, FN)样本的计算值为负，而假阳性(false positive, FP)为正，错误相互抵消而非累加。为了解决该问题，使用$-y_i(w\cdot x_i+b)/||w||$ 作为修正后的距离（不论FN还是FP，该函数值恒为正）。</p>
 <p>删去$1/||w||$ $^{[3]}$ 并累积求和，得到最终的损失函数：</p>
-<p>$$<br>L(w,b)=-\sum_{x_i\in M}y_i(w\cdot x_i+b)<br>$$</p>
-<p>对上式求微分，即可得到感知器的训练规则。此处略过。</p>
+<script type="math/tex; mode=display">
+L(w,b)=-\sum_{x_i\in M}y_i(w\cdot x_i+b)</script><p>对上式求微分，即可得到感知器的训练规则。此处略过。</p>
 <h2 id="三个不等式"><a href="#三个不等式" class="headerlink" title="三个不等式"></a>三个不等式</h2><p>记$\hat{w}=(w^T,b)^T$，$\hat{x}=(x^T,1)^T$,显然$\hat{w}\cdot \hat{x}=w\cdot x+b$。若训练数据集线性可分，则存在超平面可将数据集完全分开，取此超平面为$\hat{w_{opt}}\cdot \hat{x}=0$,且不妨令$||\hat{w}_{opt}||=1$.</p>
-<p>取 $\gamma=min_i{y_i(w_{opt}\cdot x_i+b_{opt})}$ 。其实$\gamma$ 就是误分类样本点到超平面距离的最小值。</p>
-<p>记$\hat{w}_k$是第$k$次迭代后的参数，学习过程：<br>$$<br>\hat{w}_k=\hat{w}_{k-1}+\eta y_k\hat{x}_k \tag{2.1}<br>$$</p>
-<h3 id="hat-w-k-上界"><a href="#hat-w-k-上界" class="headerlink" title="$||\hat{w}_k||$上界"></a>$||\hat{w}_k||$上界</h3><p>由三角不等式及式(2.1)，有：$||\hat{w}_k||\le||\hat{w}_{k-1}||+||\eta y_k\hat{x}_k||=||\hat{w}_{k-1}||+\eta ||y_k||\cdot||\hat{x}_k||$</p>
-<p>考虑到$y_k$ 符号不确定，我们平方处理：<br>$$<br>\begin{align<em>}<br>||\hat{w}_{k}||^2&amp;=<br>\hat{w}_{k}\cdot \hat{w}_{k}\\<br>&amp;=[\hat{w}_{k-1}+\eta y_k\hat{x}_k]\cdot[\hat{w}_{k-1}+\eta y_k\hat{x}_k]\\<br>&amp;=\hat{w}_{k-1}\cdot[\hat{w}_{k-1}+\eta y_k\hat{x}_k]^T+\eta y_k\hat{x}_k\cdot[\hat{w}_{k-1}+\eta y_k\hat{x}_k]\\<br>&amp;=||\hat{w}_{k-1}||^2+\hat{w}_{k-1}\cdot\eta y_k \hat{x}_k+\eta y_k\hat{x}_k\cdot\hat{w}_{k-1}+\eta y_k||\hat{x}_k||^2\\<br>&amp;=||\hat{w}_{k-1}||^2+2\eta y_k\hat{w}_{k-1}\cdot \hat{x}_k+\eta^2 y_k^2||\hat{x}_k||^2\\<br>\end{align</em>}<br>$$</p>
-<p>考虑$y_k\hat{w}_{k-1}\cdot \hat{x}_k$， 由于第$k$个样本$\hat{x}_k$相对于参数$\hat{w}_{k-1}$是错误的，则$\hat{w}_{k-1}\cdot \hat{x}_k$ 一定与$y_k$异号（见上文<em>消除误分类点的符号差异性</em> ），故$y_k\hat{w}_{k-1}\cdot \hat{x}_k\le0$。</p>
-<p>所以我们有：<br>$$<br>||\hat{w}_k||^2\le||\hat{w}_{k-1}||^2+\eta^2 ||\hat{x}_k||^2 \tag{2.2}\le \eta^2\sum_{i=1}^{i=k}||\hat{x}_i||^2\le k\eta^2R^2\\<br>R=max{||\hat{x}_i||}<br>$$</p>
-<h3 id="hat-w-k-下界"><a href="#hat-w-k-下界" class="headerlink" title="$||\hat{w}_k||$下界"></a>$||\hat{w}_k||$下界</h3><p>$$<br>\begin{align<em>}<br>\hat{w}_k\cdot \hat{w}_{opt} &amp;= \hat{w}_{k-1}\cdot \hat{w_{opt}}+\eta y_i\hat{x_i}\cdot\hat{w_{opt}}\\<br>&amp;\ge \hat{w}_{k-1}\cdot \hat{w_{opt}}+\eta\gamma\\<br>&amp;\ge \hat{w_{k-2}}\cdot \hat{w_{opt}}+2\eta\gamma\\<br>&amp;\cdots\\<br>&amp;\ge k\eta\gamma<br>\tag{2.3}<br>\end{align</em>}<br>$$</p>
-<p>所以就$\hat{w}_k\ge\frac{k\eta\gamma}{\hat{w}_{opt}}$ ？大错特错。2个向量之间不能比较大小。况且点乘【$\cdot$ 】 不是实数的乘法。</p>
-<p>考虑$k\eta\gamma\le\hat{w}_k\cdot\hat{w}_{opt}\le||\hat{w}_k||\times||\hat{w}_{opt}||$ ,所以我们有:<br>$$<br>||\hat{w}_k||\ge\frac{k\eta\gamma}{||\hat{w}_{opt}||}<br>$$</p>
-<h3 id="k-上界"><a href="#k-上界" class="headerlink" title="$k$上界"></a>$k$上界</h3><p>结合(2.2)和(2.3)，且$||\hat{w}_{opt}||=1$，我们有：<br>$$<br>k\eta\gamma\le||\hat{w}_k||\times||\hat{w}_{opt}||\le\sqrt{k}\eta R<br>$$<br>即$k^2\gamma^2\le kR^2$ ,得:<br>$$<br>k\le\frac{R^2}{\gamma^2}<br>$$</p>
-<h2 id="变形"><a href="#变形" class="headerlink" title="变形"></a>变形</h2><p>假设感知器的函数输出函数<code>sign()</code> 以及样本类标$y_i$类标为0和+1，那么如何进行以上证明？</p>
+<p>取 $\gamma=min_i\{y_i(w_{opt}\cdot x_i+b_{opt})\}$ 。其实$\gamma$ 就是误分类样本点到超平面距离的最小值。</p>
+<p>记$\hat{w}_k$是第$k$次迭代后的参数，学习过程：</p>
+<script type="math/tex; mode=display">
+\hat{w}_k=\hat{w}_{k-1}+\eta y_k\hat{x}_k  \tag{2.1}</script><h3 id="hat-w-k-上界"><a href="#hat-w-k-上界" class="headerlink" title="$||\hat{w}_k||$上界"></a>$||\hat{w}_k||$上界</h3><p>由三角不等式及式(2.1)，有：$||\hat{w}_k||\le||\hat{w}_{k-1}||+||\eta y_k\hat{x}_k||=||\hat{w}_{k-1}||+\eta ||y_k||\cdot||\hat{x}_k||$</p>
+<p>考虑到$y_k​$ 符号不确定，我们平方处理：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\Vert\hat{w}_{k}\Vert^2&=
+\hat{w}_{k}\cdot \hat{w}_{k}\\
+&=[\hat{w}_{k-1}+\eta y_k\hat{x}_k]\cdot[\hat{w}_{k-1}+\eta y_k\hat{x}_k]\\
+&=\hat{w}_{k-1}\cdot[\hat{w}_{k-1}+\eta y_k\hat{x}_k]^T+\eta y_k\hat{x}_k\cdot[\hat{w}_{k-1}+\eta y_k\hat{x}_k]\\
+&=\Vert\hat{w}_{k-1}\Vert^2+\hat{w}_{k-1}\cdot\eta y_k \hat{x}_k+\eta y_k\hat{x}_k\cdot\hat{w}_{k-1}+\eta y_k\Vert\hat{x}_k\Vert^2\\
+&=\Vert\hat{w}_{k-1}\Vert^2+2\eta y_k\hat{w}_{k-1}\cdot \hat{x}_k+\eta^2 y_k^2\Vert\hat{x}_k\Vert^2\\
+\end{align*}</script><p>考虑$y_k\hat{w}_{k-1}\cdot \hat{x}_k$， 由于第$k$个样本$\hat{x}_k$相对于参数$\hat{w}_{k-1}$是错误的，则$\hat{w}_{k-1}\cdot \hat{x}_k$ 一定与$y_k$异号（见上文<em>消除误分类点的符号差异性</em> ），故$y_k\hat{w}_{k-1}\cdot \hat{x}_k\le0$。</p>
+<p>所以我们有：</p>
+<script type="math/tex; mode=display">
+\Vert\hat{w}_k^2\Vert\le\Vert\hat{w}_{k-1}\Vert^2+\eta^2 \Vert\hat{x}_k\Vert^2 \tag{2.2}\le \eta^2\sum_{i=1}^{i=k}\Vert\hat{x}_i\Vert^2\le k\eta^2R^2\\
+R=max\{\Vert\hat{x}_i\Vert\}</script><h3 id="hat-w-k-下界"><a href="#hat-w-k-下界" class="headerlink" title="$||\hat{w}_k||$下界"></a>$||\hat{w}_k||$下界</h3><script type="math/tex; mode=display">
+\begin{align*}
+\hat{w}_k\cdot \hat{w}_{opt} &= \hat{w}_{k-1}\cdot \hat{w_{opt}}+\eta y_i\hat{x_i}\cdot\hat{w_{opt}}\\
+&\ge \hat{w}_{k-1}\cdot \hat{w_{opt}}+\eta\gamma\\
+&\ge \hat{w_{k-2}}\cdot \hat{w_{opt}}+2\eta\gamma\\
+&\cdots\\
+&\ge k\eta\gamma
+\tag{2.3}
+\end{align*}</script><p>所以就$\hat{w}_k\ge\frac {k\eta\gamma} {\hat{w}_{opt}}$  ？大错特错。2个向量之间不能比较大小。况且点乘【 $\cdot$ 】 不是实数的乘法。</p>
+<p>考虑$k\eta\gamma\le\hat{w}_k\cdot\hat{w}_{opt}\le||\hat{w}_k||\times||\hat{w}_{opt}||$ ,所以我们有:</p>
+<script type="math/tex; mode=display">
+||\hat{w}_k||\ge\frac{k\eta\gamma}{||\hat{w}_{opt}||}</script><h3 id="k-上界"><a href="#k-上界" class="headerlink" title="$k$上界"></a>$k$上界</h3><p>结合(2.2)和(2.3)，且$||\hat{w}_{opt}||=1$，我们有：</p>
+<script type="math/tex; mode=display">
+k\eta\gamma\le||\hat{w}_k||\times||\hat{w}_{opt}||\le\sqrt{k}\eta R</script><p>即$k^2\gamma^2\le kR^2$ ,得:</p>
+<script type="math/tex; mode=display">
+k\le\frac{R^2}{\gamma^2}</script><h2 id="变形"><a href="#变形" class="headerlink" title="变形"></a>变形</h2><p>假设感知器的函数输出函数<code>sign()</code> 以及样本类标$y_i$类标为0和+1，那么如何进行以上证明？</p>
 <p>首先考虑到以上所有推导证明都不涉及感知器的输出函数<code>sign</code> ，而公式里大多都和$y_i$ 有关。下面从$y_i$ 角度考虑。</p>
 <p>同样，到超平面的距离仍然是式(1)。但是在<em>消除误分类点的符号差异性</em>时，有两种方法：</p>
 <ol>
-<li>取$y^{new}_i=2\times (y_i-0.5)$, 这样就把${0,+1}$ 映射到${-1,+1}$ ，所有后面的证明都相同。</li>
-<li>上课说的，取$y^{new}_i=y_i-\hat{w}\cdot\hat{x}$, 若是FP，$\hat{w}\cdot\hat{x}&gt;0$ ,$y_i^{new}<0$ ;若是fn,同理$y_i^{new}="">0$ 映射到$(-\infty,0)\cup(0,\infty)$ 。当然这个变换关于FP和FN是不对称的，且输出值不是固定值，不如方法1方便。</0$></li>
+<li>取$y^{new}_i=2\times (y_i-0.5)$, 这样就把$\{0,+1\}$ 映射到$\{-1,+1\}$ ，所有后面的证明都相同。</li>
+<li>上课说的，取 $y^{new}_i=y_i-\hat{w}\cdot\hat{x} $, 若是FP，$\hat{w}\cdot\hat{x}&gt;0$ ,  $y_i^{new}<0$ ;="" 若是fn,="" 同理$y_i^{new}="">0$ 映射到$(-\infty,0)\cup(0,\infty)$ 。当然这个变换关于FP和FN是不对称的，且输出值不是固定值，不如方法1方便。</0$></li>
 </ol>
-<h2 id="补充证明："><a href="#补充证明：" class="headerlink" title="补充证明："></a>补充证明：</h2><h3 id="1-法向量恒指向正样本"><a href="#1-法向量恒指向正样本" class="headerlink" title="1 法向量恒指向正样本"></a>1 法向量恒指向正样本</h3><p>证明： 假设$x_0​$ 恰好位于决策超平面上，即$w\cdot x_0+b=0​$ ,那么从该点引出法向量指向$x_1​$，即$x_1=x_0+\alpha w​$ 。不失一般性，设$\alpha=1​$ 。那么<br>$$<br>\begin{align<em>}<br> f(x) &amp;= f(x_1)\\<br> &amp;=sign(w x_1+b) \\<br> &amp;=sign(w(x_0+w)+b)\\<br> &amp;=sign(w\cdot x_0+b+w^2)\\<br> &amp;=sign(w^2)=1<br>\end{align</em>}<br>$$</p>
-<h3 id="2-不连续"><a href="#2-不连续" class="headerlink" title="2 不连续"></a>2 不连续</h3><p>在$L$ 定义成误分类点的个数时，$L$ 很难(几乎不可能？)写成关于$w,b$ 的解析形式。就算有，那么也是包含数量巨大的脉冲函数（难以求微分）。在这种情况下要求得极小值，相当于一个超高维且分布规律弱的离散优化问题。</p>
+<h2 id="补充证明："><a href="#补充证明：" class="headerlink" title="补充证明："></a>补充证明：</h2><h3 id="1-法向量恒指向正样本"><a href="#1-法向量恒指向正样本" class="headerlink" title="1 法向量恒指向正样本"></a>1 法向量恒指向正样本</h3><p>证明： 假设$x_0$ 恰好位于决策超平面上，即$w\cdot x_0+b=0$ ,那么从该点引出法向量指向$x_1$，即$x_1=x_0+\alpha w$ 。不失一般性，设$\alpha=1$ 。那么</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+ f(x) &= f(x_1)\\
+ &=sign(w\ x_1+b) \\
+ &=sign(w(x_0+w)+b)\\
+ &=sign(w\cdot x_0+b+w^2)\\
+ &=sign(w^2)=1
+\end{align*}</script><h3 id="2-不连续"><a href="#2-不连续" class="headerlink" title="2 不连续"></a>2 不连续</h3><p>在$L$ 定义成误分类点的个数时，$L$ 很难(几乎不可能？)写成关于$w,b$ 的解析形式。就算有，那么也是包含数量巨大的脉冲函数（难以求微分）。在这种情况下要求得极小值，相当于一个超高维且分布规律弱的离散优化问题。</p>
 <h3 id="3-不考虑-w"><a href="#3-不考虑-w" class="headerlink" title="3 不考虑$||w||$"></a>3 不考虑$||w||$</h3><p>显然$w$ 和$b$ 同时按比例放大缩小时，对决策超平面没有任何影响，而感知器学习目标是改进决策超平面的位置。且分子分母同时带有$w$ 不易于函数优化（尤其分母还是欧氏距离函数）。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>统计学习方法</p>
-<p>杨老师的PPT</p>
-<p><a href="http://blog.csdn.net/fox64194167/article/details/8147460" target="_blank" rel="external">http://blog.csdn.net/fox64194167/article/details/8147460</a></p>
+<h3 id="4-额外证明"><a href="#4-额外证明" class="headerlink" title="4 额外证明"></a>4 额外证明</h3><p>题目出自《统计学习方法》 P36：设集合$S\subset R^n$ 是由$R^n$中的$k$个点所组成的集合，即$S=\{x_1,x_2,\cdots,x_k\}$，定义$S$的凸壳$conv(S)$为：</p>
+<script type="math/tex; mode=display">
+conv(S)=\{x=\sum_{i=1}^{k}\lambda_ix_i \Bigg | \sum_{i=1}^k\lambda_i=1,\lambda_i\ge0,i=1,2,\cdots,k \}</script><p> 证明以下定理：样本集线性可分的充分必要条件是正实例点集所构成的凸壳与负实例点集所构成的凸壳互不相交。</p>
+<p>证明过程见：<a href="https://vast-stars.com/2018/03/18/线性可分与凸壳/" target="_blank" rel="external">https://vast-stars.com/2018/03/18/线性可分与凸壳/</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] 李航. 统计学习方法[M]. 清华大学出版社, 2012.</p>
+<p>[2] 杨老师的PPT</p>
+<p>[3] <a href="http://blog.csdn.net/y954877035/article/details/52210734" target="_blank" rel="external">http://blog.csdn.net/y954877035/article/details/52210734</a></p>
 
           
         
@@ -686,6 +895,7 @@
 
 <p>起点是S，目标是X(未画出，在D之后)。节点内部的数字表示H估值，变上面的数字代表G代价。以下是按照wiki的流程：</p>
 <p>格式为：A(G,H)  粗体表示最小F值节点。 斜体表示新加入节点。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -712,8 +922,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>到这里，拓展B的时候发现A已经在Close表中，就不采取任何操作，而D(F=37)和D之后节点的G值都是在A 12的基础上计算，明显比S→B→A(只需要11)大，故在这种情况下得到的不是最优解。</p>
 <p>而采用更像放回Open表中的情况呢?</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -745,6 +957,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>此时D的F值为26+10=36，路径是S→B→A→D，是最优路径。</p>
 
           
@@ -875,7 +1088,11 @@
         
           
             <h2 id="一-A-算法"><a href="#一-A-算法" class="headerlink" title="一 A* 算法"></a>一 A* 算法</h2><h3 id="1-1-算法介绍"><a href="#1-1-算法介绍" class="headerlink" title="1.1 算法介绍"></a>1.1 算法介绍</h3><h4 id="1-1-1-相关背景"><a href="#1-1-1-相关背景" class="headerlink" title="1.1.1 相关背景"></a>1.1.1 相关背景</h4><p>广度优先搜索(Breadth-First-Search,BFS)、深度优先搜索(Depth-First-Search,DFS)以及由此延伸出来的双向广度优先搜索(DBFS)、双向深度优先搜索(DDFS)都属于盲目搜索，这在状态空间不大的情况下是很合适的算法，可是当状态空间十分庞大时，它们的效率实在太低，往往都是在搜索了大量无关的状态结点后才碰到解答，甚至更本不能碰到解答。搜索是一种试探性的查寻过程，为了减少搜索的盲目性引，增加试探的准确性，就要采用启发式搜索了。所谓启发式搜索就是在搜索中要对每一个搜索的位置进行评估，从中选择最好、可能容易到达目标的位置，再从这个位置向前进行搜索，这样就可以在搜索中省略大量无关的结点，提高了速度。</p>
-<h4 id="1-1-2-A-算法流程"><a href="#1-1-2-A-算法流程" class="headerlink" title="1.1.2 A*算法流程"></a>1.1.2 A*算法流程</h4><p>A*算法是一种启发式搜索算法，可以看做是针对盲目搜索(BFS/DFS)的优化。相对于DFS，A*仅仅多了一个评估值H，使状态空间不那么盲目。在A*算法中，一个结点位置的好坏用估价函数(H)来对它进行评估。A*算法的估价函数可表示为：<br>$$<br>F’(n) = g’(n)+h’(n)<br>$$<br>其中，$F’(n)$ 是估价函数，$g’(n)$ 是从初始起点到当前节点$n$的最短路径值(也称为最小耗费或最小代价，在盲目搜索中对应搜索深度), $h’(n)$ 是当前节点$n$ 到目标节点的最短路径的启发值。由于这个$f’(n)$ 其实是无法预先知道的，所以实际上使用的是下面的估价函数：<br>$$<br>f(n) = g(n) + h(n)<br>$$<br>其中$g(n)$ 是从初始结点到当前节点n的实际代价，$h(n)$ 是从当前结点n到目标结点的最佳路径的估计代价。在这里主要是$h(n)$ 体现了搜索的启发信息，因为$g(n)$ 是已知的。用$f(n)$ 作为$f’(n)$ 的近似，也就是用$g(n)$ 代替$g’(n)$ 、$h(n)$ 代替$h’(n)$ , 这样必须满足以下条件：</p>
+<h4 id="1-1-2-A-算法流程"><a href="#1-1-2-A-算法流程" class="headerlink" title="1.1.2 A*算法流程"></a>1.1.2 A*算法流程</h4><p>A*算法是一种启发式搜索算法，可以看做是针对盲目搜索(BFS/DFS)的优化。相对于DFS，A*仅仅多了一个评估值H，使状态空间不那么盲目。在A*算法中，一个结点位置的好坏用估价函数(H)来对它进行评估。A*算法的估价函数可表示为： </p>
+<script type="math/tex; mode=display">
+F'(n) = g'(n)+h'(n)</script><p>其中，$F’(n)$ 是估价函数，$g’(n)$ 是从初始起点到当前节点$n$的最短路径值(也称为最小耗费或最小代价，在盲目搜索中对应搜索深度), $h’(n)$ 是当前节点$n$ 到目标节点的最短路径的启发值。由于这个$f’(n)$ 其实是无法预先知道的，所以实际上使用的是下面的估价函数：</p>
+<script type="math/tex; mode=display">
+f(n) = g(n) + h(n)</script><p>其中$g(n)$ 是从初始结点到当前节点n的实际代价，$h(n)$ 是从当前结点n到目标结点的最佳路径的估计代价。在这里主要是$h(n)$ 体现了搜索的启发信息，因为$g(n)$ 是已知的。用$f(n)$ 作为$f’(n)$ 的近似，也就是用$g(n)$ 代替$g’(n)$ 、$h(n)$ 代替$h’(n)$ , 这样必须满足以下条件：</p>
 <ol>
 <li>$g(n)\ge g’(n)$ . 大多数情况下都是满足的，可以不用考虑。 $g(n)$ 必须保持单调递增。</li>
 <li>$h(n)$ 必须小于等于实际的从当前节点n到达目标节点的最小耗费,即$h(n)\le h’(n)$ , 可以证明应用这样的估价函数是可以找到最短路径的。</li>
@@ -968,6 +1185,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test</span><span class="params">(<span class="keyword">const</span> status &amp; target)</span></span></div><div class="line">&#123;</div><div class="line">	Astar::Configure&lt;status&gt; C(h, g, ifsame, Generate_Next, update);</div><div class="line">	Astar::Configure&lt;status&gt; C1(h1, g, ifsame, Generate_Next, update);</div><div class="line">	Astar::Configure&lt;status&gt; C2(h2, g, ifsame, Generate_Next, update);</div><div class="line">	Astar::Configure&lt;status&gt; C_BFS(h_bfs, g, ifsame, Generate_Next, update);</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;status&gt; cases = Generate_Cases(target, <span class="number">20</span>);</div><div class="line">	<span class="keyword">double</span> Time[<span class="number">4</span>][<span class="number">20</span>] = &#123; <span class="number">0</span> &#125;;</div><div class="line">	<span class="keyword">int</span> Open[<span class="number">4</span>][<span class="number">20</span>] = &#123; <span class="number">0</span> &#125;;</div><div class="line">	<span class="keyword">int</span> Close[<span class="number">4</span>][<span class="number">20</span>] = &#123; <span class="number">0</span> &#125;;</div><div class="line">	<span class="keyword">int</span> Extended[<span class="number">4</span>][<span class="number">20</span>] = &#123; <span class="number">0</span> &#125;;</div><div class="line">	<span class="built_in">string</span> path[<span class="number">4</span>][<span class="number">20</span>];</div><div class="line">	<span class="built_in">std</span>::ofstream outfile;</div><div class="line">	outfile.open(<span class="string">"test.txt"</span>, <span class="built_in">std</span>::ios::out);</div><div class="line">	outfile &lt;&lt; <span class="string">"TEST CASES:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="built_in">std</span>::<span class="keyword">clock_t</span>  st;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">20</span>;i++)</div><div class="line">	&#123;</div><div class="line">		<span class="comment">//cout &lt;&lt; cases[i];</span></div><div class="line">		 st = <span class="built_in">std</span>::clock();</div><div class="line">		<span class="keyword">auto</span> tem=Astar::AStar&lt;status&gt;(cases[i], target, C,Open[<span class="number">0</span>][i],Close[<span class="number">0</span>][i],Extended[<span class="number">0</span>][i]);</div><div class="line">		path[<span class="number">0</span>][i] = tem.path;</div><div class="line">		Time[<span class="number">0</span>][i] = <span class="built_in">std</span>::clock() - st;</div><div class="line"></div><div class="line">		st = <span class="built_in">std</span>::clock();;</div><div class="line">		tem = Astar::AStar&lt;status&gt;(cases[i], target, C1, Open[<span class="number">1</span>][i], Close[<span class="number">1</span>][i], Extended[<span class="number">1</span>][i]);</div><div class="line">		path[<span class="number">1</span>][i] = tem.path;</div><div class="line">		Time[<span class="number">1</span>][i] = <span class="built_in">std</span>::clock() - st;</div><div class="line"></div><div class="line">		 st = <span class="built_in">std</span>::clock();</div><div class="line">		 tem = Astar::AStar&lt;status&gt;(cases[i], target, C2, Open[<span class="number">2</span>][i], Close[<span class="number">2</span>][i], Extended[<span class="number">2</span>][i]);</div><div class="line">		path[<span class="number">2</span>][i] = tem.path;</div><div class="line">		Time[<span class="number">2</span>][i] = <span class="built_in">std</span>::clock() - st;</div><div class="line"></div><div class="line">		  st = <span class="built_in">std</span>::clock();</div><div class="line">		  tem = Astar::AStar&lt;status&gt;(cases[i], target, C_BFS, Open[<span class="number">3</span>][i], Close[<span class="number">3</span>][i], Extended[<span class="number">3</span>][i]);</div><div class="line">		path[<span class="number">3</span>][i] = tem.path;</div><div class="line">		Time[<span class="number">3</span>][i] = <span class="built_in">std</span>::clock() - st;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i:cases)</div><div class="line">		outfile &lt;&lt;i &lt;&lt; <span class="string">" "</span> &lt;&lt; i.path &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">	outfile &lt;&lt; <span class="string">"Open:["</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</div><div class="line">	&#123;</div><div class="line">		outfile &lt;&lt; <span class="string">'H'</span> &lt;&lt; i &lt;&lt; <span class="string">':'</span> &lt;&lt; <span class="built_in">endl</span>&lt;&lt;<span class="string">'['</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">20</span>; j++)</div><div class="line">			outfile &lt;&lt; Open[i][j]&lt;&lt;<span class="string">' '</span>;</div><div class="line">		outfile &lt;&lt; <span class="string">']'</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	outfile &lt;&lt; <span class="string">"Close:["</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</div><div class="line">	&#123;</div><div class="line">		outfile &lt;&lt; <span class="string">'H'</span> &lt;&lt; i &lt;&lt; <span class="string">':'</span> &lt;&lt; <span class="built_in">endl</span>&lt;&lt;<span class="string">'['</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">20</span>; j++)</div><div class="line">			outfile &lt;&lt; Close[i][j]&lt;&lt;<span class="string">' '</span>;</div><div class="line">		outfile &lt;&lt; <span class="string">']'</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	outfile &lt;&lt; <span class="string">"Extended:["</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</div><div class="line">	&#123;</div><div class="line">		outfile &lt;&lt; <span class="string">'H'</span> &lt;&lt; i &lt;&lt; <span class="string">':'</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">'['</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">20</span>; j++)</div><div class="line">			outfile &lt;&lt; Extended[i][j] &lt;&lt; <span class="string">' '</span>;</div><div class="line">		outfile &lt;&lt; <span class="string">']'</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	outfile &lt;&lt; <span class="string">"Time:["</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</div><div class="line">	&#123;</div><div class="line">		outfile &lt;&lt; <span class="string">'H'</span> &lt;&lt; i &lt;&lt; <span class="string">':'</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">'['</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">20</span>; j++)</div><div class="line">			outfile &lt;&lt; Time[i][j] &lt;&lt; <span class="string">' '</span>;</div><div class="line">		outfile &lt;&lt; <span class="string">']'</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	outfile &lt;&lt; <span class="string">"Path:["</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</div><div class="line">	&#123;</div><div class="line">		outfile &lt;&lt; <span class="string">'H'</span> &lt;&lt; i &lt;&lt; <span class="string">':'</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">'['</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">20</span>; j++)</div><div class="line">			outfile &lt;&lt; path[i][j] &lt;&lt; <span class="string">' '</span>;</div><div class="line">		outfile &lt;&lt; <span class="string">']'</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	outfile &lt;&lt; <span class="string">"Length:["</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</div><div class="line">	&#123;</div><div class="line">		outfile &lt;&lt; <span class="string">'H'</span> &lt;&lt; i &lt;&lt; <span class="string">':'</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">'['</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">20</span>; j++)</div><div class="line">			outfile &lt;&lt; path[i][j].length()<span class="number">-1</span> &lt;&lt; <span class="string">' '</span>;</div><div class="line">		outfile &lt;&lt; <span class="string">']'</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line">	outfile.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>以下为测试结果：</p>
 <p>H=Manhattan distance    (Simple)</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1144,7 +1362,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p> H=Manhattan distance  (One-dimensional)</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1321,7 +1541,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p> H=Manhattan distance  (Two-dimensional)</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1498,7 +1720,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>H=0 BFS</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1675,6 +1899,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>在Matlab中画图比较如下：</p>
 <p><img src="/2017/11/16/A-Algorithm-and-8-Puzzle-Problem/time.bmp" alt="time"></p>
 <p><img src="/2017/11/16/A-Algorithm-and-8-Puzzle-Problem/rom.bmp" alt="rom"></p>
@@ -2019,7 +2244,7 @@
 <p>大规模问题上，可以考虑<a href="http://www.cnblogs.com/LBSer/p/3310455.html" target="_blank" rel="external">GeoHash</a> 、k-dimension tree、最大堆等算法。限于时间和篇幅，本文不予介绍。</p>
 <hr>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="http://blog.sciencenet.cn/blog-531885-589056.html" target="_blank" rel="external">Matlab中 pdist 函数详解(各种距离的生成) </a></p>
-<p><a href="https://wizardforcel.gitbooks.io/dm-algo-top10/content/knn.html" target="_blank" rel="external">数据挖掘十大算法–K近邻算法</a></p>
+<p><a href="https://wizardforcel.gitbooks.io/dm-algo-top10/content/knn.html" target="_blank" rel="external">数据挖掘十大算法—K近邻算法</a></p>
 <p><a href="http://blog.csdn.net/wangshihui512/article/details/8834782" target="_blank" rel="external">用堆排序寻找数组中最大的K个数</a></p>
 <p><a href="http://www.cnblogs.com/LBSer/p/3310455.html" target="_blank" rel="external">GeoHash核心原理解析</a></p>
 
@@ -2153,26 +2378,46 @@
             <p>所有代码可以在 <a href="https://github.com/Vast-Stars/Algorithm/tree/master/Fisher" target="_blank" rel="external">https://github.com/Vast-Stars/Algorithm/tree/master/Fisher</a> 中看到。欢迎star</p>
 <h1 id="一-算法介绍"><a href="#一-算法介绍" class="headerlink" title="一. 算法介绍"></a>一. 算法介绍</h1><p>这是Fisher在1936年提出的线性分类方法。对于二分类问题，训练集$D={ (\mathbf{x}_i,y_i),i=1,2\ldots n}$, 其中</p>
 <p> ${\mathbf{x}_i\in \mathscr{R^d}, y_i\in \lbrace 0,1\rbrace}$, 我们需要寻找一个权重向量$\mathbf{\omega}$ 和$\mathbf{\omega_0}$ 满足</p>
-<p>$$<br>\mathbf{\omega^T}\mathbf{x}+\omega_0<br>\begin{cases}<br>\lt 0  \\<br>\gt 0<br>\end{cases}<br>\Rightarrow y=<br>\begin{cases}<br>0  \ 1<br>\end{cases}<br>$$</p>
-<p>Fisher准则的思路是将d维空间中的点$\mathbf{x_i}$投影到一条直线（分类超平面的法线）上，通过适当地选择直线的方向$\mathbf{\omega}$，有可能找到能够最大限度地区分各类样本数据点的投影方向。选择直线方向的思路是：最大化投影后类间距离和类内距离比（希望样本点向所求直线投影后，不同类别之间的距离大，相同类别之间的距离小）</p>
-<p>$$<br>\begin{align}<br>J_F(\mathbf{\omega} )&amp;=\frac{\Vert{\mathbf{\omega}^T\mathbf{m_0}-\mathbf{\omega}^T\mathbf{m_1} }\Vert_2^2}{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }\\<br>&amp;=\frac{\mathbf{\omega}^T({\mathbf{m_0}-\mathbf{m_1} } ){ ( {\mathbf{m_0}-\mathbf{m_1} } ) }^T\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }\\<br>&amp;=\frac{\mathbf{\omega}^T\mathbf{S}_{\mathbf{b} }\mathbf{\omega} } {\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }<br>\end{align}<br>$$</p>
-<p>其中$\mathbf{m}_i$ 表示第$i$ 类的均值。$\mathbf{S}_w$ 为类内散度矩阵(within-class scatter matrix)，$\mathbf{S}_b$ 为类内散度矩阵(between-class scatter matrix) </p>
-<p>$$<br>\begin{align}<br>\mathbf{S}_w&amp;=\mathbf{\Sigma_0}+\mathbf{\Sigma_1 } \\<br>&amp;=\sum_{y=0}(\mathbf{x}-\mathbf{m_0} ){ (\mathbf{x}-\mathbf{m_0} )}^T+\sum_{y=1}(\mathbf{x}-\mathbf{m_1} ){ (\mathbf{x}-\mathbf{m_1} )}^T<br>\end{align}<br>$$</p>
-<p>$$<br>\mathbf{S}_b=({\mathbf{m_0}-\mathbf{m_1} } ){ ({\mathbf{m_0}-\mathbf{m_1} } )}^T<br>$$</p>
-<p>其中$\Sigma_i$ 表示第$i$类的协方差矩阵。显然$\mathbf{S}_w$ 和$\mathbf{S}_b$ 均为对称矩阵 </p>
+<script type="math/tex; mode=display">
+\mathbf{\omega^T}\mathbf{x}+\omega_0 
+\begin{cases}
+\lt 0  \\
+\gt 0
+\end{cases}
+\Rightarrow y=
+\begin{cases}
+0  \\ 1
+\end{cases}</script><p>Fisher准则的思路是将d维空间中的点$\mathbf{x_i}$投影到一条直线（分类超平面的法线）上，通过适当地选择直线的方向$\mathbf{\omega}$，有可能找到能够最大限度地区分各类样本数据点的投影方向。选择直线方向的思路是：最大化投影后类间距离和类内距离比（希望样本点向所求直线投影后，不同类别之间的距离大，相同类别之间的距离小）</p>
+<script type="math/tex; mode=display">
+\begin{align}
+J_F(\mathbf{\omega} )&=\frac{\Vert{\mathbf{\omega}^T\mathbf{m_0}-\mathbf{\omega}^T\mathbf{m_1} }\Vert_2^2}{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }\\
+&=\frac{\mathbf{\omega}^T({\mathbf{m_0}-\mathbf{m_1} } ){ ( {\mathbf{m_0}-\mathbf{m_1} } ) }^T\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }\\
+&=\frac{\mathbf{\omega}^T\mathbf{S}_{\mathbf{b} }\mathbf{\omega} } {\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }
+\end{align}</script><p>其中$\mathbf{m}_i$ 表示第$i$ 类的均值。$\mathbf{S}_w$ 为类内散度矩阵(within-class scatter matrix)，$\mathbf{S}_b$ 为类内散度矩阵(between-class scatter matrix) </p>
+<script type="math/tex; mode=display">
+\begin{align}
+\mathbf{S}_w&=\mathbf{\Sigma_0}+\mathbf{\Sigma_1 } \\
+&=\sum_{y=0}(\mathbf{x}-\mathbf{m_0} ){ (\mathbf{x}-\mathbf{m_0} )}^T+\sum_{y=1}(\mathbf{x}-\mathbf{m_1} ){ (\mathbf{x}-\mathbf{m_1} )}^T
+\end{align}</script><script type="math/tex; mode=display">
+\mathbf{S}_b=({\mathbf{m_0}-\mathbf{m_1} } ){ ({\mathbf{m_0}-\mathbf{m_1} } )}^T</script><p>其中$\Sigma_i$ 表示第$i$类的协方差矩阵。显然$\mathbf{S}_w$ 和$\mathbf{S}_b$ 均为对称矩阵 </p>
 <p>寻找$\mathbf{\omega}$使 $ J_F(\mathbf{\omega} )$ 最大，我们可以通过对$ J_F(\mathbf{\omega} )$ 求$\mathbf{\omega}$的偏导数并令其为$0$ 计算$\mathbf{\omega}$. </p>
 <p>注意 ${ (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega}$ 和 $\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega}$ 均为标量，且 $\frac{\partial(\mathbf{\omega}^T\mathbf{S}\mathbf{\omega} )}{\partial \mathbf{\omega} }=(\mathbf{S}+\mathbf{S}^T)\mathbf{\omega} $ .</p>
-<p>$$<br>\begin{align}<br>\frac{\partial J_F(\mathbf{\omega} )}{\partial \mathbf{\omega} }&amp;=\frac{\frac{\partial(\mathbf{\omega}^T\mathbf{S}_{\mathbf{b} }\mathbf{\omega} )}{\partial \mathbf{\omega} }\cdot\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega}-\mathbf{\omega}^T\mathbf{S}_{\mathbf{b} }\mathbf{\omega}\cdot\frac{\partial(\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}{\partial\mathbf{\omega}}}{ { (\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}^2}\\<br>&amp;=\frac{2\mathbf{S}_{\mathbf{b} }\mathbf{\omega}\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega}-\mathbf{\omega}^T\mathbf{S}_{\mathbf{b} }\mathbf{\omega}\cdot 2\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }{ { (\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}^2}\\<br>&amp;=2\cdot\frac{ (\mathbf{m_0}-\mathbf{m_1} ){ (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega}\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega}-\mathbf{\omega}^T(\mathbf{m_0}-\mathbf{m_1} ){ (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega}\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }{ { (\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}^2}\\<br>&amp;=2\cdot\frac{ { (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }\cdot((\mathbf{m_0}-\mathbf{m_1} )-\frac{\mathbf{\omega}^T(\mathbf{m_0}-\mathbf{m_1} )\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} } )=0<br>\end{align}<br>$$</p>
-<p>同时，由于$\frac{ { (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }$ 为标量， 因此</p>
-<p>$$<br>(\mathbf{m_0}-\mathbf{m_1} )-\lambda\cdot\mathbf{S}_{\mathbf{w} }\mathbf{\omega}=0<br>$$</p>
-<p>其中$\lambda\in \mathscr{R}$ ,由于我们在做线性分类时，主要关心直线的方向，因此可取$\lambda=1 $，如果$\mathbf{S}_w $ 可逆（如果不可逆，则用伪逆），则 </p>
-<p>$$<br>\mathbf{\omega}=\mathbf{S}_{\mathbf{w} }^{-1}(\mathbf{m_0}-\mathbf{m_1} )<br>$$</p>
-<p>关于 $\omega_0$ 的选择，有以下几种常见方法：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\partial J_F(\mathbf{\omega} )}{\partial \mathbf{\omega} }&=\frac{\frac{\partial(\mathbf{\omega}^T\mathbf{S}_{\mathbf{b} }\mathbf{\omega} )}{\partial \mathbf{\omega} }\cdot\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega}-\mathbf{\omega}^T\mathbf{S}_{\mathbf{b} }\mathbf{\omega}\cdot\frac{\partial(\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}{\partial\mathbf{\omega}}}{ { (\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}^2}\\
+&=\frac{2\mathbf{S}_{\mathbf{b} }\mathbf{\omega}\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega}-\mathbf{\omega}^T\mathbf{S}_{\mathbf{b} }\mathbf{\omega}\cdot 2\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }{ { (\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}^2}\\
+&=2\cdot\frac{ (\mathbf{m_0}-\mathbf{m_1} ){ (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega}\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega}-\mathbf{\omega}^T(\mathbf{m_0}-\mathbf{m_1} ){ (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega}\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }{ { (\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} )}^2}\\
+&=2\cdot\frac{ { (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }\cdot((\mathbf{m_0}-\mathbf{m_1} )-\frac{\mathbf{\omega}^T(\mathbf{m_0}-\mathbf{m_1} )\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} } )=0
+\end{align}</script><p>同时，由于$\frac{ { (\mathbf{m_0}-\mathbf{m_1} )}^T\mathbf{\omega} }{\mathbf{\omega}^T\mathbf{S}_{\mathbf{w} }\mathbf{\omega} }$ 为标量， 因此</p>
+<script type="math/tex; mode=display">
+(\mathbf{m_0}-\mathbf{m_1} )-\lambda\cdot\mathbf{S}_{\mathbf{w} }\mathbf{\omega}=0</script><p>其中$\lambda\in \mathscr{R}$ ,由于我们在做线性分类时，主要关心直线的方向，因此可取$\lambda=1 $，如果$\mathbf{S}_w $ 可逆（如果不可逆，则用伪逆），则 </p>
+<script type="math/tex; mode=display">
+\mathbf{\omega}=\mathbf{S}_{\mathbf{w} }^{-1}(\mathbf{m_0}-\mathbf{m_1} )</script><p>关于 $\omega_0$ 的选择，有以下几种常见方法：</p>
 <ul>
 <li>我们知道当投影直线的方向确定后，d维空间中的点$\mathbf{x}_i$ 在直线的投影位置确定。为此，我们希望$y=0$ 类的样本点到$0$ 的距离与$y=1$ 类的样本点到$0$ 的距离越接近越好（当一条直线上两个点之间的距离确定，两点构成线段的中垂面为最好的分类超平面）。于是 $ -\sum_{y=0}(\mathbf{\omega^T}\mathbf{x}+\omega_0)=\sum_{y=1}(\mathbf{\omega^T}\mathbf{x}+\omega_0) $ 。再设$ n_0、n_1 $ 分别为两类样本数量，因此：</li>
 </ul>
-<p>$$<br>\omega_0=-\frac{n_0\mathbf{\omega^T}\mathbf{m}_0+n_1\mathbf{\omega^T}\mathbf{m}_1}{n_0+n_1}<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+\omega_0=-\frac{n_0\mathbf{\omega^T}\mathbf{m}_0+n_1\mathbf{\omega^T}\mathbf{m}_1}{n_0+n_1}</script><ul>
 <li>$\omega_0=-\frac{1}{2}(m_1+m_2)^T (S_\omega)^{-1}(m_1-m_2)-ln \frac{P(\omega_2)}{P(\omega_1)} $ </li>
 <li>暂无。待补充。</li>
 </ul>
@@ -2541,142 +2786,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2017/06/04/TensorFlow-SequenceExample用法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vast-Stars">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vast-stars' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/04/TensorFlow-SequenceExample用法/" itemprop="url">
-                  TensorFlow SequenceExample用法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-04T18:41:29+08:00">
-                2017-06-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/06/04/TensorFlow-SequenceExample用法/" class="leancloud_visitors" data-flag-title="TensorFlow SequenceExample用法">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_TFrecord_SequenceExample2</span><span class="params">(files_list,labels_list,to_file=<span class="string">"train.tfrecords"</span>)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    待测试。生成一个TFrecord文件</div><div class="line">    :param files_list: 文件列表。</div><div class="line">    :param labels_list: 和文件列表对应的标签列表。</div><div class="line">    :param to_file: 写入目标TFrecord文件</div><div class="line">    :return: NULL</div><div class="line">    """</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">make_example</span><span class="params">(sequence, labels)</span>:</span></div><div class="line">        <span class="comment"># The object we return</span></div><div class="line">        ex = tf.train.SequenceExample()</div><div class="line">        <span class="comment"># A non-sequential feature of our example</span></div><div class="line"></div><div class="line"></div><div class="line">        <span class="comment">#sequence_length = len(sequence)</span></div><div class="line">        <span class="comment">#ex.context.feature["length"].int64_list.value.append(sequence_length)</span></div><div class="line">        <span class="comment"># Feature lists for the two sequential features of our example</span></div><div class="line">        <span class="comment"># fl_imgs = ex.feature_lists.feature_list["imgs"]</span></div><div class="line">        <span class="comment"># fl_labels = ex.feature_lists.feature_list["labels"]</span></div><div class="line">        fl_imgs = ex.feature_lists.feature_list[<span class="string">"imgs"</span>]</div><div class="line">        fl_labels = ex.feature_lists.feature_list[<span class="string">"labels"</span>]</div><div class="line">        <span class="keyword">for</span> img, label <span class="keyword">in</span> zip(sequence, labels):</div><div class="line">            fl_imgs.feature.add().bytes_list.value.append(Image.open(img).tobytes())</div><div class="line">            fl_labels.feature.add().int64_list.value.append(label)</div><div class="line">        <span class="keyword">return</span> ex</div><div class="line"></div><div class="line">    writer = tf.python_io.TFRecordWriter(to_file)</div><div class="line">    <span class="keyword">for</span> sequence, label_sequence <span class="keyword">in</span> zip(files_list, labels_list):</div><div class="line">        ex = make_example([sequence], [label_sequence])</div><div class="line">        writer.write(ex.SerializeToString())</div><div class="line">    writer.close()</div></pre></td></tr></table></figure>
-<p>参考：</p>
-<ul>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/train/SequenceExample" target="_blank" rel="external">官方文档:tf.train.SequenceExample</a></li>
-<li><a href="https://github.com/tensorflow/magenta/blob/master/magenta/common/sequence_example_lib.py" target="_blank" rel="external">Google开源项目magenta中的例程</a></li>
-<li><a href="https://github.com/tensorflow/tensorflow/blob/ec7929b878926c39255254e9aea992f0bc65aa68/tensorflow/core/example/example.proto" target="_blank" rel="external">TensorFlow SequenceExample范例</a></li>
-<li><a href="https://github.com/dennybritz/tf-rnn/blob/master/sequence_example.ipynb" target="_blank" rel="external"><strong>sequence_example.ipynb</strong></a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2726,7 +2835,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

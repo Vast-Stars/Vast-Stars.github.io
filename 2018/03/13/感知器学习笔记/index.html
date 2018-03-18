@@ -93,18 +93,24 @@
 
 
 <meta name="description" content="最近杨老师课上又学了一遍感知器。。唔，算做个总结吧。 时间仓促，难免有疏漏，望各位指正!(email: vast2stars@gmail.com)
-基本感知器函数定义：$$f(x)=sign(w\cdot x+b)$$其中$w$ 和$b$ 为感知器模型参数，分别为权值和阈值。在特征空间$R^n$ 中，$w$ 是感知器决策超平面的法向量（恒指向正类$^{[1]}$），$b$ 是超平面的截距。$f(x">
+基本感知器函数定义：
+
+f(x)=sign(w\cdot x+b)其中$w$ 和$b$ 为感知器模型参数，分别为权值和阈值。在特征空间$R^n$ 中，$w$ 是感知器决策超平面的法向量（恒指向正类$^{[1]}$），$b$ 是超平面的截距。$f(x)$">
 <meta property="og:type" content="article">
 <meta property="og:title" content="感知器学习笔记">
 <meta property="og:url" content="http://www.vast-stars.com/2018/03/13/感知器学习笔记/index.html">
 <meta property="og:site_name" content="Vast-stars' Blog">
 <meta property="og:description" content="最近杨老师课上又学了一遍感知器。。唔，算做个总结吧。 时间仓促，难免有疏漏，望各位指正!(email: vast2stars@gmail.com)
-基本感知器函数定义：$$f(x)=sign(w\cdot x+b)$$其中$w$ 和$b$ 为感知器模型参数，分别为权值和阈值。在特征空间$R^n$ 中，$w$ 是感知器决策超平面的法向量（恒指向正类$^{[1]}$），$b$ 是超平面的截距。$f(x">
-<meta property="og:updated_time" content="2018-03-14T12:14:01.334Z">
+基本感知器函数定义：
+
+f(x)=sign(w\cdot x+b)其中$w$ 和$b$ 为感知器模型参数，分别为权值和阈值。在特征空间$R^n$ 中，$w$ 是感知器决策超平面的法向量（恒指向正类$^{[1]}$），$b$ 是超平面的截距。$f(x)$">
+<meta property="og:updated_time" content="2018-03-17T17:48:36.024Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="感知器学习笔记">
 <meta name="twitter:description" content="最近杨老师课上又学了一遍感知器。。唔，算做个总结吧。 时间仓促，难免有疏漏，望各位指正!(email: vast2stars@gmail.com)
-基本感知器函数定义：$$f(x)=sign(w\cdot x+b)$$其中$w$ 和$b$ 为感知器模型参数，分别为权值和阈值。在特征空间$R^n$ 中，$w$ 是感知器决策超平面的法向量（恒指向正类$^{[1]}$），$b$ 是超平面的截距。$f(x">
+基本感知器函数定义：
+
+f(x)=sign(w\cdot x+b)其中$w$ 和$b$ 为感知器模型参数，分别为权值和阈值。在特征空间$R^n$ 中，$w$ 是感知器决策超平面的法向量（恒指向正类$^{[1]}$），$b$ 是超平面的截距。$f(x)$">
 
 
 
@@ -344,36 +350,76 @@
 
       
         <p>最近杨老师课上又学了一遍感知器。。唔，算做个总结吧。 时间仓促，难免有疏漏，望各位指正!(email: vast2stars@gmail.com)</p>
-<h2 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h2><p>感知器函数定义：<br>$$<br>f(x)=sign(w\cdot x+b)<br>$$<br>其中$w$ 和$b$ 为感知器模型参数，分别为权值和阈值。在特征空间$R^n$ 中，$w$ 是感知器决策超平面的法向量（恒指向正类$^{[1]}$），$b$ 是超平面的截距。$f(x)$ 输出$+1,-1$ 。</p>
+<h2 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h2><p>感知器函数定义：</p>
+<script type="math/tex; mode=display">
+f(x)=sign(w\cdot x+b)</script><p>其中$w$ 和$b$ 为感知器模型参数，分别为权值和阈值。在特征空间$R^n$ 中，$w$ 是感知器决策超平面的法向量（恒指向正类$^{[1]}$），$b$ 是超平面的截距。$f(x)$ 输出$+1,-1$ 。</p>
 <p>记感知器学习策略的损失函数为$L(w,b)$。 <strong>该函数不能定义成误分类点的数量</strong>，因为此时$L$ 不是关于$w,b$ 的连续可到函数$^{[2]}$，不易优化。通常采用<strong>所有误分类点(集合M)到超平面的距离总和</strong>作为损失函数。推导过程如下：</p>
-<p>任意点到超平面的距离为<br>$$<br>\begin{equation}<br>\frac{|w\cdot x_i+b|}{||w||}<br>\end{equation}<br>\tag{1}<br>$$<br><strong>消除误分类点的符号差异性：</strong> 式(1)分子含有绝对值，不利于求微分进行优化。如果删去绝对值，那么假阴性(false negative, FN)样本的计算值为负，而假阳性(false positive, FP)为正，错误相互抵消而非累加。为了解决该问题，使用$-y_i(w\cdot x_i+b)/||w||$ 作为修正后的距离（不论FN还是FP，该函数值恒为正）。</p>
+<p>任意点到超平面的距离为：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\frac{|w\cdot x_i+b|}{||w||}
+\end{equation}
+\tag{1}</script><p><strong>消除误分类点的符号差异性：</strong> 式(1)分子含有绝对值，不利于求微分进行优化。如果删去绝对值，那么假阴性(false negative, FN)样本的计算值为负，而假阳性(false positive, FP)为正，错误相互抵消而非累加。为了解决该问题，使用$-y_i(w\cdot x_i+b)/||w||$ 作为修正后的距离（不论FN还是FP，该函数值恒为正）。</p>
 <p>删去$1/||w||$ $^{[3]}$ 并累积求和，得到最终的损失函数：</p>
-<p>$$<br>L(w,b)=-\sum_{x_i\in M}y_i(w\cdot x_i+b)<br>$$</p>
-<p>对上式求微分，即可得到感知器的训练规则。此处略过。</p>
+<script type="math/tex; mode=display">
+L(w,b)=-\sum_{x_i\in M}y_i(w\cdot x_i+b)</script><p>对上式求微分，即可得到感知器的训练规则。此处略过。</p>
 <h2 id="三个不等式"><a href="#三个不等式" class="headerlink" title="三个不等式"></a>三个不等式</h2><p>记$\hat{w}=(w^T,b)^T$，$\hat{x}=(x^T,1)^T$,显然$\hat{w}\cdot \hat{x}=w\cdot x+b$。若训练数据集线性可分，则存在超平面可将数据集完全分开，取此超平面为$\hat{w_{opt}}\cdot \hat{x}=0$,且不妨令$||\hat{w}_{opt}||=1$.</p>
-<p>取 $\gamma=min_i{y_i(w_{opt}\cdot x_i+b_{opt})}$ 。其实$\gamma$ 就是误分类样本点到超平面距离的最小值。</p>
-<p>记$\hat{w}_k$是第$k$次迭代后的参数，学习过程：<br>$$<br>\hat{w}_k=\hat{w}_{k-1}+\eta y_k\hat{x}_k \tag{2.1}<br>$$</p>
-<h3 id="hat-w-k-上界"><a href="#hat-w-k-上界" class="headerlink" title="$||\hat{w}_k||$上界"></a>$||\hat{w}_k||$上界</h3><p>由三角不等式及式(2.1)，有：$||\hat{w}_k||\le||\hat{w}_{k-1}||+||\eta y_k\hat{x}_k||=||\hat{w}_{k-1}||+\eta ||y_k||\cdot||\hat{x}_k||$</p>
-<p>考虑到$y_k$ 符号不确定，我们平方处理：<br>$$<br>\begin{align<em>}<br>||\hat{w}_{k}||^2&amp;=<br>\hat{w}_{k}\cdot \hat{w}_{k}\\<br>&amp;=[\hat{w}_{k-1}+\eta y_k\hat{x}_k]\cdot[\hat{w}_{k-1}+\eta y_k\hat{x}_k]\\<br>&amp;=\hat{w}_{k-1}\cdot[\hat{w}_{k-1}+\eta y_k\hat{x}_k]^T+\eta y_k\hat{x}_k\cdot[\hat{w}_{k-1}+\eta y_k\hat{x}_k]\\<br>&amp;=||\hat{w}_{k-1}||^2+\hat{w}_{k-1}\cdot\eta y_k \hat{x}_k+\eta y_k\hat{x}_k\cdot\hat{w}_{k-1}+\eta y_k||\hat{x}_k||^2\\<br>&amp;=||\hat{w}_{k-1}||^2+2\eta y_k\hat{w}_{k-1}\cdot \hat{x}_k+\eta^2 y_k^2||\hat{x}_k||^2\\<br>\end{align</em>}<br>$$</p>
-<p>考虑$y_k\hat{w}_{k-1}\cdot \hat{x}_k$， 由于第$k$个样本$\hat{x}_k$相对于参数$\hat{w}_{k-1}$是错误的，则$\hat{w}_{k-1}\cdot \hat{x}_k$ 一定与$y_k$异号（见上文<em>消除误分类点的符号差异性</em> ），故$y_k\hat{w}_{k-1}\cdot \hat{x}_k\le0$。</p>
-<p>所以我们有：<br>$$<br>||\hat{w}_k||^2\le||\hat{w}_{k-1}||^2+\eta^2 ||\hat{x}_k||^2 \tag{2.2}\le \eta^2\sum_{i=1}^{i=k}||\hat{x}_i||^2\le k\eta^2R^2\\<br>R=max{||\hat{x}_i||}<br>$$</p>
-<h3 id="hat-w-k-下界"><a href="#hat-w-k-下界" class="headerlink" title="$||\hat{w}_k||$下界"></a>$||\hat{w}_k||$下界</h3><p>$$<br>\begin{align<em>}<br>\hat{w}_k\cdot \hat{w}_{opt} &amp;= \hat{w}_{k-1}\cdot \hat{w_{opt}}+\eta y_i\hat{x_i}\cdot\hat{w_{opt}}\\<br>&amp;\ge \hat{w}_{k-1}\cdot \hat{w_{opt}}+\eta\gamma\\<br>&amp;\ge \hat{w_{k-2}}\cdot \hat{w_{opt}}+2\eta\gamma\\<br>&amp;\cdots\\<br>&amp;\ge k\eta\gamma<br>\tag{2.3}<br>\end{align</em>}<br>$$</p>
-<p>所以就$\hat{w}_k\ge\frac{k\eta\gamma}{\hat{w}_{opt}}$ ？大错特错。2个向量之间不能比较大小。况且点乘【$\cdot$ 】 不是实数的乘法。</p>
-<p>考虑$k\eta\gamma\le\hat{w}_k\cdot\hat{w}_{opt}\le||\hat{w}_k||\times||\hat{w}_{opt}||$ ,所以我们有:<br>$$<br>||\hat{w}_k||\ge\frac{k\eta\gamma}{||\hat{w}_{opt}||}<br>$$</p>
-<h3 id="k-上界"><a href="#k-上界" class="headerlink" title="$k$上界"></a>$k$上界</h3><p>结合(2.2)和(2.3)，且$||\hat{w}_{opt}||=1$，我们有：<br>$$<br>k\eta\gamma\le||\hat{w}_k||\times||\hat{w}_{opt}||\le\sqrt{k}\eta R<br>$$<br>即$k^2\gamma^2\le kR^2$ ,得:<br>$$<br>k\le\frac{R^2}{\gamma^2}<br>$$</p>
-<h2 id="变形"><a href="#变形" class="headerlink" title="变形"></a>变形</h2><p>假设感知器的函数输出函数<code>sign()</code> 以及样本类标$y_i$类标为0和+1，那么如何进行以上证明？</p>
+<p>取 $\gamma=min_i\{y_i(w_{opt}\cdot x_i+b_{opt})\}$ 。其实$\gamma$ 就是误分类样本点到超平面距离的最小值。</p>
+<p>记$\hat{w}_k$是第$k$次迭代后的参数，学习过程：</p>
+<script type="math/tex; mode=display">
+\hat{w}_k=\hat{w}_{k-1}+\eta y_k\hat{x}_k  \tag{2.1}</script><h3 id="hat-w-k-上界"><a href="#hat-w-k-上界" class="headerlink" title="$||\hat{w}_k||$上界"></a>$||\hat{w}_k||$上界</h3><p>由三角不等式及式(2.1)，有：$||\hat{w}_k||\le||\hat{w}_{k-1}||+||\eta y_k\hat{x}_k||=||\hat{w}_{k-1}||+\eta ||y_k||\cdot||\hat{x}_k||$</p>
+<p>考虑到$y_k​$ 符号不确定，我们平方处理：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\Vert\hat{w}_{k}\Vert^2&=
+\hat{w}_{k}\cdot \hat{w}_{k}\\
+&=[\hat{w}_{k-1}+\eta y_k\hat{x}_k]\cdot[\hat{w}_{k-1}+\eta y_k\hat{x}_k]\\
+&=\hat{w}_{k-1}\cdot[\hat{w}_{k-1}+\eta y_k\hat{x}_k]^T+\eta y_k\hat{x}_k\cdot[\hat{w}_{k-1}+\eta y_k\hat{x}_k]\\
+&=\Vert\hat{w}_{k-1}\Vert^2+\hat{w}_{k-1}\cdot\eta y_k \hat{x}_k+\eta y_k\hat{x}_k\cdot\hat{w}_{k-1}+\eta y_k\Vert\hat{x}_k\Vert^2\\
+&=\Vert\hat{w}_{k-1}\Vert^2+2\eta y_k\hat{w}_{k-1}\cdot \hat{x}_k+\eta^2 y_k^2\Vert\hat{x}_k\Vert^2\\
+\end{align*}</script><p>考虑$y_k\hat{w}_{k-1}\cdot \hat{x}_k$， 由于第$k$个样本$\hat{x}_k$相对于参数$\hat{w}_{k-1}$是错误的，则$\hat{w}_{k-1}\cdot \hat{x}_k$ 一定与$y_k$异号（见上文<em>消除误分类点的符号差异性</em> ），故$y_k\hat{w}_{k-1}\cdot \hat{x}_k\le0$。</p>
+<p>所以我们有：</p>
+<script type="math/tex; mode=display">
+\Vert\hat{w}_k^2\Vert\le\Vert\hat{w}_{k-1}\Vert^2+\eta^2 \Vert\hat{x}_k\Vert^2 \tag{2.2}\le \eta^2\sum_{i=1}^{i=k}\Vert\hat{x}_i\Vert^2\le k\eta^2R^2\\
+R=max\{\Vert\hat{x}_i\Vert\}</script><h3 id="hat-w-k-下界"><a href="#hat-w-k-下界" class="headerlink" title="$||\hat{w}_k||$下界"></a>$||\hat{w}_k||$下界</h3><script type="math/tex; mode=display">
+\begin{align*}
+\hat{w}_k\cdot \hat{w}_{opt} &= \hat{w}_{k-1}\cdot \hat{w_{opt}}+\eta y_i\hat{x_i}\cdot\hat{w_{opt}}\\
+&\ge \hat{w}_{k-1}\cdot \hat{w_{opt}}+\eta\gamma\\
+&\ge \hat{w_{k-2}}\cdot \hat{w_{opt}}+2\eta\gamma\\
+&\cdots\\
+&\ge k\eta\gamma
+\tag{2.3}
+\end{align*}</script><p>所以就$\hat{w}_k\ge\frac {k\eta\gamma} {\hat{w}_{opt}}$  ？大错特错。2个向量之间不能比较大小。况且点乘【 $\cdot$ 】 不是实数的乘法。</p>
+<p>考虑$k\eta\gamma\le\hat{w}_k\cdot\hat{w}_{opt}\le||\hat{w}_k||\times||\hat{w}_{opt}||$ ,所以我们有:</p>
+<script type="math/tex; mode=display">
+||\hat{w}_k||\ge\frac{k\eta\gamma}{||\hat{w}_{opt}||}</script><h3 id="k-上界"><a href="#k-上界" class="headerlink" title="$k$上界"></a>$k$上界</h3><p>结合(2.2)和(2.3)，且$||\hat{w}_{opt}||=1$，我们有：</p>
+<script type="math/tex; mode=display">
+k\eta\gamma\le||\hat{w}_k||\times||\hat{w}_{opt}||\le\sqrt{k}\eta R</script><p>即$k^2\gamma^2\le kR^2$ ,得:</p>
+<script type="math/tex; mode=display">
+k\le\frac{R^2}{\gamma^2}</script><h2 id="变形"><a href="#变形" class="headerlink" title="变形"></a>变形</h2><p>假设感知器的函数输出函数<code>sign()</code> 以及样本类标$y_i$类标为0和+1，那么如何进行以上证明？</p>
 <p>首先考虑到以上所有推导证明都不涉及感知器的输出函数<code>sign</code> ，而公式里大多都和$y_i$ 有关。下面从$y_i$ 角度考虑。</p>
 <p>同样，到超平面的距离仍然是式(1)。但是在<em>消除误分类点的符号差异性</em>时，有两种方法：</p>
 <ol>
-<li>取$y^{new}_i=2\times (y_i-0.5)$, 这样就把${0,+1}$ 映射到${-1,+1}$ ，所有后面的证明都相同。</li>
-<li>上课说的，取$y^{new}_i=y_i-\hat{w}\cdot\hat{x}$, 若是FP，$\hat{w}\cdot\hat{x}&gt;0$ ,$y_i^{new}<0$ ;若是fn,同理$y_i^{new}="">0$ 映射到$(-\infty,0)\cup(0,\infty)$ 。当然这个变换关于FP和FN是不对称的，且输出值不是固定值，不如方法1方便。</0$></li>
+<li>取$y^{new}_i=2\times (y_i-0.5)$, 这样就把$\{0,+1\}$ 映射到$\{-1,+1\}$ ，所有后面的证明都相同。</li>
+<li>上课说的，取 $y^{new}_i=y_i-\hat{w}\cdot\hat{x} $, 若是FP，$\hat{w}\cdot\hat{x}&gt;0$ ,  $y_i^{new}<0$ ;="" 若是fn,="" 同理$y_i^{new}="">0$ 映射到$(-\infty,0)\cup(0,\infty)$ 。当然这个变换关于FP和FN是不对称的，且输出值不是固定值，不如方法1方便。</0$></li>
 </ol>
-<h2 id="补充证明："><a href="#补充证明：" class="headerlink" title="补充证明："></a>补充证明：</h2><h3 id="1-法向量恒指向正样本"><a href="#1-法向量恒指向正样本" class="headerlink" title="1 法向量恒指向正样本"></a>1 法向量恒指向正样本</h3><p>证明： 假设$x_0​$ 恰好位于决策超平面上，即$w\cdot x_0+b=0​$ ,那么从该点引出法向量指向$x_1​$，即$x_1=x_0+\alpha w​$ 。不失一般性，设$\alpha=1​$ 。那么<br>$$<br>\begin{align<em>}<br> f(x) &amp;= f(x_1)\\<br> &amp;=sign(w x_1+b) \\<br> &amp;=sign(w(x_0+w)+b)\\<br> &amp;=sign(w\cdot x_0+b+w^2)\\<br> &amp;=sign(w^2)=1<br>\end{align</em>}<br>$$</p>
-<h3 id="2-不连续"><a href="#2-不连续" class="headerlink" title="2 不连续"></a>2 不连续</h3><p>在$L$ 定义成误分类点的个数时，$L$ 很难(几乎不可能？)写成关于$w,b$ 的解析形式。就算有，那么也是包含数量巨大的脉冲函数（难以求微分）。在这种情况下要求得极小值，相当于一个超高维且分布规律弱的离散优化问题。</p>
+<h2 id="补充证明："><a href="#补充证明：" class="headerlink" title="补充证明："></a>补充证明：</h2><h3 id="1-法向量恒指向正样本"><a href="#1-法向量恒指向正样本" class="headerlink" title="1 法向量恒指向正样本"></a>1 法向量恒指向正样本</h3><p>证明： 假设$x_0$ 恰好位于决策超平面上，即$w\cdot x_0+b=0$ ,那么从该点引出法向量指向$x_1$，即$x_1=x_0+\alpha w$ 。不失一般性，设$\alpha=1$ 。那么</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+ f(x) &= f(x_1)\\
+ &=sign(w\ x_1+b) \\
+ &=sign(w(x_0+w)+b)\\
+ &=sign(w\cdot x_0+b+w^2)\\
+ &=sign(w^2)=1
+\end{align*}</script><h3 id="2-不连续"><a href="#2-不连续" class="headerlink" title="2 不连续"></a>2 不连续</h3><p>在$L$ 定义成误分类点的个数时，$L$ 很难(几乎不可能？)写成关于$w,b$ 的解析形式。就算有，那么也是包含数量巨大的脉冲函数（难以求微分）。在这种情况下要求得极小值，相当于一个超高维且分布规律弱的离散优化问题。</p>
 <h3 id="3-不考虑-w"><a href="#3-不考虑-w" class="headerlink" title="3 不考虑$||w||$"></a>3 不考虑$||w||$</h3><p>显然$w$ 和$b$ 同时按比例放大缩小时，对决策超平面没有任何影响，而感知器学习目标是改进决策超平面的位置。且分子分母同时带有$w$ 不易于函数优化（尤其分母还是欧氏距离函数）。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>统计学习方法</p>
-<p>杨老师的PPT</p>
-<p><a href="http://blog.csdn.net/fox64194167/article/details/8147460" target="_blank" rel="external">http://blog.csdn.net/fox64194167/article/details/8147460</a></p>
+<h3 id="4-额外证明"><a href="#4-额外证明" class="headerlink" title="4 额外证明"></a>4 额外证明</h3><p>题目出自《统计学习方法》 P36：设集合$S\subset R^n$ 是由$R^n$中的$k$个点所组成的集合，即$S=\{x_1,x_2,\cdots,x_k\}$，定义$S$的凸壳$conv(S)$为：</p>
+<script type="math/tex; mode=display">
+conv(S)=\{x=\sum_{i=1}^{k}\lambda_ix_i \Bigg | \sum_{i=1}^k\lambda_i=1,\lambda_i\ge0,i=1,2,\cdots,k \}</script><p> 证明以下定理：样本集线性可分的充分必要条件是正实例点集所构成的凸壳与负实例点集所构成的凸壳互不相交。</p>
+<p>证明过程见：<a href="https://vast-stars.com/2018/03/18/线性可分与凸壳/" target="_blank" rel="external">https://vast-stars.com/2018/03/18/线性可分与凸壳/</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] 李航. 统计学习方法[M]. 清华大学出版社, 2012.</p>
+<p>[2] 杨老师的PPT</p>
+<p>[3] <a href="http://blog.csdn.net/y954877035/article/details/52210734" target="_blank" rel="external">http://blog.csdn.net/y954877035/article/details/52210734</a></p>
 
       
     </div>
@@ -419,6 +465,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/18/线性可分与凸壳/" rel="prev" title="线性可分与凸壳">
+                线性可分与凸壳 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -490,7 +540,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -538,7 +588,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本"><span class="nav-number">1.</span> <span class="nav-text">基本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三个不等式"><span class="nav-number">2.</span> <span class="nav-text">三个不等式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hat-w-k-上界"><span class="nav-number">2.1.</span> <span class="nav-text">$||\hat{w}_k||$上界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hat-w-k-下界"><span class="nav-number">2.2.</span> <span class="nav-text">$||\hat{w}_k||$下界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#k-上界"><span class="nav-number">2.3.</span> <span class="nav-text">$k$上界</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变形"><span class="nav-number">3.</span> <span class="nav-text">变形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充证明："><span class="nav-number">4.</span> <span class="nav-text">补充证明：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-法向量恒指向正样本"><span class="nav-number">4.1.</span> <span class="nav-text">1 法向量恒指向正样本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-不连续"><span class="nav-number">4.2.</span> <span class="nav-text">2 不连续</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-不考虑-w"><span class="nav-number">4.3.</span> <span class="nav-text">3 不考虑$||w||$</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本"><span class="nav-number">1.</span> <span class="nav-text">基本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三个不等式"><span class="nav-number">2.</span> <span class="nav-text">三个不等式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hat-w-k-上界"><span class="nav-number">2.1.</span> <span class="nav-text">$||\hat{w}_k||$上界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hat-w-k-下界"><span class="nav-number">2.2.</span> <span class="nav-text">$||\hat{w}_k||$下界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#k-上界"><span class="nav-number">2.3.</span> <span class="nav-text">$k$上界</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变形"><span class="nav-number">3.</span> <span class="nav-text">变形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充证明："><span class="nav-number">4.</span> <span class="nav-text">补充证明：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-法向量恒指向正样本"><span class="nav-number">4.1.</span> <span class="nav-text">1 法向量恒指向正样本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-不连续"><span class="nav-number">4.2.</span> <span class="nav-text">2 不连续</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-不考虑-w"><span class="nav-number">4.3.</span> <span class="nav-text">3 不考虑$||w||$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-额外证明"><span class="nav-number">4.4.</span> <span class="nav-text">4 额外证明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

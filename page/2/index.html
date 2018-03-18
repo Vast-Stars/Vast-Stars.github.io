@@ -258,6 +258,142 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2017/06/04/TensorFlow-SequenceExample用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vast-Stars">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vast-stars' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/04/TensorFlow-SequenceExample用法/" itemprop="url">
+                  TensorFlow SequenceExample用法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-04T18:41:29+08:00">
+                2017-06-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/06/04/TensorFlow-SequenceExample用法/" class="leancloud_visitors" data-flag-title="TensorFlow SequenceExample用法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_TFrecord_SequenceExample2</span><span class="params">(files_list,labels_list,to_file=<span class="string">"train.tfrecords"</span>)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    待测试。生成一个TFrecord文件</div><div class="line">    :param files_list: 文件列表。</div><div class="line">    :param labels_list: 和文件列表对应的标签列表。</div><div class="line">    :param to_file: 写入目标TFrecord文件</div><div class="line">    :return: NULL</div><div class="line">    """</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">make_example</span><span class="params">(sequence, labels)</span>:</span></div><div class="line">        <span class="comment"># The object we return</span></div><div class="line">        ex = tf.train.SequenceExample()</div><div class="line">        <span class="comment"># A non-sequential feature of our example</span></div><div class="line"></div><div class="line"></div><div class="line">        <span class="comment">#sequence_length = len(sequence)</span></div><div class="line">        <span class="comment">#ex.context.feature["length"].int64_list.value.append(sequence_length)</span></div><div class="line">        <span class="comment"># Feature lists for the two sequential features of our example</span></div><div class="line">        <span class="comment"># fl_imgs = ex.feature_lists.feature_list["imgs"]</span></div><div class="line">        <span class="comment"># fl_labels = ex.feature_lists.feature_list["labels"]</span></div><div class="line">        fl_imgs = ex.feature_lists.feature_list[<span class="string">"imgs"</span>]</div><div class="line">        fl_labels = ex.feature_lists.feature_list[<span class="string">"labels"</span>]</div><div class="line">        <span class="keyword">for</span> img, label <span class="keyword">in</span> zip(sequence, labels):</div><div class="line">            fl_imgs.feature.add().bytes_list.value.append(Image.open(img).tobytes())</div><div class="line">            fl_labels.feature.add().int64_list.value.append(label)</div><div class="line">        <span class="keyword">return</span> ex</div><div class="line"></div><div class="line">    writer = tf.python_io.TFRecordWriter(to_file)</div><div class="line">    <span class="keyword">for</span> sequence, label_sequence <span class="keyword">in</span> zip(files_list, labels_list):</div><div class="line">        ex = make_example([sequence], [label_sequence])</div><div class="line">        writer.write(ex.SerializeToString())</div><div class="line">    writer.close()</div></pre></td></tr></table></figure>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.tensorflow.org/api_docs/python/tf/train/SequenceExample" target="_blank" rel="external">官方文档:tf.train.SequenceExample</a></li>
+<li><a href="https://github.com/tensorflow/magenta/blob/master/magenta/common/sequence_example_lib.py" target="_blank" rel="external">Google开源项目magenta中的例程</a></li>
+<li><a href="https://github.com/tensorflow/tensorflow/blob/ec7929b878926c39255254e9aea992f0bc65aa68/tensorflow/core/example/example.proto" target="_blank" rel="external">TensorFlow SequenceExample范例</a></li>
+<li><a href="https://github.com/dennybritz/tf-rnn/blob/master/sequence_example.ipynb" target="_blank" rel="external"><strong>sequence_example.ipynb</strong></a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2017/06/04/TensorFlow-TFrecord探究/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1457,6 +1593,7 @@
 <p>写好测试代码之后，运行。测试代码向A、B2个号码发送长短信。</p>
 <p>问题来了，A正常，B号却收到了5条一模一样的短信。上管理界面查报表API alibaba.aliqin.fc.sms.num.send 成功15次 失败0次 日期都是今天。</p>
 <p>且今天之前完全没测试过。通过短信发送状态查询：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1559,8 +1696,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>而且倒数第四个我也不知道为什么会延时这么久，发送时间也是诡异。。。</p>
 <p>怀疑可能是API接口不稳定的原因，半小时之后再次调试，A号仍正常，B号却没收到。打开管理界面查询，多了一条结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1579,6 +1718,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>这是第二次API响应JSON：{‘alibaba_aliqin_fc_sms_num_send_response’: {‘request_id’: ‘11ifpz15bd471’, ‘result’: {‘success’: True, ‘model’: ‘103006048221^0’}}}</p>
 <p>后变也再没收到相关信息。</p>
 <p>下午去问客服，客服表示不清楚。已经反馈给技术人员了。。</p>
@@ -1588,141 +1728,6 @@
 <p>没有选择框没法提交问题。。也是醉了</p>
 <p>参考： <a href="https://github.com/yedf/aliyun-[Python](http://lib.csdn.net/base/11" target="_blank" rel="external">https://github.com/yedf/aliyun-[Python](http://lib.csdn.net/base/11</a>)</p>
 <p><a href="https://github.com/raptorz/alidayu" target="_blank" rel="external">https://github.com/raptorz/alidayu</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2016/07/12/VB-NET中使用委托-Delegate-来注册回调-callback-函数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vast-Stars">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vast-stars' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/12/VB-NET中使用委托-Delegate-来注册回调-callback-函数/" itemprop="url">
-                  VB.NET中使用委托(Delegate)来注册回调(callback)函数
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-12T11:22:03+08:00">
-                2016-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/07/12/VB-NET中使用委托-Delegate-来注册回调-callback-函数/" class="leancloud_visitors" data-flag-title="VB.NET中使用委托(Delegate)来注册回调(callback)函数">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前些日子捣鼓了下VFW，里面注册回调(callback)函数是通过sendmessage函数实现的，也就是把回调函数的指针作为参数发送给hWnd即可。折腾了不少时间，下面是代码</p>
-<p>这是C/C++代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">typedef struct videohdr_tag &#123;</div><div class="line">LPBYTE      lpData;</div><div class="line">DWORD       dwBufferLength;</div><div class="line">DWORD       dwBytesUsed;</div><div class="line">DWORD       dwTimeCaptured;</div><div class="line">DWORD       dwUser;</div><div class="line">DWORD       dwFlags;</div><div class="line">DWORD       dwReserved[4];</div><div class="line">&#125; VIDEOHDR, *PVIDEOHDR, *LPVIDEOHDR;</div><div class="line"></div><div class="line">#define capSetCallbackOnVideoStream(handle, callback) </div><div class="line"> (safeSendMessage (handle, WM_CAP_SET_CALLBACK_VIDEOSTREAM, 0, callback))</div><div class="line"></div><div class="line">capSetCallbackOnVideoStream(mhwnd, VideoCallback);</div><div class="line"></div><div class="line">LRESULT CALLBACK VDCaptureDriverVFW::VideoCallback(HWND hwnd, LPVIDEOHDR lpVHdr) &#123;</div><div class="line">VDCaptureDriverVFW *pThis = (VDCaptureDriverVFW *)capGetUserData(hwnd);</div><div class="line"></div><div class="line">if (pThis-&gt;mpCB &amp;&amp; !pThis-&gt;mbBlockVideoFrames) &#123;</div><div class="line">    DO SOMETHING……</div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;12345678910111213141516171819202122231234567891011121314151617181920212223</div></pre></td></tr></table></figure>
-<p>下面是VB.NET的代码，因为.NET里不允许使用指针，就必须使用委托（Delegate）来实现</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">    Structure LPVIDEOHDR</div><div class="line">            Public lpData As IntPtr            'point to the buffer</div><div class="line">            Public dwBufferLength As UInt32     'length of buffer</div><div class="line">            Public dwBytesUsed As UInt32        'buffer's Byte</div><div class="line">            Public dwTimeCaptured As UInt32     'time:ms</div><div class="line">            Public dwUser As UInt64             '</div><div class="line">            Public dwFlags As UInt32            '</div><div class="line">            Public dwReserved() As UInt64      'Reserved for driver.</div><div class="line">            Public Sub New(ByVal Size As UShort) '</div><div class="line">                dwReserved = New UInt64(Size) &#123;&#125;</div><div class="line">            End Sub</div><div class="line">    End Structure</div><div class="line"></div><div class="line">Public lpVHdr As LPVIDEOHDR = New LPVIDEOHDR(4)</div><div class="line"></div><div class="line"> Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" (</div><div class="line">                                                                        ByVal hWnd As Integer,</div><div class="line">                                                                        ByVal wMsg As Integer,</div><div class="line">                                                                        ByVal wParam As Integer,</div><div class="line">                                                                        ByVal IParam As callback)</div><div class="line"></div><div class="line"></div><div class="line">Public Delegate Function callback(ByVal whnd As IntPtr, ByVal lpVhdr As IntPtr)   </div><div class="line"></div><div class="line"></div><div class="line">Dim a1 As callback = Function(ByVal whnd As IntPtr, ByVal lpVhdr As IntPtr)</div><div class="line">                         If count &lt; 30 Then</div><div class="line">                             Clipboard.GetImage.Save("D:\" &amp; count &amp; ".bmp")</div><div class="line">                             count = count + 1</div><div class="line">                         End If</div><div class="line">                         Return True</div><div class="line">                     End Function</div><div class="line"></div><div class="line">Public Function fuckcallback(ByVal whnd As IntPtr, ByVal FramePoint As IntPtr) As Boolean</div><div class="line">    DO SOMETHING</div><div class="line">    Return True</div><div class="line">End Function</div><div class="line"></div><div class="line">Dim a2 As callback = AddressOf fuckcallback</div><div class="line"></div><div class="line">Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click</div><div class="line">        'SendMessage(hwnd, Cam.WM_CAP_SET_CALLBACK_FRAME, 0, a2)</div><div class="line">        'SendMessage(hwnd, Cam.WM_CAP_SET_CALLBACK_FRAME, 0, a1)</div><div class="line">        'SendMessage(hwnd, Cam.WM_CAP_SET_CALLBACK_FRAME, 0, AddressOf fuckcallback)</div><div class="line">        '上面3个都行</div><div class="line">End Sub1234567891011121314151617181920212223242526272829303132333435363738394041424344454612345678910111213141516171819202122232425262728293031323334353637383940414243444546</div></pre></td></tr></table></figure>
-<p>上面其实是有问题的，排查了半天，才发现是声明委托的时候，漏了函数返回值<br>Public Delegate Function callback(ByVal whnd As IntPtr, ByVal lpVhdr As IntPtr) 改成<br>Public Delegate Function callback(ByVal whnd As IntPtr, ByVal lpVhdr As IntPtr) as integer 即可 。</p>
-<p>PS：以后可能不会再用VB.NET了，这篇文章算是个End.</p>
 
           
         
@@ -1803,7 +1808,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

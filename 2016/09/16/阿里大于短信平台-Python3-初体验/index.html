@@ -99,6 +99,7 @@
 
 
 
+
 手机号码
 发送时间
 接收时间
@@ -114,6 +115,7 @@
 
 
 
+
 手机号码
 发送时间
 接收时间
@@ -126,6 +128,7 @@
 写好测试代码之后，运行。测试代码向A、B2个号码发送长短信。
 问题来了，A正常，B号却收到了5条一模一样的短信。上管理界面查报表API alibaba.aliqin.fc.sms.num.send 成功15次 失败0次 日期都是今天。
 且今天之前完全没测试过。通过短信发送状态查询：
+
 
 
 
@@ -376,6 +379,7 @@
 <p>写好测试代码之后，运行。测试代码向A、B2个号码发送长短信。</p>
 <p>问题来了，A正常，B号却收到了5条一模一样的短信。上管理界面查报表API alibaba.aliqin.fc.sms.num.send 成功15次 失败0次 日期都是今天。</p>
 <p>且今天之前完全没测试过。通过短信发送状态查询：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -478,8 +482,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>而且倒数第四个我也不知道为什么会延时这么久，发送时间也是诡异。。。</p>
 <p>怀疑可能是API接口不稳定的原因，半小时之后再次调试，A号仍正常，B号却没收到。打开管理界面查询，多了一条结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -498,6 +504,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>这是第二次API响应JSON：{‘alibaba_aliqin_fc_sms_num_send_response’: {‘request_id’: ‘11ifpz15bd471’, ‘result’: {‘success’: True, ‘model’: ‘103006048221^0’}}}</p>
 <p>后变也再没收到相关信息。</p>
 <p>下午去问客服，客服表示不清楚。已经反馈给技术人员了。。</p>
@@ -612,7 +619,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -802,26 +809,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
   
 
 

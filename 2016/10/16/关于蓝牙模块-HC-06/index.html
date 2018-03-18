@@ -346,6 +346,7 @@
         <p>关于如何与Arduino接线、进入AT模式，请看：<a href="http://swf.com.tw/?p=712" target="_blank" rel="external">http://swf.com.tw/?p=712</a></p>
 <p>这是HC-06所有AT指令（网上参考资料或多或少会漏，这是我整理比较齐全的）</p>
 <a id="more"></a>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -442,6 +443,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>下面是2个调试使用的程序：</p>
 <p>第一个：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line"> Serial.begin(<span class="number">9600</span>);</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">while</span>(Serial.available())</div><div class="line">   &#123;</div><div class="line">     delay(<span class="number">2</span>);</div><div class="line">     Serial.println(<span class="string">"Get Infomation："</span>);</div><div class="line">     <span class="keyword">while</span>(Serial.available())</div><div class="line">     &#123;</div><div class="line">     Serial.print(<span class="keyword">char</span>( Serial.read()));</div><div class="line">     delay(<span class="number">2</span>);</div><div class="line">     &#125;</div><div class="line">     Serial.println();</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -568,7 +570,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -758,26 +760,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
   
 
 

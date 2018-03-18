@@ -92,15 +92,24 @@
 
 
 
-<meta name="description" content="或许是不知梦的缘故，游离之人追逐幻影   https://github.com/vast-stars      vast2stars@gmail.com">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Vast-stars' Blog">
-<meta property="og:url" content="http://www.vast-stars.com/tags/NET/index.html">
+<meta name="description" content="描述题目出自《统计学习方法》 P36：设集合$S\subset R^n$ 是由$R^n$中的$k$个点所组成的集合，即$S=\{x_1,x_2,\cdots,x_k\}$，定义$S$的凸壳$conv(S)$为：
+
+conv(S)=\{x=\sum_{i=1}^{k}\lambda_ix_i \Bigg | \sum_{i=1}^k\lambda_i=1,\lambda_i\ge0,i=1,2,\c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性可分与凸壳">
+<meta property="og:url" content="http://www.vast-stars.com/2018/03/18/线性可分与凸壳/index.html">
 <meta property="og:site_name" content="Vast-stars' Blog">
-<meta property="og:description" content="或许是不知梦的缘故，游离之人追逐幻影   https://github.com/vast-stars      vast2stars@gmail.com">
+<meta property="og:description" content="描述题目出自《统计学习方法》 P36：设集合$S\subset R^n$ 是由$R^n$中的$k$个点所组成的集合，即$S=\{x_1,x_2,\cdots,x_k\}$，定义$S$的凸壳$conv(S)$为：
+
+conv(S)=\{x=\sum_{i=1}^{k}\lambda_ix_i \Bigg | \sum_{i=1}^k\lambda_i=1,\lambda_i\ge0,i=1,2,\c">
+<meta property="og:image" content="http://www.vast-stars.com/2018/03/18/线性可分与凸壳/1.png">
+<meta property="og:updated_time" content="2018-03-18T04:41:17.607Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vast-stars' Blog">
-<meta name="twitter:description" content="或许是不知梦的缘故，游离之人追逐幻影   https://github.com/vast-stars      vast2stars@gmail.com">
+<meta name="twitter:title" content="线性可分与凸壳">
+<meta name="twitter:description" content="描述题目出自《统计学习方法》 P36：设集合$S\subset R^n$ 是由$R^n$中的$k$个点所组成的集合，即$S=\{x_1,x_2,\cdots,x_k\}$，定义$S$的凸壳$conv(S)$为：
+
+conv(S)=\{x=\sum_{i=1}^{k}\lambda_ix_i \Bigg | \sum_{i=1}^k\lambda_i=1,\lambda_i\ge0,i=1,2,\c">
+<meta name="twitter:image" content="http://www.vast-stars.com/2018/03/18/线性可分与凸壳/1.png">
 
 
 
@@ -128,14 +137,14 @@
 
 
 
-  <link rel="canonical" href="http://www.vast-stars.com/tags/NET/"/>
+  <link rel="canonical" href="http://www.vast-stars.com/2018/03/18/线性可分与凸壳/"/>
 
 
 
 
 
 
-  <title> 标签: .NET | Vast-stars' Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 线性可分与凸壳 | Vast-stars' Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -160,7 +169,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left  ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -246,46 +255,195 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        .NET
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.vast-stars.com/2018/03/18/线性可分与凸壳/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vast-Stars">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vast-stars' Blog">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                线性可分与凸壳
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-18T01:18:49+08:00">
+                2018-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/18/线性可分与凸壳/" class="leancloud_visitors" data-flag-title="线性可分与凸壳">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>题目出自《统计学习方法》 P36：设集合$S\subset R^n$ 是由$R^n$中的$k$个点所组成的集合，即$S=\{x_1,x_2,\cdots,x_k\}$，定义$S$的凸壳$conv(S)$为：</p>
+<script type="math/tex; mode=display">
+conv(S)=\{x=\sum_{i=1}^{k}\lambda_ix_i \Bigg | \sum_{i=1}^k\lambda_i=1,\lambda_i\ge0,i=1,2,\cdots,k \}</script><p> 证明以下定理：样本集线性可分的充分必要条件是正实例点集所构成的凸壳与负实例点集所构成的凸壳互不相交。</p>
+<p>上网查了一遍，只找到半份比较好的证明：<a href="http://blog.csdn.net/y954877035/article/details/52210734" target="_blank" rel="external">http://blog.csdn.net/y954877035/article/details/52210734</a> 对充分性证明起了很大作用（其实是本菜鸡整理补充了一下他的证明过程）。</p>
+<h2 id="必要性"><a href="#必要性" class="headerlink" title="必要性"></a>必要性</h2><p><strong>必要性：</strong> 若样本集线性可分，则正实例点集所构成的凸壳与负实例点集所构成的凸壳互不相交。</p>
+<p>采用反证法，假设超平面$f(\hat{x})=\hat{w}\cdot\hat{x}$能完全分开正负样本，即$f(x_+)&gt;0$，$f(x_-)&lt;0$。</p>
+<p>假设正类凸壳和负类凸壳相交部分样本点为$z$ ，有定义可知：</p>
+<script type="math/tex; mode=display">
+z=\sum_{i=1}^{k_1}\lambda_ix_{+i}</script><p>其中$ \sum_{i=1}^k\lambda_i=1,\lambda_i\ge0,i=1,2,\cdots,k_1 $<br>即样本$z$分别可由正样本和负样本按线性加权表示。现考虑$f(z)$:</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+f(z)&=f(\sum_{i=1}^{k_1}\lambda_ix_{+i})\\
+&=\hat{w}\cdot\sum_{i=1}^{k_1}\lambda_ix_{+i}\\
+&=\sum_{i=1}^{k_1}\lambda_ix_{+i}\cdot\hat{w}\\
+&=\sum_{i=1}^{k_1}\lambda_if(x_{+i})>0
+\end{align*}</script><p>同理可得，$f(z)&lt;0$,矛盾，故必要性得证。</p>
+<h2 id="充分性"><a href="#充分性" class="headerlink" title="充分性"></a>充分性</h2><p>（该部分主要来源于<a href="http://blog.csdn.net/y954877035/article/details/52210734" target="_blank" rel="external">http://blog.csdn.net/y954877035/article/details/52210734</a>  特别感谢该CSDN博主！）</p>
+<p><strong>再证充分性：</strong>若正实例点集所构成的凸壳与负实例点集所构成的凸壳互不相交，则样本集线性可分。</p>
+<p>从距离入手。定义两点间的距离为 $dist(x_1,x_2)=\sqrt{(x_1-x_2)\cdot(x_1-x_2)}=\Vert x_1-x_2\Vert _2$  ，也就是二范数。</p>
+<p>定义凸壳间的距离为$dist(conv(S_+),conv(S_-))=min\{dist(x_+,x_-) \quad \big| \quad x_+\in conv(S_+),x_-\in conv(S_-) \}$ ，也就是两个凸壳上最接近的点之间的距离。下文记该点对为$x_{+0}$ 和$x_{-0}$ 。</p>
+<p>那么显然：对任意$x_+\in conv(S_+),x_-\in conv(S_-)$ , $dist(x_+,x_-)\ge dist(conv(S_+),conv(S_-))=dist(x_{+0},x_{-0}) \tag{3.1}$</p>
+<p>引理1：$dist(x_+,x_{-0})&gt;dist(x_+,x_{+0})$ ,即正类凸壳上的任意点到负类凸壳的距离一定比该点到$x_{+0}$ 的距离大。</p>
+<p>其实很显然。想象成过河的情景，你到对面岸的距离显然比你到自己这个岸边的距离要更远。然而证明起来还<del>有点</del> 非常费劲。。</p>
+<p>反证法，假设$dist(x_+,x_{-0}) \le dist(x_+,x_{+0})$ ，又有式(2): $dist(x_+,x_{-0})d \ge dist(x_{+0},x_{-0})$ .</p>
+<p>即$dist(x_{+0},x_{-0}) \le dist(x_+,x_{-0}) \le dist(x_+,x_{+0}) \tag{3.2}$</p>
+<p>取</p>
+<script type="math/tex; mode=display">
+t=\frac{(x_{-0}-x_{+0})\cdot(x_+-x_{+0})}{\Vert x_+-x_{+0}\Vert _2^2}=\frac{\Vert x_{-0}-x_{+0}\Vert _2cos\theta}{\Vert x_+-x_{+0}\Vert _2}</script><p>由式(3.2)可知$t<1$ 。$\theta$="" 表示向量$\overrightarrow{="" x_{+0}="" x_{-0}}$="" 与向量$\overrightarrow{="" x_{+}}$="" 间的夹角。$\theta$="" 所对的边是$\overline{x_+x_{-0}}$="" ，由式(3.2)可知该边为最短的边，故$\theta$="" 小于$90^\circ$="" ,="" 故$t="">0$ 。</1$></p>
+<p>取 $z=tx_++(1-t)x_{+0}$ ，故点$z\in conv(S_+)$ 且在线段$\overline{x_{+0} x_+}$ 上。显然$dist(z,x_{-0})&lt;dist(x_{+0},x_{-0})$ ,这与式(3.1)矛盾，引理得证。</p>
+<p><img src="/2018/03/18/线性可分与凸壳/1.png" alt="1"></p>
+<p>下面开始正式证明。直接以线段$\overline{x_{+0}+x_{-0}}$ 的中垂超平面作为判决函数：</p>
+<script type="math/tex; mode=display">
+w=x_{+0}-x_{-0}
+\\b=\frac{x_{-0}\cdot x_{-0}-x_{+0}\cdot x_{+0}}{2}</script><p>考虑对任意正样本$x_+$：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+w\cdot x_+ +b &=(x_{+0}-x_{-0})\cdot x_+ +\frac{x_{-0}\cdot x_{-0}-x_{+0}\cdot x_{+0}}{2}\\
+&=\frac{2x_{+0}\cdot x_{+}-2x_{-0}\cdot x_{+}+x_{-0}\cdot x_{-0}-x_{+0}\cdot x_{+0}}{2}\\
+&=\frac{dist(x_+,x_{-0})^2-dist(x_+,x_{+0})^2}{2}>0
+\end{align}</script><p>同理，对任意负样本有$w\cdot x_-+b &lt;0$ ，该数据集线性可分。</p>
+<p>其实有个<strong>凸集分离定理知</strong> 直接就证完了，有兴趣的同学可以自行了解。。</p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/06/22/VB.NET中，如何得知多个radiobutton中哪个被选中(checked)/" itemprop="url">
-              
-                <span itemprop="name">VB.NET中，取出被选中(checked)的按钮(radiobutton)</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-06-22T15:59:23+08:00"
-              content="2016-06-22" >
-          06-22
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/13/感知器学习笔记/" rel="next" title="感知器学习笔记">
+                <i class="fa fa-chevron-left"></i> 感知器学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
           
           </div>
@@ -293,6 +451,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -312,8 +474,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -366,6 +537,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#描述"><span class="nav-number">1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#必要性"><span class="nav-number">2.</span> <span class="nav-text">必要性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#充分性"><span class="nav-number">3.</span> <span class="nav-text">充分性</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -471,6 +658,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
